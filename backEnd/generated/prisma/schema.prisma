@@ -1,0 +1,220 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//////////  Usuario  //////////
+
+model Usuario {
+  id                      Int               @id @default(autoincrement())
+  nombre                  String?           @db.VarChar(30)
+  imagen                  Bytes?
+  correo                  String            @unique @db.VarChar(35)
+  contrasenna             String            @db.VarChar(250)
+  role                    Role              @default(USER)
+  ultimaSesion            DateTime          @default(now()) @updatedAt
+  estado                  Boolean           @default(true)
+  idioma                  Idioma            @default(es)
+  tecnico                 Tecnico[]
+  ticket                  Ticket[]
+  historialTicket         HistorialTicket[]
+  valoracion              Valoracion[]
+  notificacionesRemitente Notificacion[]    @relation("remitenteNotificacion")
+  notificaciones          Notificacion[]    @relation("destinatarioNotificacion")
+}
+
+enum Role {
+  USER
+  TEC
+  ADMIN
+}
+
+enum Idioma {
+  es
+  en
+}
+
+model Notificacion {
+  id             Int              @id @default(autoincrement())
+  Remitente      Usuario?         @relation("remitenteNotificacion", fields: [idRemitente], references: [id])
+  idRemitente    Int?
+  Destinatario   Usuario          @relation("destinatarioNotificacion", fields: [idDestinatario], references: [id])
+  idDestinatario Int
+  tipo           TipoNotificacion
+  leido          Boolean          @default(false)
+  mensaje        String           @db.VarChar(500)
+  fecha          DateTime         @default(now())
+}
+
+enum TipoNotificacion {
+  asignacion
+  cambio_estado
+  observacion
+  inicio_sesion
+  exito
+  error
+  advertencia
+  info
+  nuevo
+}
+
+//////////  Tecnico y Especialidad  //////////
+
+model Tecnico {
+  usuario          Usuario          @relation(fields: [id], references: [id])
+  id               Int              @id
+  disponible       Boolean          @default(true)
+  motivoDisponible MotivoDisponible @default(disponible)
+  fechaDisponible  DateTime?        @default(now())
+  carga            Int              @default(0)
+  especialidades   Especialidad[]
+  Asignacion       Asignacion[]
+}
+
+enum MotivoDisponible {
+  disponible
+  almuerzo
+  descanso
+  ausente
+}
+
+model Especialidad {
+  id          Int                @id @default(autoincrement())
+  nombre      String             @db.VarChar(30)
+  descripcion String             @db.VarChar(100)
+  tecnicos    Tecnico[]
+  categorias  Categoria[]
+  reglas      Regla_Autotriage[]
+}
+
+//////////  Categorias  //////////
+
+model Categoria {
+  id                    Int                @id @default(autoincrement())
+  nombre                String             @db.VarChar(30)
+  descripcion           String             @db.VarChar(200)
+  tiempoMaximoRespuesta Float
+  tiempoMaximoSolucion  Float
+  prioridad             Prioridad
+  especialidades        Especialidad[]
+  etiquetas             Etiqueta[]
+  reglas                Regla_Autotriage[]
+}
+
+enum Prioridad {
+  baja
+  media
+  alta
+}
+
+model Etiqueta {
+  id          Int       @id @default(autoincrement())
+  categoria   Categoria @relation(fields: [idCategoria], references: [id])
+  idCategoria Int
+  nombre      String    @db.VarChar(50)
+  Ticket      Ticket[]
+}
+
+//////////  Tickets e Incidencias  //////////
+
+model Ticket {
+  id            Int               @id @default(autoincrement())
+  usuario       Usuario           @relation(fields: [idUsuario], references: [id])
+  idUsuario     Int
+  etiqueta      Etiqueta          @relation(fields: [idEtiqueta], references: [id])
+  idEtiqueta    Int
+  titulo        String            @db.VarChar(40)
+  descripcion   String            @db.VarChar(500)
+  fechaCreacion DateTime          @default(now())
+  fechaCierre   DateTime?
+  slaRespusta   DateTime?
+  slaSolucion   DateTime?
+  estado        EstadoTicket      @default(pendiente)
+  historial     HistorialTicket[]
+  imagenes      Ticket_Imagen[]
+  asignaciones  Asignacion[]
+  Valoracion    Valoracion[]
+}
+
+enum EstadoTicket {
+  pendiente
+  asignado
+  en_proceso
+  resuelto
+  cerrado
+}
+
+model HistorialTicket {
+  id             Int          @id @default(autoincrement())
+  ticket         Ticket       @relation(fields: [idTicket], references: [id])
+  idTicket       Int
+  usuario        Usuario?     @relation(fields: [idUsuario], references: [id])
+  idUsuario      Int
+  estadoAnterior EstadoTicket
+  estadoNuevo    EstadoTicket
+  fecha          DateTime     @default(now())
+  observacion    String?      @db.VarChar(500)
+}
+
+model Ticket_Imagen {
+  id       Int     @id @default(autoincrement())
+  ticket   Ticket  @relation(fields: [idTicket], references: [id])
+  idTicket Int
+  imagen   Bytes?
+  url      String? @db.VarChar(200)
+}
+
+model Asignacion {
+  id               Int               @id @default(autoincrement())
+  ticket           Ticket            @relation(fields: [idTicket], references: [id])
+  idTicket         Int
+  tecnico          Tecnico           @relation(fields: [idTecnico], references: [id])
+  idTecnico        Int
+  regla            Regla_Autotriage? @relation(fields: [idRegla], references: [id])
+  idRegla          Int?
+  fecha            DateTime          @default(now())
+  puntajePrioridad Int
+  motivo           String?           @db.VarChar(300)
+  activo           Boolean           @default(true)
+  metodo           MetodoAsignacion?
+}
+
+enum MetodoAsignacion {
+  manual
+  automatico
+}
+
+model Valoracion {
+  id         Int      @id @default(autoincrement())
+  ticket     Ticket   @relation(fields: [idTicket], references: [id])
+  idTicket   Int
+  usuario    Usuario  @relation(fields: [idUsuario], references: [id])
+  idUsuario  Int
+  puntaje    Int
+  comentario String?  @db.VarChar(300)
+  fecha      DateTime @default(now())
+}
+
+///////////  Reglas autotriage  //////////
+model Regla_Autotriage {
+  id             Int            @id @default(autoincrement())
+  nombre         String         @db.VarChar(5)
+  categoria      Categoria      @relation(fields: [idCategoria], references: [id])
+  idCategoria    Int
+  prioridad      Int
+  etiquetas      String         @db.VarChar(500)
+  especialidades Especialidad[]
+  asignaciones   Asignacion[]
+  activa         Boolean        @default(true)
+}

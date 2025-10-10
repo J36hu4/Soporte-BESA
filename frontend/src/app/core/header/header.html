@@ -1,0 +1,37 @@
+<!-- https://material.angular.dev/components/menu/overview -->
+<!--https://fonts.google.com/icons-->
+<mat-toolbar class="header-nav">
+    <!-- Logo -->
+    <button class="header-logo" matTooltip="BESA's Software"><img src="/images/BESA Banner.png" alt="BESA's Software"></button>
+
+    <!-- Menús desplegables -->
+    <mat-menu #menu1="matMenu">
+        <button mat-menu-item>Inicio</button>
+        <button mat-menu-item>Acerca de</button>
+        <button mat-menu-item>Videojuego</button>
+    </mat-menu>
+
+
+    <!-- Spacer -->
+    <div class="spacer"></div>
+
+    <!-- Carrito y usuario -->
+    <div class="user-section">
+        <span class="small-text user-email">Jeshua Herrera Salas</span>
+
+        <button mat-icon-button [matMenuTriggerFor]="menu3">
+            <mat-icon>person</mat-icon>
+        </button>
+
+        <mat-menu #menu3="matMenu">
+            <button mat-menu-item>
+                <mat-icon>person_add</mat-icon>
+                <span>Login</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>person_remove</mat-icon>
+                <span>Logout</span>
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>

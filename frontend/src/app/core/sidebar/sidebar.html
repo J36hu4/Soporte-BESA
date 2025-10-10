@@ -1,0 +1,84 @@
+<!-- https://material.angular.dev/components/menu/overview -->
+<!-- https://fonts.google.com/icons -->
+<mat-toolbar id="sidebar" [class]="'sidebar-gradient ' + (menuClose ? 'menuClose' : '')">
+  <button class="sidebar-menu sidebar-buttons" matTooltip="Menú" (click)="menuClose = !menuClose">
+    <mat-icon>menu</mat-icon>
+    <p>Menú</p>
+  </button>
+
+  <!-- Menú principal -->
+  <div id="sidebar-group">
+    <button class="sidebar-buttons select" matTooltip="Inicio">
+      <mat-icon>home</mat-icon>
+      <p>Inicio</p>
+    </button>
+
+    <button class="sidebar-buttons" matTooltip="Mis tickets">
+      <mat-icon>local_activity</mat-icon>
+      <p>Mis tickets</p>
+    </button>
+
+    <button class="sidebar-buttons" matTooltip="Historial">
+      <mat-icon>history</mat-icon>
+      <p>Historial</p>
+    </button>
+
+    <button class="sidebar-buttons" matTooltip="Notificaciones">
+      <mat-icon>notifications</mat-icon>
+      <p>Notificaciones</p>
+    </button>
+
+    <button class="sidebar-buttons" matTooltip="Mi cuenta">
+      <mat-icon>account_box</mat-icon>
+      <p>Mi cuenta</p>
+    </button>
+
+    <details open id="tecnico-group">
+      <summary>
+        <span>Técnico</span>
+      </summary>
+      <button class="sidebar-buttons" matTooltip="Mis asignaciones">
+        <mat-icon>assignment</mat-icon>
+        <p>Mis asignaciones</p>
+      </button>
+    </details>
+
+    <details open id="admin-group">
+      <summary><span>Administración</span></summary>
+      <button class="sidebar-buttons" matTooltip="Dashboard">
+        <mat-icon>analytics</mat-icon>
+        <p>Dashboard</p>
+      </button>
+
+      <button class="sidebar-buttons" matTooltip="Gestión de técnicos">
+        <mat-icon>manage_accounts</mat-icon>
+        <p>Gestión de técnicos</p>
+      </button>
+
+      <button class="sidebar-buttons" matTooltip="Gestión de categorías">
+        <mat-icon>category</mat-icon>
+        <p>Gestión de categorías</p>
+      </button>
+
+      <button class="sidebar-buttons" matTooltip="Tickets">
+        <mat-icon>local_activity</mat-icon>
+        <p>Tickets</p>
+      </button>
+
+      <button class="sidebar-buttons" matTooltip="Asignaciones">
+        <mat-icon>assignment</mat-icon>
+        <p>Asignaciones</p>
+      </button>
+
+      <button class="sidebar-buttons" matTooltip="Reportes">
+        <mat-icon>report</mat-icon>
+        <p>Reportes</p>
+      </button>
+    </details>
+  </div>
+
+  <button class="sidebar-logout sidebar-buttons" matTooltip="Cerrar sesión">
+    <mat-icon>logout</mat-icon>
+    <p>Cerrar sesión</p>
+  </button>
+</mat-toolbar>
