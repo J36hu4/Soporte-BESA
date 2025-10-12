@@ -1,0 +1,36 @@
+<main class="">
+    <div #main id="main">
+        <section #sc1 id="sc1" class="cargando hidden">
+            <h3>Cargando</h3>
+            <div>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </section>
+
+        <section #sc2 id="sc2" class="form">
+            <img src="/images/BESA Banner.png" alt="BESA's Software">
+            <div class="acciones">
+                <div class="input-group-primary">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="text" name="correo" placeholder="Ingrese su correo" class="">
+                </div>
+
+                <div class="input-group-primary">
+                    <label for="contraseña">Contraseña</label>
+                    <input type="password" name="contraseña" placeholder="Ingrese su contraseña" class="">
+                </div>
+                <a routerLink="/auth/recuperar" class="newPass">¿Olvidaste tu contraseña?</a>
+
+                <button (click)="cargar()" class="btn-primary">Iniciar sesión</button>
+
+                <p class="newAccount">¿No tienes una cuenta? <a routerLink="/auth/registro">Regístrate</a></p>
+            </div>
+            <footer>
+                <p>© {{ today | date : "yyyy" }} BESA's Software. Todos los derechos reservados. </p>
+                <p>Desarrollado por el equipo de BESA's Software.</p>
+            </footer>
+        </section>
+    </div>
+</main>
