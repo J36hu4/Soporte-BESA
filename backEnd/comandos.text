@@ -1,0 +1,8 @@
+Crear conexion:
+    npx prisma generate 
+
+Hacer migracion:
+    npx prisma migrate dev --name [nombre commit] 
+
+resetear conexion y hacer seeders
+    npx prisma migrate reset

@@ -1,14 +1,15 @@
-import express, {Express} from 'express'
+import express, { Express } from 'express'
 import morgan from 'morgan'
-import * as dotenv from 'dotenv' 
+import * as dotenv from 'dotenv'
 import cors from 'cors';
 import path from 'path'
 import { ErrorMiddleware } from './middleware/error.middleware';
 import { AppRoutes } from './routes/route';
 
+
 const rootDir = __dirname;
 
-const app: Express=express()
+const app: Express = express()
 
 // Acceder a la configuracion del archivo .env
 dotenv.config();
@@ -28,16 +29,17 @@ app.use(
 );
 
 //---- Registro de rutas ----
-app.use(AppRoutes.routes) 
+app.use(AppRoutes.routes)
 
 //Gestión de errores middleware
-app.use(ErrorMiddleware.handleError); 
+app.use(ErrorMiddleware.handleError);
 
 
 //Acceso a las imágenes
-
+app.use("/images", express.static(
+  path.join(path.resolve(), "assets/uploads")))
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);
   console.log('Presione CTRL-C para deternerlo\n');
- });
+});

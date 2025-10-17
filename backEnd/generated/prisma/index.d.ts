@@ -472,8 +472,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 6.16.2
-   * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+   * Prisma Client JS version: 6.17.1
+   * Query Engine version: 272a37d34178c2894197e17273bf937f25acdeac
    */
   export type PrismaVersion = {
     client: string
@@ -2083,10 +2083,12 @@ export namespace Prisma {
 
   export type EtiquetaCountOutputType = {
     Ticket: number
+    autoTriage: number
   }
 
   export type EtiquetaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Ticket?: boolean | EtiquetaCountOutputTypeCountTicketArgs
+    autoTriage?: boolean | EtiquetaCountOutputTypeCountAutoTriageArgs
   }
 
   // Custom InputTypes
@@ -2105,6 +2107,13 @@ export namespace Prisma {
    */
   export type EtiquetaCountOutputTypeCountTicketArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TicketWhereInput
+  }
+
+  /**
+   * EtiquetaCountOutputType without action
+   */
+  export type EtiquetaCountOutputTypeCountAutoTriageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Regla_AutotriageWhereInput
   }
 
 
@@ -2171,11 +2180,13 @@ export namespace Prisma {
    */
 
   export type Regla_AutotriageCountOutputType = {
+    etiquetas: number
     especialidades: number
     asignaciones: number
   }
 
   export type Regla_AutotriageCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    etiquetas?: boolean | Regla_AutotriageCountOutputTypeCountEtiquetasArgs
     especialidades?: boolean | Regla_AutotriageCountOutputTypeCountEspecialidadesArgs
     asignaciones?: boolean | Regla_AutotriageCountOutputTypeCountAsignacionesArgs
   }
@@ -2189,6 +2200,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the Regla_AutotriageCountOutputType
      */
     select?: Regla_AutotriageCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Regla_AutotriageCountOutputType without action
+   */
+  export type Regla_AutotriageCountOutputTypeCountEtiquetasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EtiquetaWhereInput
   }
 
   /**
@@ -2233,7 +2251,7 @@ export namespace Prisma {
   export type UsuarioMinAggregateOutputType = {
     id: number | null
     nombre: string | null
-    imagen: Uint8Array | null
+    imagen: string | null
     correo: string | null
     contrasenna: string | null
     role: $Enums.Role | null
@@ -2245,7 +2263,7 @@ export namespace Prisma {
   export type UsuarioMaxAggregateOutputType = {
     id: number | null
     nombre: string | null
-    imagen: Uint8Array | null
+    imagen: string | null
     correo: string | null
     contrasenna: string | null
     role: $Enums.Role | null
@@ -2402,7 +2420,7 @@ export namespace Prisma {
   export type UsuarioGroupByOutputType = {
     id: number
     nombre: string | null
-    imagen: Uint8Array | null
+    imagen: string | null
     correo: string
     contrasenna: string
     role: $Enums.Role
@@ -2487,7 +2505,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nombre: string | null
-      imagen: Uint8Array | null
+      imagen: string | null
       correo: string
       contrasenna: string
       role: $Enums.Role
@@ -2871,7 +2889,7 @@ export namespace Prisma {
   interface UsuarioFieldRefs {
     readonly id: FieldRef<"Usuario", 'Int'>
     readonly nombre: FieldRef<"Usuario", 'String'>
-    readonly imagen: FieldRef<"Usuario", 'Bytes'>
+    readonly imagen: FieldRef<"Usuario", 'String'>
     readonly correo: FieldRef<"Usuario", 'String'>
     readonly contrasenna: FieldRef<"Usuario", 'String'>
     readonly role: FieldRef<"Usuario", 'Role'>
@@ -7699,6 +7717,7 @@ export namespace Prisma {
     nombre?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     Ticket?: boolean | Etiqueta$TicketArgs<ExtArgs>
+    autoTriage?: boolean | Etiqueta$autoTriageArgs<ExtArgs>
     _count?: boolean | EtiquetaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["etiqueta"]>
 
@@ -7714,6 +7733,7 @@ export namespace Prisma {
   export type EtiquetaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     Ticket?: boolean | Etiqueta$TicketArgs<ExtArgs>
+    autoTriage?: boolean | Etiqueta$autoTriageArgs<ExtArgs>
     _count?: boolean | EtiquetaCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7722,6 +7742,7 @@ export namespace Prisma {
     objects: {
       categoria: Prisma.$CategoriaPayload<ExtArgs>
       Ticket: Prisma.$TicketPayload<ExtArgs>[]
+      autoTriage: Prisma.$Regla_AutotriagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8069,6 +8090,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     categoria<T extends CategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoriaDefaultArgs<ExtArgs>>): Prisma__CategoriaClient<$Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Ticket<T extends Etiqueta$TicketArgs<ExtArgs> = {}>(args?: Subset<T, Etiqueta$TicketArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    autoTriage<T extends Etiqueta$autoTriageArgs<ExtArgs> = {}>(args?: Subset<T, Etiqueta$autoTriageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Regla_AutotriagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8465,6 +8487,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TicketScalarFieldEnum | TicketScalarFieldEnum[]
+  }
+
+  /**
+   * Etiqueta.autoTriage
+   */
+  export type Etiqueta$autoTriageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Regla_Autotriage
+     */
+    select?: Regla_AutotriageSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Regla_Autotriage
+     */
+    omit?: Regla_AutotriageOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Regla_AutotriageInclude<ExtArgs> | null
+    where?: Regla_AutotriageWhereInput
+    orderBy?: Regla_AutotriageOrderByWithRelationInput | Regla_AutotriageOrderByWithRelationInput[]
+    cursor?: Regla_AutotriageWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Regla_AutotriageScalarFieldEnum | Regla_AutotriageScalarFieldEnum[]
   }
 
   /**
@@ -13658,12 +13704,14 @@ export namespace Prisma {
     id: number | null
     idCategoria: number | null
     prioridad: number | null
+    carga: number | null
   }
 
   export type Regla_AutotriageSumAggregateOutputType = {
     id: number | null
     idCategoria: number | null
     prioridad: number | null
+    carga: number | null
   }
 
   export type Regla_AutotriageMinAggregateOutputType = {
@@ -13671,7 +13719,7 @@ export namespace Prisma {
     nombre: string | null
     idCategoria: number | null
     prioridad: number | null
-    etiquetas: string | null
+    carga: number | null
     activa: boolean | null
   }
 
@@ -13680,7 +13728,7 @@ export namespace Prisma {
     nombre: string | null
     idCategoria: number | null
     prioridad: number | null
-    etiquetas: string | null
+    carga: number | null
     activa: boolean | null
   }
 
@@ -13689,7 +13737,7 @@ export namespace Prisma {
     nombre: number
     idCategoria: number
     prioridad: number
-    etiquetas: number
+    carga: number
     activa: number
     _all: number
   }
@@ -13699,12 +13747,14 @@ export namespace Prisma {
     id?: true
     idCategoria?: true
     prioridad?: true
+    carga?: true
   }
 
   export type Regla_AutotriageSumAggregateInputType = {
     id?: true
     idCategoria?: true
     prioridad?: true
+    carga?: true
   }
 
   export type Regla_AutotriageMinAggregateInputType = {
@@ -13712,7 +13762,7 @@ export namespace Prisma {
     nombre?: true
     idCategoria?: true
     prioridad?: true
-    etiquetas?: true
+    carga?: true
     activa?: true
   }
 
@@ -13721,7 +13771,7 @@ export namespace Prisma {
     nombre?: true
     idCategoria?: true
     prioridad?: true
-    etiquetas?: true
+    carga?: true
     activa?: true
   }
 
@@ -13730,7 +13780,7 @@ export namespace Prisma {
     nombre?: true
     idCategoria?: true
     prioridad?: true
-    etiquetas?: true
+    carga?: true
     activa?: true
     _all?: true
   }
@@ -13826,7 +13876,7 @@ export namespace Prisma {
     nombre: string
     idCategoria: number
     prioridad: number
-    etiquetas: string
+    carga: number
     activa: boolean
     _count: Regla_AutotriageCountAggregateOutputType | null
     _avg: Regla_AutotriageAvgAggregateOutputType | null
@@ -13854,9 +13904,10 @@ export namespace Prisma {
     nombre?: boolean
     idCategoria?: boolean
     prioridad?: boolean
-    etiquetas?: boolean
+    carga?: boolean
     activa?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
+    etiquetas?: boolean | Regla_Autotriage$etiquetasArgs<ExtArgs>
     especialidades?: boolean | Regla_Autotriage$especialidadesArgs<ExtArgs>
     asignaciones?: boolean | Regla_Autotriage$asignacionesArgs<ExtArgs>
     _count?: boolean | Regla_AutotriageCountOutputTypeDefaultArgs<ExtArgs>
@@ -13869,13 +13920,14 @@ export namespace Prisma {
     nombre?: boolean
     idCategoria?: boolean
     prioridad?: boolean
-    etiquetas?: boolean
+    carga?: boolean
     activa?: boolean
   }
 
-  export type Regla_AutotriageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "idCategoria" | "prioridad" | "etiquetas" | "activa", ExtArgs["result"]["regla_Autotriage"]>
+  export type Regla_AutotriageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "idCategoria" | "prioridad" | "carga" | "activa", ExtArgs["result"]["regla_Autotriage"]>
   export type Regla_AutotriageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
+    etiquetas?: boolean | Regla_Autotriage$etiquetasArgs<ExtArgs>
     especialidades?: boolean | Regla_Autotriage$especialidadesArgs<ExtArgs>
     asignaciones?: boolean | Regla_Autotriage$asignacionesArgs<ExtArgs>
     _count?: boolean | Regla_AutotriageCountOutputTypeDefaultArgs<ExtArgs>
@@ -13885,6 +13937,7 @@ export namespace Prisma {
     name: "Regla_Autotriage"
     objects: {
       categoria: Prisma.$CategoriaPayload<ExtArgs>
+      etiquetas: Prisma.$EtiquetaPayload<ExtArgs>[]
       especialidades: Prisma.$EspecialidadPayload<ExtArgs>[]
       asignaciones: Prisma.$AsignacionPayload<ExtArgs>[]
     }
@@ -13893,7 +13946,7 @@ export namespace Prisma {
       nombre: string
       idCategoria: number
       prioridad: number
-      etiquetas: string
+      carga: number
       activa: boolean
     }, ExtArgs["result"]["regla_Autotriage"]>
     composites: {}
@@ -14236,6 +14289,7 @@ export namespace Prisma {
   export interface Prisma__Regla_AutotriageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     categoria<T extends CategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoriaDefaultArgs<ExtArgs>>): Prisma__CategoriaClient<$Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    etiquetas<T extends Regla_Autotriage$etiquetasArgs<ExtArgs> = {}>(args?: Subset<T, Regla_Autotriage$etiquetasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EtiquetaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     especialidades<T extends Regla_Autotriage$especialidadesArgs<ExtArgs> = {}>(args?: Subset<T, Regla_Autotriage$especialidadesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EspecialidadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     asignaciones<T extends Regla_Autotriage$asignacionesArgs<ExtArgs> = {}>(args?: Subset<T, Regla_Autotriage$asignacionesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AsignacionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -14271,7 +14325,7 @@ export namespace Prisma {
     readonly nombre: FieldRef<"Regla_Autotriage", 'String'>
     readonly idCategoria: FieldRef<"Regla_Autotriage", 'Int'>
     readonly prioridad: FieldRef<"Regla_Autotriage", 'Int'>
-    readonly etiquetas: FieldRef<"Regla_Autotriage", 'String'>
+    readonly carga: FieldRef<"Regla_Autotriage", 'Int'>
     readonly activa: FieldRef<"Regla_Autotriage", 'Boolean'>
   }
     
@@ -14616,6 +14670,30 @@ export namespace Prisma {
   }
 
   /**
+   * Regla_Autotriage.etiquetas
+   */
+  export type Regla_Autotriage$etiquetasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Etiqueta
+     */
+    select?: EtiquetaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Etiqueta
+     */
+    omit?: EtiquetaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EtiquetaInclude<ExtArgs> | null
+    where?: EtiquetaWhereInput
+    orderBy?: EtiquetaOrderByWithRelationInput | EtiquetaOrderByWithRelationInput[]
+    cursor?: EtiquetaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EtiquetaScalarFieldEnum | EtiquetaScalarFieldEnum[]
+  }
+
+  /**
    * Regla_Autotriage.especialidades
    */
   export type Regla_Autotriage$especialidadesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14836,7 +14914,7 @@ export namespace Prisma {
     nombre: 'nombre',
     idCategoria: 'idCategoria',
     prioridad: 'prioridad',
-    etiquetas: 'etiquetas',
+    carga: 'carga',
     activa: 'activa'
   };
 
@@ -14861,6 +14939,7 @@ export namespace Prisma {
 
   export const UsuarioOrderByRelevanceFieldEnum: {
     nombre: 'nombre',
+    imagen: 'imagen',
     correo: 'correo',
     contrasenna: 'contrasenna'
   };
@@ -14935,8 +15014,7 @@ export namespace Prisma {
 
 
   export const Regla_AutotriageOrderByRelevanceFieldEnum: {
-    nombre: 'nombre',
-    etiquetas: 'etiquetas'
+    nombre: 'nombre'
   };
 
   export type Regla_AutotriageOrderByRelevanceFieldEnum = (typeof Regla_AutotriageOrderByRelevanceFieldEnum)[keyof typeof Regla_AutotriageOrderByRelevanceFieldEnum]
@@ -14958,13 +15036,6 @@ export namespace Prisma {
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
-
-  /**
-   * Reference to a field of type 'Bytes'
-   */
-  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
     
 
 
@@ -15032,6 +15103,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Bytes'
+   */
+  export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+  /**
    * Reference to a field of type 'MetodoAsignacion'
    */
   export type EnumMetodoAsignacionFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MetodoAsignacion'>
@@ -15047,7 +15125,7 @@ export namespace Prisma {
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
     id?: IntFilter<"Usuario"> | number
     nombre?: StringNullableFilter<"Usuario"> | string | null
-    imagen?: BytesNullableFilter<"Usuario"> | Uint8Array | null
+    imagen?: StringNullableFilter<"Usuario"> | string | null
     correo?: StringFilter<"Usuario"> | string
     contrasenna?: StringFilter<"Usuario"> | string
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
@@ -15088,7 +15166,7 @@ export namespace Prisma {
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
     nombre?: StringNullableFilter<"Usuario"> | string | null
-    imagen?: BytesNullableFilter<"Usuario"> | Uint8Array | null
+    imagen?: StringNullableFilter<"Usuario"> | string | null
     contrasenna?: StringFilter<"Usuario"> | string
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
     ultimaSesion?: DateTimeFilter<"Usuario"> | Date | string
@@ -15125,7 +15203,7 @@ export namespace Prisma {
     NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Usuario"> | number
     nombre?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
-    imagen?: BytesNullableWithAggregatesFilter<"Usuario"> | Uint8Array | null
+    imagen?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     correo?: StringWithAggregatesFilter<"Usuario"> | string
     contrasenna?: StringWithAggregatesFilter<"Usuario"> | string
     role?: EnumRoleWithAggregatesFilter<"Usuario"> | $Enums.Role
@@ -15400,6 +15478,7 @@ export namespace Prisma {
     nombre?: StringFilter<"Etiqueta"> | string
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
     Ticket?: TicketListRelationFilter
+    autoTriage?: Regla_AutotriageListRelationFilter
   }
 
   export type EtiquetaOrderByWithRelationInput = {
@@ -15408,6 +15487,7 @@ export namespace Prisma {
     nombre?: SortOrder
     categoria?: CategoriaOrderByWithRelationInput
     Ticket?: TicketOrderByRelationAggregateInput
+    autoTriage?: Regla_AutotriageOrderByRelationAggregateInput
     _relevance?: EtiquetaOrderByRelevanceInput
   }
 
@@ -15420,6 +15500,7 @@ export namespace Prisma {
     nombre?: StringFilter<"Etiqueta"> | string
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
     Ticket?: TicketListRelationFilter
+    autoTriage?: Regla_AutotriageListRelationFilter
   }, "id">
 
   export type EtiquetaOrderByWithAggregationInput = {
@@ -15822,9 +15903,10 @@ export namespace Prisma {
     nombre?: StringFilter<"Regla_Autotriage"> | string
     idCategoria?: IntFilter<"Regla_Autotriage"> | number
     prioridad?: IntFilter<"Regla_Autotriage"> | number
-    etiquetas?: StringFilter<"Regla_Autotriage"> | string
+    carga?: IntFilter<"Regla_Autotriage"> | number
     activa?: BoolFilter<"Regla_Autotriage"> | boolean
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
+    etiquetas?: EtiquetaListRelationFilter
     especialidades?: EspecialidadListRelationFilter
     asignaciones?: AsignacionListRelationFilter
   }
@@ -15834,9 +15916,10 @@ export namespace Prisma {
     nombre?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
-    etiquetas?: SortOrder
+    carga?: SortOrder
     activa?: SortOrder
     categoria?: CategoriaOrderByWithRelationInput
+    etiquetas?: EtiquetaOrderByRelationAggregateInput
     especialidades?: EspecialidadOrderByRelationAggregateInput
     asignaciones?: AsignacionOrderByRelationAggregateInput
     _relevance?: Regla_AutotriageOrderByRelevanceInput
@@ -15850,9 +15933,10 @@ export namespace Prisma {
     nombre?: StringFilter<"Regla_Autotriage"> | string
     idCategoria?: IntFilter<"Regla_Autotriage"> | number
     prioridad?: IntFilter<"Regla_Autotriage"> | number
-    etiquetas?: StringFilter<"Regla_Autotriage"> | string
+    carga?: IntFilter<"Regla_Autotriage"> | number
     activa?: BoolFilter<"Regla_Autotriage"> | boolean
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
+    etiquetas?: EtiquetaListRelationFilter
     especialidades?: EspecialidadListRelationFilter
     asignaciones?: AsignacionListRelationFilter
   }, "id">
@@ -15862,7 +15946,7 @@ export namespace Prisma {
     nombre?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
-    etiquetas?: SortOrder
+    carga?: SortOrder
     activa?: SortOrder
     _count?: Regla_AutotriageCountOrderByAggregateInput
     _avg?: Regla_AutotriageAvgOrderByAggregateInput
@@ -15879,13 +15963,13 @@ export namespace Prisma {
     nombre?: StringWithAggregatesFilter<"Regla_Autotriage"> | string
     idCategoria?: IntWithAggregatesFilter<"Regla_Autotriage"> | number
     prioridad?: IntWithAggregatesFilter<"Regla_Autotriage"> | number
-    etiquetas?: StringWithAggregatesFilter<"Regla_Autotriage"> | string
+    carga?: IntWithAggregatesFilter<"Regla_Autotriage"> | number
     activa?: BoolWithAggregatesFilter<"Regla_Autotriage"> | boolean
   }
 
   export type UsuarioCreateInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -15903,7 +15987,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -15920,7 +16004,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -15938,7 +16022,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -15956,7 +16040,7 @@ export namespace Prisma {
   export type UsuarioCreateManyInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -15967,7 +16051,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateManyMutationInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -15979,7 +16063,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -16243,6 +16327,7 @@ export namespace Prisma {
     nombre: string
     categoria: CategoriaCreateNestedOneWithoutEtiquetasInput
     Ticket?: TicketCreateNestedManyWithoutEtiquetaInput
+    autoTriage?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUncheckedCreateInput = {
@@ -16250,12 +16335,14 @@ export namespace Prisma {
     idCategoria: number
     nombre: string
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
+    autoTriage?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUpdateInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     categoria?: CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput
     Ticket?: TicketUpdateManyWithoutEtiquetaNestedInput
+    autoTriage?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateInput = {
@@ -16263,6 +16350,7 @@ export namespace Prisma {
     idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
+    autoTriage?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaCreateManyInput = {
@@ -16632,9 +16720,10 @@ export namespace Prisma {
   export type Regla_AutotriageCreateInput = {
     nombre: string
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
     categoria: CategoriaCreateNestedOneWithoutReglasInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
     especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
   }
@@ -16644,8 +16733,9 @@ export namespace Prisma {
     nombre: string
     idCategoria: number
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
     especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
   }
@@ -16653,9 +16743,10 @@ export namespace Prisma {
   export type Regla_AutotriageUpdateInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
     categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
     especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
   }
@@ -16665,8 +16756,9 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     idCategoria?: IntFieldUpdateOperationsInput | number
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
     especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
   }
@@ -16676,14 +16768,14 @@ export namespace Prisma {
     nombre: string
     idCategoria: number
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
   }
 
   export type Regla_AutotriageUpdateManyMutationInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -16692,7 +16784,7 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     idCategoria?: IntFieldUpdateOperationsInput | number
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -16720,13 +16812,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type BytesNullableFilter<$PrismaModel = never> = {
-    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
-    in?: Uint8Array[] | null
-    notIn?: Uint8Array[] | null
-    not?: NestedBytesNullableFilter<$PrismaModel> | Uint8Array | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -16911,16 +16996,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
-    in?: Uint8Array[] | null
-    notIn?: Uint8Array[] | null
-    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Uint8Array | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBytesNullableFilter<$PrismaModel>
-    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -17513,6 +17588,13 @@ export namespace Prisma {
     idUsuario?: SortOrder
   }
 
+  export type BytesNullableFilter<$PrismaModel = never> = {
+    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
+    in?: Uint8Array[] | null
+    notIn?: Uint8Array[] | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Uint8Array | null
+  }
+
   export type Ticket_ImagenOrderByRelevanceInput = {
     fields: Ticket_ImagenOrderByRelevanceFieldEnum | Ticket_ImagenOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -17548,6 +17630,16 @@ export namespace Prisma {
   export type Ticket_ImagenSumOrderByAggregateInput = {
     id?: SortOrder
     idTicket?: SortOrder
+  }
+
+  export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
+    in?: Uint8Array[] | null
+    notIn?: Uint8Array[] | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Uint8Array | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
   export type EnumMetodoAsignacionNullableFilter<$PrismaModel = never> = {
@@ -17693,7 +17785,7 @@ export namespace Prisma {
     nombre?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
-    etiquetas?: SortOrder
+    carga?: SortOrder
     activa?: SortOrder
   }
 
@@ -17701,6 +17793,7 @@ export namespace Prisma {
     id?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
+    carga?: SortOrder
   }
 
   export type Regla_AutotriageMaxOrderByAggregateInput = {
@@ -17708,7 +17801,7 @@ export namespace Prisma {
     nombre?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
-    etiquetas?: SortOrder
+    carga?: SortOrder
     activa?: SortOrder
   }
 
@@ -17717,7 +17810,7 @@ export namespace Prisma {
     nombre?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
-    etiquetas?: SortOrder
+    carga?: SortOrder
     activa?: SortOrder
   }
 
@@ -17725,6 +17818,7 @@ export namespace Prisma {
     id?: SortOrder
     idCategoria?: SortOrder
     prioridad?: SortOrder
+    carga?: SortOrder
   }
 
   export type TecnicoCreateNestedManyWithoutUsuarioInput = {
@@ -17813,10 +17907,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type NullableBytesFieldUpdateOperationsInput = {
-    set?: Uint8Array | null
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -18420,11 +18510,23 @@ export namespace Prisma {
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
   }
 
+  export type Regla_AutotriageCreateNestedManyWithoutEtiquetasInput = {
+    create?: XOR<Regla_AutotriageCreateWithoutEtiquetasInput, Regla_AutotriageUncheckedCreateWithoutEtiquetasInput> | Regla_AutotriageCreateWithoutEtiquetasInput[] | Regla_AutotriageUncheckedCreateWithoutEtiquetasInput[]
+    connectOrCreate?: Regla_AutotriageCreateOrConnectWithoutEtiquetasInput | Regla_AutotriageCreateOrConnectWithoutEtiquetasInput[]
+    connect?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+  }
+
   export type TicketUncheckedCreateNestedManyWithoutEtiquetaInput = {
     create?: XOR<TicketCreateWithoutEtiquetaInput, TicketUncheckedCreateWithoutEtiquetaInput> | TicketCreateWithoutEtiquetaInput[] | TicketUncheckedCreateWithoutEtiquetaInput[]
     connectOrCreate?: TicketCreateOrConnectWithoutEtiquetaInput | TicketCreateOrConnectWithoutEtiquetaInput[]
     createMany?: TicketCreateManyEtiquetaInputEnvelope
     connect?: TicketWhereUniqueInput | TicketWhereUniqueInput[]
+  }
+
+  export type Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput = {
+    create?: XOR<Regla_AutotriageCreateWithoutEtiquetasInput, Regla_AutotriageUncheckedCreateWithoutEtiquetasInput> | Regla_AutotriageCreateWithoutEtiquetasInput[] | Regla_AutotriageUncheckedCreateWithoutEtiquetasInput[]
+    connectOrCreate?: Regla_AutotriageCreateOrConnectWithoutEtiquetasInput | Regla_AutotriageCreateOrConnectWithoutEtiquetasInput[]
+    connect?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
   }
 
   export type CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput = {
@@ -18449,6 +18551,19 @@ export namespace Prisma {
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
   }
 
+  export type Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput = {
+    create?: XOR<Regla_AutotriageCreateWithoutEtiquetasInput, Regla_AutotriageUncheckedCreateWithoutEtiquetasInput> | Regla_AutotriageCreateWithoutEtiquetasInput[] | Regla_AutotriageUncheckedCreateWithoutEtiquetasInput[]
+    connectOrCreate?: Regla_AutotriageCreateOrConnectWithoutEtiquetasInput | Regla_AutotriageCreateOrConnectWithoutEtiquetasInput[]
+    upsert?: Regla_AutotriageUpsertWithWhereUniqueWithoutEtiquetasInput | Regla_AutotriageUpsertWithWhereUniqueWithoutEtiquetasInput[]
+    set?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    disconnect?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    delete?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    connect?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    update?: Regla_AutotriageUpdateWithWhereUniqueWithoutEtiquetasInput | Regla_AutotriageUpdateWithWhereUniqueWithoutEtiquetasInput[]
+    updateMany?: Regla_AutotriageUpdateManyWithWhereWithoutEtiquetasInput | Regla_AutotriageUpdateManyWithWhereWithoutEtiquetasInput[]
+    deleteMany?: Regla_AutotriageScalarWhereInput | Regla_AutotriageScalarWhereInput[]
+  }
+
   export type TicketUncheckedUpdateManyWithoutEtiquetaNestedInput = {
     create?: XOR<TicketCreateWithoutEtiquetaInput, TicketUncheckedCreateWithoutEtiquetaInput> | TicketCreateWithoutEtiquetaInput[] | TicketUncheckedCreateWithoutEtiquetaInput[]
     connectOrCreate?: TicketCreateOrConnectWithoutEtiquetaInput | TicketCreateOrConnectWithoutEtiquetaInput[]
@@ -18461,6 +18576,19 @@ export namespace Prisma {
     update?: TicketUpdateWithWhereUniqueWithoutEtiquetaInput | TicketUpdateWithWhereUniqueWithoutEtiquetaInput[]
     updateMany?: TicketUpdateManyWithWhereWithoutEtiquetaInput | TicketUpdateManyWithWhereWithoutEtiquetaInput[]
     deleteMany?: TicketScalarWhereInput | TicketScalarWhereInput[]
+  }
+
+  export type Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput = {
+    create?: XOR<Regla_AutotriageCreateWithoutEtiquetasInput, Regla_AutotriageUncheckedCreateWithoutEtiquetasInput> | Regla_AutotriageCreateWithoutEtiquetasInput[] | Regla_AutotriageUncheckedCreateWithoutEtiquetasInput[]
+    connectOrCreate?: Regla_AutotriageCreateOrConnectWithoutEtiquetasInput | Regla_AutotriageCreateOrConnectWithoutEtiquetasInput[]
+    upsert?: Regla_AutotriageUpsertWithWhereUniqueWithoutEtiquetasInput | Regla_AutotriageUpsertWithWhereUniqueWithoutEtiquetasInput[]
+    set?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    disconnect?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    delete?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    connect?: Regla_AutotriageWhereUniqueInput | Regla_AutotriageWhereUniqueInput[]
+    update?: Regla_AutotriageUpdateWithWhereUniqueWithoutEtiquetasInput | Regla_AutotriageUpdateWithWhereUniqueWithoutEtiquetasInput[]
+    updateMany?: Regla_AutotriageUpdateManyWithWhereWithoutEtiquetasInput | Regla_AutotriageUpdateManyWithWhereWithoutEtiquetasInput[]
+    deleteMany?: Regla_AutotriageScalarWhereInput | Regla_AutotriageScalarWhereInput[]
   }
 
   export type UsuarioCreateNestedOneWithoutTicketInput = {
@@ -18699,6 +18827,10 @@ export namespace Prisma {
     connect?: TicketWhereUniqueInput
   }
 
+  export type NullableBytesFieldUpdateOperationsInput = {
+    set?: Uint8Array | null
+  }
+
   export type TicketUpdateOneRequiredWithoutImagenesNestedInput = {
     create?: XOR<TicketCreateWithoutImagenesInput, TicketUncheckedCreateWithoutImagenesInput>
     connectOrCreate?: TicketCreateOrConnectWithoutImagenesInput
@@ -18789,6 +18921,12 @@ export namespace Prisma {
     connect?: CategoriaWhereUniqueInput
   }
 
+  export type EtiquetaCreateNestedManyWithoutAutoTriageInput = {
+    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
+    connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+  }
+
   export type EspecialidadCreateNestedManyWithoutReglasInput = {
     create?: XOR<EspecialidadCreateWithoutReglasInput, EspecialidadUncheckedCreateWithoutReglasInput> | EspecialidadCreateWithoutReglasInput[] | EspecialidadUncheckedCreateWithoutReglasInput[]
     connectOrCreate?: EspecialidadCreateOrConnectWithoutReglasInput | EspecialidadCreateOrConnectWithoutReglasInput[]
@@ -18800,6 +18938,12 @@ export namespace Prisma {
     connectOrCreate?: AsignacionCreateOrConnectWithoutReglaInput | AsignacionCreateOrConnectWithoutReglaInput[]
     createMany?: AsignacionCreateManyReglaInputEnvelope
     connect?: AsignacionWhereUniqueInput | AsignacionWhereUniqueInput[]
+  }
+
+  export type EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput = {
+    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
+    connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
   }
 
   export type EspecialidadUncheckedCreateNestedManyWithoutReglasInput = {
@@ -18821,6 +18965,19 @@ export namespace Prisma {
     upsert?: CategoriaUpsertWithoutReglasInput
     connect?: CategoriaWhereUniqueInput
     update?: XOR<XOR<CategoriaUpdateToOneWithWhereWithoutReglasInput, CategoriaUpdateWithoutReglasInput>, CategoriaUncheckedUpdateWithoutReglasInput>
+  }
+
+  export type EtiquetaUpdateManyWithoutAutoTriageNestedInput = {
+    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
+    upsert?: EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput[]
+    set?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    disconnect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    delete?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    update?: EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput[]
+    updateMany?: EtiquetaUpdateManyWithWhereWithoutAutoTriageInput | EtiquetaUpdateManyWithWhereWithoutAutoTriageInput[]
+    deleteMany?: EtiquetaScalarWhereInput | EtiquetaScalarWhereInput[]
   }
 
   export type EspecialidadUpdateManyWithoutReglasNestedInput = {
@@ -18848,6 +19005,19 @@ export namespace Prisma {
     update?: AsignacionUpdateWithWhereUniqueWithoutReglaInput | AsignacionUpdateWithWhereUniqueWithoutReglaInput[]
     updateMany?: AsignacionUpdateManyWithWhereWithoutReglaInput | AsignacionUpdateManyWithWhereWithoutReglaInput[]
     deleteMany?: AsignacionScalarWhereInput | AsignacionScalarWhereInput[]
+  }
+
+  export type EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput = {
+    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
+    upsert?: EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput[]
+    set?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    disconnect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    delete?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
+    update?: EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput[]
+    updateMany?: EtiquetaUpdateManyWithWhereWithoutAutoTriageInput | EtiquetaUpdateManyWithWhereWithoutAutoTriageInput[]
+    deleteMany?: EtiquetaScalarWhereInput | EtiquetaScalarWhereInput[]
   }
 
   export type EspecialidadUncheckedUpdateManyWithoutReglasNestedInput = {
@@ -18901,13 +19071,6 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedBytesNullableFilter<$PrismaModel = never> = {
-    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
-    in?: Uint8Array[] | null
-    notIn?: Uint8Array[] | null
-    not?: NestedBytesNullableFilter<$PrismaModel> | Uint8Array | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -19009,16 +19172,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
-    in?: Uint8Array[] | null
-    notIn?: Uint8Array[] | null
-    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Uint8Array | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedBytesNullableFilter<$PrismaModel>
-    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -19215,6 +19368,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumEstadoTicketFilter<$PrismaModel>
     _max?: NestedEnumEstadoTicketFilter<$PrismaModel>
+  }
+
+  export type NestedBytesNullableFilter<$PrismaModel = never> = {
+    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
+    in?: Uint8Array[] | null
+    notIn?: Uint8Array[] | null
+    not?: NestedBytesNullableFilter<$PrismaModel> | Uint8Array | null
+  }
+
+  export type NestedBytesNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Uint8Array | BytesFieldRefInput<$PrismaModel> | null
+    in?: Uint8Array[] | null
+    notIn?: Uint8Array[] | null
+    not?: NestedBytesNullableWithAggregatesFilter<$PrismaModel> | Uint8Array | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBytesNullableFilter<$PrismaModel>
+    _max?: NestedBytesNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumMetodoAsignacionNullableFilter<$PrismaModel = never> = {
@@ -19572,7 +19742,7 @@ export namespace Prisma {
 
   export type UsuarioCreateWithoutNotificacionesRemitenteInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -19589,7 +19759,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateWithoutNotificacionesRemitenteInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -19610,7 +19780,7 @@ export namespace Prisma {
 
   export type UsuarioCreateWithoutNotificacionesInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -19627,7 +19797,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateWithoutNotificacionesInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -19659,7 +19829,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateWithoutNotificacionesRemitenteInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -19676,7 +19846,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateWithoutNotificacionesRemitenteInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -19703,7 +19873,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateWithoutNotificacionesInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -19720,7 +19890,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateWithoutNotificacionesInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -19736,7 +19906,7 @@ export namespace Prisma {
 
   export type UsuarioCreateWithoutTecnicoInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -19753,7 +19923,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateWithoutTecnicoInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -19836,7 +20006,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateWithoutTecnicoInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -19853,7 +20023,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateWithoutTecnicoInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -19975,9 +20145,10 @@ export namespace Prisma {
   export type Regla_AutotriageCreateWithoutEspecialidadesInput = {
     nombre: string
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
     categoria: CategoriaCreateNestedOneWithoutReglasInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
     asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
   }
 
@@ -19986,8 +20157,9 @@ export namespace Prisma {
     nombre: string
     idCategoria: number
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
   }
 
@@ -20064,7 +20236,7 @@ export namespace Prisma {
     nombre?: StringFilter<"Regla_Autotriage"> | string
     idCategoria?: IntFilter<"Regla_Autotriage"> | number
     prioridad?: IntFilter<"Regla_Autotriage"> | number
-    etiquetas?: StringFilter<"Regla_Autotriage"> | string
+    carga?: IntFilter<"Regla_Autotriage"> | number
     activa?: BoolFilter<"Regla_Autotriage"> | boolean
   }
 
@@ -20091,12 +20263,14 @@ export namespace Prisma {
   export type EtiquetaCreateWithoutCategoriaInput = {
     nombre: string
     Ticket?: TicketCreateNestedManyWithoutEtiquetaInput
+    autoTriage?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUncheckedCreateWithoutCategoriaInput = {
     id?: number
     nombre: string
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
+    autoTriage?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaCreateOrConnectWithoutCategoriaInput = {
@@ -20112,8 +20286,9 @@ export namespace Prisma {
   export type Regla_AutotriageCreateWithoutCategoriaInput = {
     nombre: string
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
+    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
     especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
   }
@@ -20122,8 +20297,9 @@ export namespace Prisma {
     id?: number
     nombre: string
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
     especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
   }
@@ -20262,6 +20438,32 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type Regla_AutotriageCreateWithoutEtiquetasInput = {
+    nombre: string
+    prioridad: number
+    carga: number
+    activa?: boolean
+    categoria: CategoriaCreateNestedOneWithoutReglasInput
+    especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
+    asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
+  }
+
+  export type Regla_AutotriageUncheckedCreateWithoutEtiquetasInput = {
+    id?: number
+    nombre: string
+    idCategoria: number
+    prioridad: number
+    carga: number
+    activa?: boolean
+    especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
+    asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
+  }
+
+  export type Regla_AutotriageCreateOrConnectWithoutEtiquetasInput = {
+    where: Regla_AutotriageWhereUniqueInput
+    create: XOR<Regla_AutotriageCreateWithoutEtiquetasInput, Regla_AutotriageUncheckedCreateWithoutEtiquetasInput>
+  }
+
   export type CategoriaUpsertWithoutEtiquetasInput = {
     update: XOR<CategoriaUpdateWithoutEtiquetasInput, CategoriaUncheckedUpdateWithoutEtiquetasInput>
     create: XOR<CategoriaCreateWithoutEtiquetasInput, CategoriaUncheckedCreateWithoutEtiquetasInput>
@@ -20310,9 +20512,25 @@ export namespace Prisma {
     data: XOR<TicketUpdateManyMutationInput, TicketUncheckedUpdateManyWithoutEtiquetaInput>
   }
 
+  export type Regla_AutotriageUpsertWithWhereUniqueWithoutEtiquetasInput = {
+    where: Regla_AutotriageWhereUniqueInput
+    update: XOR<Regla_AutotriageUpdateWithoutEtiquetasInput, Regla_AutotriageUncheckedUpdateWithoutEtiquetasInput>
+    create: XOR<Regla_AutotriageCreateWithoutEtiquetasInput, Regla_AutotriageUncheckedCreateWithoutEtiquetasInput>
+  }
+
+  export type Regla_AutotriageUpdateWithWhereUniqueWithoutEtiquetasInput = {
+    where: Regla_AutotriageWhereUniqueInput
+    data: XOR<Regla_AutotriageUpdateWithoutEtiquetasInput, Regla_AutotriageUncheckedUpdateWithoutEtiquetasInput>
+  }
+
+  export type Regla_AutotriageUpdateManyWithWhereWithoutEtiquetasInput = {
+    where: Regla_AutotriageScalarWhereInput
+    data: XOR<Regla_AutotriageUpdateManyMutationInput, Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasInput>
+  }
+
   export type UsuarioCreateWithoutTicketInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -20329,7 +20547,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateWithoutTicketInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -20351,12 +20569,14 @@ export namespace Prisma {
   export type EtiquetaCreateWithoutTicketInput = {
     nombre: string
     categoria: CategoriaCreateNestedOneWithoutEtiquetasInput
+    autoTriage?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUncheckedCreateWithoutTicketInput = {
     id?: number
     idCategoria: number
     nombre: string
+    autoTriage?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaCreateOrConnectWithoutTicketInput = {
@@ -20481,7 +20701,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateWithoutTicketInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -20498,7 +20718,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateWithoutTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -20526,12 +20746,14 @@ export namespace Prisma {
   export type EtiquetaUpdateWithoutTicketInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     categoria?: CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput
+    autoTriage?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateWithoutTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
     idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+    autoTriage?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type HistorialTicketUpsertWithWhereUniqueWithoutTicketInput = {
@@ -20646,7 +20868,7 @@ export namespace Prisma {
 
   export type UsuarioCreateWithoutHistorialTicketInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -20663,7 +20885,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateWithoutHistorialTicketInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -20737,7 +20959,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateWithoutHistorialTicketInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -20754,7 +20976,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateWithoutHistorialTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -20908,9 +21130,10 @@ export namespace Prisma {
   export type Regla_AutotriageCreateWithoutAsignacionesInput = {
     nombre: string
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
     categoria: CategoriaCreateNestedOneWithoutReglasInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
     especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
   }
 
@@ -20919,8 +21142,9 @@ export namespace Prisma {
     nombre: string
     idCategoria: number
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
     especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
   }
 
@@ -21014,9 +21238,10 @@ export namespace Prisma {
   export type Regla_AutotriageUpdateWithoutAsignacionesInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
     categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
     especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
   }
 
@@ -21025,8 +21250,9 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     idCategoria?: IntFieldUpdateOperationsInput | number
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
     especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
   }
 
@@ -21068,7 +21294,7 @@ export namespace Prisma {
 
   export type UsuarioCreateWithoutValoracionInput = {
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -21085,7 +21311,7 @@ export namespace Prisma {
   export type UsuarioUncheckedCreateWithoutValoracionInput = {
     id?: number
     nombre?: string | null
-    imagen?: Uint8Array | null
+    imagen?: string | null
     correo: string
     contrasenna: string
     role?: $Enums.Role
@@ -21159,7 +21385,7 @@ export namespace Prisma {
 
   export type UsuarioUpdateWithoutValoracionInput = {
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -21176,7 +21402,7 @@ export namespace Prisma {
   export type UsuarioUncheckedUpdateWithoutValoracionInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
@@ -21214,6 +21440,24 @@ export namespace Prisma {
   export type CategoriaCreateOrConnectWithoutReglasInput = {
     where: CategoriaWhereUniqueInput
     create: XOR<CategoriaCreateWithoutReglasInput, CategoriaUncheckedCreateWithoutReglasInput>
+  }
+
+  export type EtiquetaCreateWithoutAutoTriageInput = {
+    nombre: string
+    categoria: CategoriaCreateNestedOneWithoutEtiquetasInput
+    Ticket?: TicketCreateNestedManyWithoutEtiquetaInput
+  }
+
+  export type EtiquetaUncheckedCreateWithoutAutoTriageInput = {
+    id?: number
+    idCategoria: number
+    nombre: string
+    Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
+  }
+
+  export type EtiquetaCreateOrConnectWithoutAutoTriageInput = {
+    where: EtiquetaWhereUniqueInput
+    create: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput>
   }
 
   export type EspecialidadCreateWithoutReglasInput = {
@@ -21297,6 +21541,22 @@ export namespace Prisma {
     prioridad?: EnumPrioridadFieldUpdateOperationsInput | $Enums.Prioridad
     especialidades?: EspecialidadUncheckedUpdateManyWithoutCategoriasNestedInput
     etiquetas?: EtiquetaUncheckedUpdateManyWithoutCategoriaNestedInput
+  }
+
+  export type EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput = {
+    where: EtiquetaWhereUniqueInput
+    update: XOR<EtiquetaUpdateWithoutAutoTriageInput, EtiquetaUncheckedUpdateWithoutAutoTriageInput>
+    create: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput>
+  }
+
+  export type EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput = {
+    where: EtiquetaWhereUniqueInput
+    data: XOR<EtiquetaUpdateWithoutAutoTriageInput, EtiquetaUncheckedUpdateWithoutAutoTriageInput>
+  }
+
+  export type EtiquetaUpdateManyWithWhereWithoutAutoTriageInput = {
+    where: EtiquetaScalarWhereInput
+    data: XOR<EtiquetaUpdateManyMutationInput, EtiquetaUncheckedUpdateManyWithoutAutoTriageInput>
   }
 
   export type EspecialidadUpsertWithWhereUniqueWithoutReglasInput = {
@@ -21677,9 +21937,10 @@ export namespace Prisma {
   export type Regla_AutotriageUpdateWithoutEspecialidadesInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
     categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
     asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
   }
 
@@ -21688,8 +21949,9 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     idCategoria?: IntFieldUpdateOperationsInput | number
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
   }
 
@@ -21698,7 +21960,7 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     idCategoria?: IntFieldUpdateOperationsInput | number
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -21711,7 +21973,7 @@ export namespace Prisma {
     id?: number
     nombre: string
     prioridad: number
-    etiquetas: string
+    carga: number
     activa?: boolean
   }
 
@@ -21739,12 +22001,14 @@ export namespace Prisma {
   export type EtiquetaUpdateWithoutCategoriaInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUpdateManyWithoutEtiquetaNestedInput
+    autoTriage?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateWithoutCategoriaInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
+    autoTriage?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateManyWithoutCategoriaInput = {
@@ -21755,8 +22019,9 @@ export namespace Prisma {
   export type Regla_AutotriageUpdateWithoutCategoriaInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
+    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
     especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
   }
@@ -21765,8 +22030,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
     especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
   }
@@ -21775,7 +22041,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     prioridad?: IntFieldUpdateOperationsInput | number
-    etiquetas?: StringFieldUpdateOperationsInput | string
+    carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -21832,6 +22098,36 @@ export namespace Prisma {
     slaRespusta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
+  }
+
+  export type Regla_AutotriageUpdateWithoutEtiquetasInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    prioridad?: IntFieldUpdateOperationsInput | number
+    carga?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
+    especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
+    asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
+  }
+
+  export type Regla_AutotriageUncheckedUpdateWithoutEtiquetasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
+    prioridad?: IntFieldUpdateOperationsInput | number
+    carga?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
+    especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
+    asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
+  }
+
+  export type Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
+    prioridad?: IntFieldUpdateOperationsInput | number
+    carga?: IntFieldUpdateOperationsInput | number
+    activa?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type HistorialTicketCreateManyTicketInput = {
@@ -21975,6 +22271,25 @@ export namespace Prisma {
     motivo?: string | null
     activo?: boolean
     metodo?: $Enums.MetodoAsignacion | null
+  }
+
+  export type EtiquetaUpdateWithoutAutoTriageInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    categoria?: CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput
+    Ticket?: TicketUpdateManyWithoutEtiquetaNestedInput
+  }
+
+  export type EtiquetaUncheckedUpdateWithoutAutoTriageInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idCategoria?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
+  }
+
+  export type EtiquetaUncheckedUpdateManyWithoutAutoTriageInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    idCategoria?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
   }
 
   export type EspecialidadUpdateWithoutReglasInput = {

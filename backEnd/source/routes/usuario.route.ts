@@ -5,8 +5,7 @@ export class UsuarioRoutes {
     const router = Router();
     const controller = new UsuarioController();
     //GET localhost:3000/usuario/
-    router.get('/', controller.get);
-    router.get('/:id', controller.getById);
+    router.post('/auth', controller.auth);
     return router;
   }
 }

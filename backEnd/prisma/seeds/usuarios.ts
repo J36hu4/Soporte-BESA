@@ -1,5 +1,4 @@
 import { Role, MotivoDisponible } from "../../generated/prisma";
-
 export const usuarios = [
   // Administradores
   {
@@ -7,6 +6,7 @@ export const usuarios = [
     correo: "jeshua.herrera@admin.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.ADMIN,
+    imagen: 'PassaportFt.png'
   },
   {
     nombre: "admin",
@@ -20,16 +20,19 @@ export const usuarios = [
     nombre: "Sofía Jiménez",
     correo: "sofia.jimenez@besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
+    imagen: 'sofia.png'
   },
   {
     nombre: "Pedro Vargas",
     correo: "pedro.vargas@besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
+    imagen: 'pedro.png'
   },
   {
     nombre: "Laura Fernández",
     correo: "laura.fernandez@besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
+    imagen: 'laura.png'
   },
 
   // Técnicos
@@ -38,12 +41,14 @@ export const usuarios = [
     correo: "luis.vega@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
+    imagen: 'luis.png'
   },
   {
     nombre: "María Solano",
     correo: "maria.solano@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
+    imagen: 'maria.png'
   },
   {
     nombre: "Jorge Castillo",
@@ -56,14 +61,17 @@ export const usuarios = [
     correo: "andrea.mora@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
+    imagen: 'andrea.png'
   },
   {
     nombre: "David Rojas",
     correo: "david.rojas@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
+    imagen: 'david.png'
   },
 ];
+
 
 
 export const tecnicos = [
@@ -72,7 +80,7 @@ export const tecnicos = [
     disponible: true,
     motivoDisponible: MotivoDisponible.disponible,
     fechaDisponible: new Date(),
-    carga: 0,
+    carga: 2,
     especialidades: {
       connect: [
         { id: 1 }, // Técnico en reparación de equipos
@@ -128,7 +136,7 @@ export const tecnicos = [
     disponible: true,
     motivoDisponible: MotivoDisponible.disponible,
     fechaDisponible: new Date(),
-    carga: 0,
+    carga: 6,
     especialidades: {
       connect: [
         { id: 12 }, // Administrador de servidores

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { UserService } from '../../../share/services/api/user.service';
+import { UserModel } from '../../../share/models/UsuarioModel';
 
 @Component({
   selector: 'app-header',
@@ -7,5 +9,10 @@ import { Component } from '@angular/core';
   styleUrl: './header.css'
 })
 export class Header {
+  constructor(private userService: UserService) { };
 
+  user = signal<UserModel | null>(null);
+  ngOnInit(): void {
+    this.user.set(this.userService.getUser());
+  }
 }

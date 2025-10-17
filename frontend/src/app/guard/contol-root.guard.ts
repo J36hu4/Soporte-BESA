@@ -1,29 +1,36 @@
 // control-root.guard.ts
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { UserService } from '../share/services/api/user.service';
+import { Roles } from '../share/models/UsuarioModel';
 
 @Injectable({ providedIn: 'root' })
 export class RedirectGuard implements CanActivate {
-    constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: UserService, private router: Router) { }
 
-    canActivate(): boolean {
-        const isLoggedIn = this.auth.isAuthenticated();
-        this.router.navigate([isLoggedIn ? '/inicio' : '/login']);
-        return false; 
+  canActivate(): boolean {
+    const isLoggedIn = this.auth.isAuthenticated();
+
+    if (!isLoggedIn) {
+      this.router.navigate(['/login']);
+      return false;
     }
+
+    return true;
+  }
+
 }
 
 
 @Injectable({ providedIn: 'root' })
 export class RoleGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: UserService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const expectedRoles = route.data['roles'] as string[];
-    const userRole = this.auth.getUserRole();
+    const userRole = this.auth.getUser()?.role;
 
-    if (!this.auth.isAuthenticated() || !expectedRoles.includes(userRole)) {
+    if (!this.auth.isAuthenticated() || !userRole || !expectedRoles.includes(userRole.toString())) {
       this.router.navigate(['/login']);
       return false;
     }

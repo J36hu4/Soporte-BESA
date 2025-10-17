@@ -1,7 +1,7 @@
 <main class="container-xxl">
     <header class="home-header">
         <div class="header-info">
-            <h1 class="title-primary">Hola, Jeshua Herrera Salas</h1>
+            <h1 class="title-primary">Hola, {{user()?.nombre}}</h1>
             <p class="header-text">
                 Bienvenido al Soporte Técnico de <span class="title-primary">BESA's Software</span>. Gestiona y
                 da seguimiento a tus tickets de incidencias relacionadas con tus herramientas de trabajo o área
@@ -12,8 +12,93 @@
             <div class="header-ticket-info ">
                 <span>Tickets Activos
                 </span>
-                <p class="bg-gradient-primary ticket-num">4</p>
+                <p class="bg-gradient-primary ticket-num">{{ datos().length }}</p>
             </div>
         </div>
     </header>
+
+    <section class="home-content">
+        <div class="lista-datos">
+            <div class="header-datos">
+                <div class="header-datos-info">
+                    <h2 class="title-primary">Tickets Recientes</h2>
+                    <div [class]="(verTipos ? '' : 'hidden ') + 'tipo-group-datos'">
+                        <button [class]="(tipo === 'grid' ? 'select' : '')" (click)="cambiarTipo('grid')">
+                            <mat-icon>grid_view</mat-icon><span>Grid</span>
+                        </button>
+                        <button [class]="(tipo === 'list' ? 'select' : '')" (click)="cambiarTipo('list')">
+                            <mat-icon>list_alt</mat-icon><span>Lista</span>
+                        </button>
+                    </div>
+                </div>
+                <button matButton="outlined">
+                    <mat-icon>arrow_circle_right</mat-icon><span>Ver más tickets</span>
+                </button>
+            </div>
+
+            @if (tipo === 'list') {
+            <table class="tabla-datos">
+                <thead class="bg-gradient-primary">
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Ticket</th>
+                        <th>Estado</th>
+                        <th>Prioridad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (fila of datos(); track $index) {
+                    <tr>
+                        <td class="codigo">{{ 'TK-' + (fila.id.toString().padStart(3, '0')) }}</td>
+                        <td class="content">
+                            <p>{{ fila.titulo }}</p>
+                            <span>{{ fila.etiqueta.categoria.nombre + " - " + fila.etiqueta.nombre }}</span>
+                        </td>
+                        <td class="estado">{{ fila.estado | transformText}}
+                        </td>
+                        <td class="prioridad">
+                            <p
+                                [class]="'bg-' + (fila.etiqueta.categoria.prioridad === 'baja' ? 'success' : fila.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'error')">
+                                {{ fila.etiqueta.categoria.prioridad | transformText }}</p>
+                        </td>
+                        <td class="acciones">
+                            <button matMiniFab matTooltip="Detalles" matTooltipPosition="right"
+                                aria-label="Example icon button with a menu icon">
+                                <mat-icon>info</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            } @else {
+            <div class="grid-datos">
+                @for (dato of datos(); track $index) {
+                <div class="card-grid"
+                    [style]="'border-left: 4px solid ' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'red' : dato.etiqueta.categoria.prioridad === 'media' ? 'orange' : 'green') + 
+                    '; border-bottom: 4px solid ' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'red' : dato.etiqueta.categoria.prioridad === 'media' ? 'orange' : 'green') + ';'">
+                    <div class="card-grid-header">
+                        <p><span class="title-secondary">{{'TK-' + (dato.id.toString().padStart(3, '0'))}}</span> - {{dato.titulo}}</p>
+                        <p>{{dato.etiqueta.categoria.nombre}} - {{dato.etiqueta.nombre}}</p>
+                    </div>
+                    <div class="card-grid-info">
+                        <div class="dato-info">
+                            <p class="">Prioridad: <span
+                                    [class]="'title-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">{{dato.etiqueta.categoria.prioridad | transformText}}</span>
+                            </p>
+                            <p>Estado: <span class="dato-estado">{{dato.estado | transformText}}</span></p>
+                        </div>
+                        <button class="datos-btns btn-primary" >Ver Detalles</button>
+                    </div>
+
+                </div>
+                }
+            </div>
+            }
+        </div>
+
+        <div class="home-info"></div>
+    </section>
+
 </main>

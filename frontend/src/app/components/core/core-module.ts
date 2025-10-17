@@ -9,9 +9,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { Sidebar } from './sidebar/sidebar'
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { Tabla } from './tabla/tabla';
 
 @NgModule({
-  declarations: [Header, Footer, Sidebar],
+  declarations: [Header, Footer, Sidebar, Tabla],
   imports: [
     CommonModule,
     RouterModule,
@@ -22,6 +23,6 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
     MatBadgeModule,
     CdkAccordionModule
   ],
-  exports: [Header, Footer, Sidebar],
+  exports: [Header, Footer, Sidebar, Tabla],
 })
 export class CoreModule { } 

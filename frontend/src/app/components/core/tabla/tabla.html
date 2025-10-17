@@ -1,0 +1,74 @@
+<div class="lista-datos">
+    <header class="header-datos">
+        <div class="header-datos-info">
+            <h2 class="title-primary">{{ titulo }}</h2>
+            <div [class]="(verTipos ? '' : 'hidden ') + 'tipo-group-datos'">
+                <button [class]="(tipos.grid ? '' : 'hidden ') + (tipo === 'grid' ? 'title-primary' : '')"
+                    (click)="cambiarTipo('grid')">
+                    <mat-icon>grid_view</mat-icon><span>Grid</span></button>
+                <button [class]="(tipos.calendar ? '' : 'hidden ') + (tipo === 'calendar' ? 'title-primary' : '')"
+                    (click)="cambiarTipo('calendar')"><mat-icon>calendar_month</mat-icon><span>Calendario</span></button>
+                <button [class]="(tipos.list ? '' : 'hidden ') + (tipo === 'list' ? 'title-primary' : '')"
+                    (click)="cambiarTipo('list')"><mat-icon>list_alt</mat-icon><span>Lista</span></button>
+            </div>
+        </div>
+        <div class="button-group-datos">
+            <button [class]="'datos-btns btn-success ' + (acciones.crear ? '' : 'hidden')">Crear</button>
+            <button [class]="'datos-btns btn-warning ' + (acciones.crear ? '' : 'hidden')">Editar</button>
+            <button [class]="'datos-btns btn-error ' + (acciones.crear ? '' : 'hidden')">Eliminar</button>
+        </div>
+    </header>
+
+    @if (tipo === 'list') {
+    <table class="tabla-datos">
+        <thead class="bg-gradient-primary">
+            <tr>
+                @for (col of columnas; track $index) {
+                <th>{{ col.label }}</th>
+                }
+                <th [class]="acciones.detalles ? '' : 'hidden'">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (fila of datosPaginados; track $index) {
+            <tr>
+                @for (col of columnas; track $index) {
+                <td>{{ fila[col.key]}}</td>
+                }
+                <td [class]="acciones.detalles ? '' : 'hidden'">
+                    <button class="datos-btns btn-primary" (click)="detalle(fila.id)">Detalles</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    } @else if (tipo === 'grid') {
+    <div class="grid-datos">
+        @for (dato of datosPaginados; track $index) {
+        <div class="card-grid"
+            [style]="'border-left: 6px solid ' + (dato.prioridad === 'Alta' ? 'red' : dato.prioridad === 'Media' ? 'yellow' : 'gren') + ';'">
+            <div class="card-grid-header">
+                <p><span class="title-secondary">{{dato.id}}</span> - {{dato.titulo}}</p>
+                <p>{{dato.categoria}} - {{dato.etiqueta}}</p>
+            </div>
+            <div class="card-grid-info">
+                <div class="dato-info">
+                    <p class="">Prioridad: <span
+                            [class]="'title-' + (dato.prioridad === 'Alta' ? 'error' : dato.prioridad === 'Media' ? 'warning' : 'success')">{{dato.prioridad}}</span>
+                    </p>
+                    <p>Estado: <span class="dato-estado">{{dato.estado}}</span></p>
+                </div>
+                <button class="datos-btns btn-primary" (click)="detalle(dato.id)">Ver Detalles</button>
+            </div>
+
+        </div>
+        }
+    </div>
+    }
+
+    <div class="paginacion">
+        <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">Anterior</button>
+        <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+        <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+    </div>
+</div>

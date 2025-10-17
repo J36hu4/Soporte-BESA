@@ -1,61 +1,55 @@
 import { Request, Response, NextFunction } from 'express';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { AppError } from '../errors/custom.error';
 import { PrismaClient } from '../../generated/prisma';
 
 export class UsuarioController {
     prisma = new PrismaClient();
 
-    get = async (request: Request, response: Response, next: NextFunction) => {
-        try {
-            const lista = await this.prisma.usuario.findMany({
-                orderBy: {
-                    nombre: 'asc',
-                },
-                include: {
-                    tecnico: true,
-                },
-            });
-            response.json(lista);
-        } catch (error) {
-            next(error);
-        }
-    };
-    //Obtener por Id
-    getById = async (
+    auth = async (
         request: Request,
         response: Response,
         next: NextFunction
     ) => {
         try {
-            let myId = parseInt(request.params.id);
-            if (isNaN(myId)) {
-                next(AppError.badRequest('El ID no es valido'));
+            const { myCorreo, myContrasenna } = request.body;
+
+            if (!myCorreo || !myContrasenna) {
+                return next(AppError.badRequest('Debe indicar correo y contraseña'));
             }
 
-            const objeto = await this.prisma.usuario.findFirst({
-                where: { id: myId }
+            const usuario = await this.prisma.usuario.findUnique({
+                where: { correo: myCorreo }
             });
-            if (objeto) {
-                response.status(200).json(objeto);
-            } else {
-                next(AppError.notFound("No existe el videojuego seleccionado"))
+
+            if (!usuario) {
+                return next(AppError.unauthorized('Credenciales inválidas'));
             }
+
+            const contrasennaValida = await bcrypt.compare(myContrasenna, usuario.contrasenna);
+
+            if (!contrasennaValida) {
+                return next(AppError.unauthorized('Credenciales inválidas'));
+            }
+
+            const token = jwt.sign(
+                {
+                    id: usuario.id,
+                    idioma: usuario.idioma,
+                    correo: usuario.correo,
+                    nombre: usuario.nombre,
+                    rol: usuario.role,
+                    imagen: usuario.imagen ? usuario.imagen : ''
+                },
+                process.env.JWT_SECRET as string, // ← Clave secreta obligatoria
+                { expiresIn: '8h' }
+            );
+
+            return response.status(200).json({ token });
         } catch (error: any) {
-            next(error);
-        }
-    };
-    //Crear
-    create = async (request: Request, response: Response, next: NextFunction) => {
-        try {
-        } catch (error) {
-            next(error);
-        }
-    };
-    //Actualizar
-    update = async (request: Request, response: Response, next: NextFunction) => {
-        try {
-        } catch (error) {
-            next(error);
+            console.error('Error en autenticación:', error.message);
+            next(AppError.internalServer('Error interno del servidor'));
         }
     };
 }

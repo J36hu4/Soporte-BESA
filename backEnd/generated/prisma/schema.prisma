@@ -19,7 +19,7 @@ datasource db {
 model Usuario {
   id                      Int               @id @default(autoincrement())
   nombre                  String?           @db.VarChar(30)
-  imagen                  Bytes?
+  imagen                  String?           @db.VarChar(100)
   correo                  String            @unique @db.VarChar(35)
   contrasenna             String            @db.VarChar(250)
   role                    Role              @default(USER)
@@ -119,11 +119,12 @@ enum Prioridad {
 }
 
 model Etiqueta {
-  id          Int       @id @default(autoincrement())
-  categoria   Categoria @relation(fields: [idCategoria], references: [id])
+  id          Int                @id @default(autoincrement())
+  categoria   Categoria          @relation(fields: [idCategoria], references: [id])
   idCategoria Int
-  nombre      String    @db.VarChar(50)
+  nombre      String             @db.VarChar(50)
   Ticket      Ticket[]
+  autoTriage  Regla_Autotriage[]
 }
 
 //////////  Tickets e Incidencias  //////////
@@ -209,11 +210,12 @@ model Valoracion {
 ///////////  Reglas autotriage  //////////
 model Regla_Autotriage {
   id             Int            @id @default(autoincrement())
-  nombre         String         @db.VarChar(5)
+  nombre         String         @db.VarChar(50)
   categoria      Categoria      @relation(fields: [idCategoria], references: [id])
   idCategoria    Int
   prioridad      Int
-  etiquetas      String         @db.VarChar(500)
+  carga          Int
+  etiquetas      Etiqueta[]
   especialidades Especialidad[]
   asignaciones   Asignacion[]
   activa         Boolean        @default(true)

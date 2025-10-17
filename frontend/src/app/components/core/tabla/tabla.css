@@ -1,0 +1,178 @@
+.lista-datos {
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+
+  .datos-btns {
+    font-size: .8rem;
+    padding: 5px 10px;
+    box-shadow: -4px 4px 15px;
+  }
+}
+
+.header-datos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  gap: 10px;
+
+  .header-datos-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .tipo-group-datos {
+    display: flex;
+    gap: 8px;
+
+    &.hidden {
+      display: none;
+    }
+
+    button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      transition: all .3s;
+
+      span {
+        font-size: 0.6rem;
+      }
+
+      mat-icon {
+        font-size: 1.2rem;
+        width: fit-content;
+        height: fit-content;
+      }
+
+      &:hover {
+        transform: scale(1.08);
+      }
+
+      &.hidden {
+        display: none;
+      }
+    }
+  }
+
+  .button-group-datos {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+.tabla-datos {
+  width: 100%;
+  overflow: hidden;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+
+  th,
+  td {
+    padding: 0.75em 1em;
+    border-bottom: 1px solid #ccc;
+    text-align: left;
+  }
+
+  thead {
+    color: white;
+  }
+}
+
+.grid-datos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+
+  .card-grid {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    padding: 10px;
+    flex: 1 1 300px;
+    max-width: 350px;
+    box-sizing: border-box;
+    border-left: 6px green solid;
+
+    .card-grid-header {
+      p {
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      p:nth-child(2) {
+        color: #6d6d6d;
+        font-size: .775rem;
+      }
+    }
+
+    .card-grid-info {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      p {
+        margin: 0;
+        color: #6d6d6d;
+        font-size: .7rem;
+
+        span {
+          color: rgb(0, 0, 0);
+          font-weight: bold;
+          font-size: .8rem;
+        }
+
+        &:nth-child(1) {
+          margin-bottom: 5px;
+
+          span {
+            font-size: .95rem;
+
+          }
+        }
+      }
+    }
+  }
+}
+
+.paginacion {
+  margin-top: 1em;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+
+  button {
+    padding: 0.4em 1em;
+    border: none;
+    background-color: #2196f3;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}

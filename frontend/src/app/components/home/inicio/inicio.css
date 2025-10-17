@@ -8,6 +8,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-bottom: 25px;
 
   .header-info {
     flex: 1 1 400px;
@@ -28,6 +29,7 @@
     font-size: 0.95rem;
     color: #333;
     margin-top: 5px;
+    text-align: justify;
   }
 
   .header-ticket-info {
@@ -55,3 +57,63 @@
     }
   }
 }
+
+.home-content {}
+
+.tabla-datos {
+
+  td {
+    &.codigo {
+      text-align: center;
+    }
+
+    &.content {
+      padding-left: 10px;
+
+      p {
+        padding: 0;
+        margin: 5px 0 0;
+        font-size: 1rem;
+      }
+
+      span {
+        font-size: .82rem;
+        color: rgb(117, 117, 117);
+        letter-spacing: .5px;
+      }
+    }
+
+    &.prioridad {
+      text-align: center;
+      padding: 0;
+
+      p {
+        padding: 5px 15px;
+        border-radius: 15px;
+        color: white;
+        margin: 0;
+        width: fit-content;
+        margin: auto;
+      }
+    }
+
+    &.estado {
+      text-align: center;
+
+      p {
+        padding: 5px 15px;
+        border-radius: 15px;
+        color: white;
+        background-color: rgb(90, 90, 90);
+        margin: 0;
+        width: fit-content;
+        margin: auto;
+      }
+    }
+
+    &.acciones {
+      text-align: center;
+    }
+  }
+}
+

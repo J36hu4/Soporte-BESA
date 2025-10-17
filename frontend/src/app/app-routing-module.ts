@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Inicio } from './components/home/inicio/inicio';
-import { PageNotFound } from './components/share/page-not-found/page-not-found';
-import { MainLayout } from './components/layout/main-layout/main-layout';
-import { CleanLayout } from './components/layout/clean-layout/clean-layout';
+import { PageNotFound } from './share/page-not-found/page-not-found';
+import { MainLayout } from './layout/main-layout/main-layout';
+import { CleanLayout } from './layout/clean-layout/clean-layout';
 import { LoginModule } from './components/auth/login/login';
+import { RedirectGuard } from './guard/contol-root.guard';
 
 const routes: Routes = [ 
 { path: '', redirectTo: '/login', pathMatch: 'full' },
 {path: '', component: MainLayout, children: [
-  {path: 'inicio', component: Inicio}
+  {path: 'inicio', component: Inicio, canActivate: [RedirectGuard]}
 ]},
 {path: '', component: CleanLayout, children: [
   { path: 'login', component: LoginModule },
