@@ -19,8 +19,8 @@
     <div class="user-section">
         <span class="small-text user-email">{{user()?.nombre}}</span>
 
-        <button mat-icon-button [matMenuTriggerFor]="menu3">
-            <mat-icon>person</mat-icon>
+        <button class="user-ft" [matMenuTriggerFor]="menu3">
+            <img mat-card-image [src]="'http://localhost:3000/images/'+user()?.imagen" [alt]="user()?.nombre" />
         </button>
 
         <mat-menu #menu3="matMenu">

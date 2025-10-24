@@ -1,0 +1,167 @@
+<main class="container-xxl">
+    <header class="Tickets-header">
+        <!-- <button class="btn-atras"><mat-icon>keyboard_backspace</mat-icon>Atrás</button> -->
+        <p class="title-page">Lista de Tickets</p>
+    </header>
+
+    <section class="filtros">
+        <input type="text" [(ngModel)]="filtros.texto" placeholder="Buscar por código o nombre" />
+
+        <select [(ngModel)]="filtros.estado">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="asignado">Asignado</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="resuelto">Resuelto</option>
+            <option value="cerrado">Cerrado</option>
+        </select>
+
+        <select [(ngModel)]="filtros.prioridad">
+            <option value="">Todas las prioridades</option>
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+        </select>
+
+        <div class="orden">
+            <select [(ngModel)]="filtros.ordenCampo">
+                <option value="">Ordenar por…</option>
+                <option *ngFor="let campo of camposOrdenables" [value]="campo.value">{{ campo.label }}</option>
+            </select>
+
+            <select [(ngModel)]="filtros.ordenDireccion">
+                <option *ngFor="let dir of direccionesOrden" [value]="dir.value">{{ dir.label }}</option>
+            </select>
+        </div>
+
+        <button class="btn-primary filled" (click)="lista()">Aplicar filtros</button>
+        <button class="btn-primary" (click)="quitarFiltros()">Quitar filtros</button>
+    </section>
+
+
+    <div class="lista-datos">
+        <div class="header-datos">
+            <div class="header-datos-info">
+                <!-- <h2 class="title-primary">Tickets Recientes</h2> -->
+                <div [class]="(verTipos ? '' : 'hidden ') + 'tipo-group-datos'">
+                    <button [class]="(tipo === 'grid' ? 'select' : '')" (click)="cambiarTipo('grid')">
+                        <mat-icon>grid_view</mat-icon><span>Grid</span>
+                    </button>
+                    <button [class]="(tipo === 'list' ? 'select' : '')" (click)="cambiarTipo('list')">
+                        <mat-icon>list_alt</mat-icon><span>Lista</span>
+                    </button>
+                    <button [class]="(tipo === 'calendar' ? 'select' : '')" (click)="cambiarTipo('calendar')">
+                        <mat-icon>calendar_month</mat-icon><span>Calendario</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        @if (tipo === 'list') {
+        <table class="tabla-datos">
+            <thead class="bg-gradient-primary">
+                <tr>
+                    <th>Codigo</th>
+                    <th>Ticket</th>
+                    <th>Solicitante</th>
+                    <th>Tecnico/a</th>
+                    <th>Estado</th>
+                    <th>Prioridad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (datos().length > 0) {
+                @for (fila of datos(); track $index) {
+                <tr>
+                    <td class="codigo">{{ (fila.id.toString().padStart(3, '0')) }}</td>
+                    <td class="content">
+                        <p>{{ fila.titulo }}</p>
+                        <span>{{ fila.etiqueta.categoria.nombre + " - " + fila.etiqueta.nombre }}</span>
+                    </td>
+                    <td class="content">
+                        <p>{{ fila.usuario.nombre }}</p>
+                        <span>{{ fila.usuario.correo }}</span>
+                    </td>
+                    <td class="content">
+                        @if (tecnicoAsignado(fila.asignaciones)) {
+                        <p>{{ tecnicoAsignado(fila.asignaciones)?.usuario?.nombre }}</p>
+                        <span>{{ tecnicoAsignado(fila.asignaciones)?.usuario?.correo }}</span>
+                        } @else {
+                        <span>Sin tecnico/a</span>
+                        }
+                    </td>
+                    <td class="estado">{{ fila.estado | transformText}}
+                    </td>
+                    <td class="prioridad">
+                        <p
+                            [class]="'bg-gradient-' + (fila.etiqueta.categoria.prioridad === 'baja' ? 'success' : fila.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'error')">
+                            {{ fila.etiqueta.categoria.prioridad | transformText }}</p>
+                    </td>
+                    <td class="acciones">
+                        <button style="margin: auto;" class="btn-primary filled" matTooltip="Detalles"
+                            matTooltipPosition="right" aria-label="" (click)="irDetalles(fila.id)">
+                            <mat-icon>info</mat-icon>
+                        </button>
+                    </td>
+                </tr>
+                }
+                }
+                @else {
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 20px;">
+                        No se encontraron tickets.
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        } @else if (tipo === 'grid') {
+        <div class="grid-datos">
+            @if (datos().length > 0) {
+            @for (dato of datos(); track $index) {
+            <div
+                [class]="'card-grid-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                <div class="card-grid-header">
+                    <p><span class="title-secondary">{{ (dato.id.toString().padStart(3, '0'))}}</span> -
+                        {{dato.titulo}}</p>
+                    <p>{{dato.etiqueta.categoria.nombre}} - {{dato.etiqueta.nombre}}</p>
+                </div>
+                <div class="card-grid-info">
+                    <div class="dato-info">
+                        <p class="">Prioridad: <span
+                                [class]="'title-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">{{dato.etiqueta.categoria.prioridad
+                                | transformText}}</span>
+                        </p>
+                        <p>Estado: <span class="dato-estado">{{dato.estado | transformText}}</span></p>
+                    </div>
+                    <button
+                        [class]="'filled btn-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')"
+                        matTooltip="Detalles" (click)="irDetalles(dato.id)">
+                        <mat-icon>info</mat-icon>
+                    </button>
+                </div>
+
+            </div>
+            }
+            } @else {
+            <p class="card-grid" style="text-align: center;">No se encontraron tickets.</p>
+            }
+        </div>
+        } @else {
+        <div class="grid-datos">
+            <p>Proximamente</p>
+        </div>
+        }
+
+        <footer style="display: flex; align-items: center; justify-content: center; padding: 20px 0 0; gap: 20px;">
+            <app-paginador [paginaActual]="paginaActual" [totalItems]="totalItems" [itemsPorPagina]="itemsPorPagina"
+                (paginaCambiada)="cambiarPagina($event)" (itemsPorPaginaCambiado)="cambiarItemsPorPagina($event)">
+            </app-paginador>
+
+        </footer>
+
+    </div>
+
+
+</main>

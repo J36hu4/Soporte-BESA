@@ -8,191 +8,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model categoriatoespecialidad {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_CategoriaToEspecialidad_AB_unique")
-  @@index([B], map: "_CategoriaToEspecialidad_B_index")
-  @@map("_categoriatoespecialidad")
+model Usuario {
+  id                      Int               @id @default(autoincrement())
+  nombre                  String?           @db.VarChar(30)
+  imagen                  String?           @db.VarChar(500)
+  correo                  String            @unique @db.VarChar(35)
+  contrasenna             String            @db.VarChar(250)
+  role                    Role              @default(USER)
+  ultimaSesion            DateTime          @default(now()) @updatedAt
+  estado                  Boolean           @default(true)
+  idioma                  Idioma            @default(es)
+  tecnico                 Tecnico[]
+  ticket                  Ticket[]
+  historialTicket         HistorialTicket[]
+  valoracion              Valoracion[]
+  notificacionesRemitente Notificacion[]    @relation("remitenteNotificacion")
+  notificaciones          Notificacion[]    @relation("destinatarioNotificacion")
 }
 
-model especialidadtoregla_autotriage {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_EspecialidadToRegla_Autotriage_AB_unique")
-  @@index([B], map: "_EspecialidadToRegla_Autotriage_B_index")
-  @@map("_especialidadtoregla_autotriage")
+enum Role {
+  USER
+  TEC
+  ADMIN
 }
 
-model especialidadtotecnico {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_EspecialidadToTecnico_AB_unique")
-  @@index([B], map: "_EspecialidadToTecnico_B_index")
-  @@map("_especialidadtotecnico")
+enum Idioma {
+  es
+  en
 }
 
-model etiquetatoregla_autotriage {
-  A Int
-  B Int
-
-  @@unique([A, B], map: "_EtiquetaToRegla_Autotriage_AB_unique")
-  @@index([B], map: "_EtiquetaToRegla_Autotriage_B_index")
-  @@map("_etiquetatoregla_autotriage")
-}
-
-model asignacion {
-  id               Int                @id @default(autoincrement())
-  idTicket         Int
-  idTecnico        Int
-  idRegla          Int?
-  fecha            DateTime           @default(now())
-  puntajePrioridad Int
-  motivo           String?            @db.VarChar(300)
-  activo           Boolean            @default(true)
-  metodo           MetodoAsignacion?
-
-  @@index([idRegla], map: "Asignacion_idRegla_fkey")
-  @@index([idTecnico], map: "Asignacion_idTecnico_fkey")
-  @@index([idTicket], map: "Asignacion_idTicket_fkey")
-}
-
-model categoria {
-  id                    Int                 @id @default(autoincrement())
-  nombre                String              @db.VarChar(30)
-  descripcion           String              @db.VarChar(200)
-  tiempoMaximoRespuesta Float
-  tiempoMaximoSolucion  Float
-  prioridad             Prioridad
-}
-
-model especialidad {
-  id          Int    @id @default(autoincrement())
-  nombre      String @db.VarChar(30)
-  descripcion String @db.VarChar(100)
-}
-
-model etiqueta {
-  id          Int    @id @default(autoincrement())
-  idCategoria Int
-  nombre      String @db.VarChar(50)
-
-  @@index([idCategoria], map: "Etiqueta_idCategoria_fkey")
-}
-
-model historialticket {
-  id             Int                            @id @default(autoincrement())
-  idTicket       Int
-  idUsuario      Int
-  estadoAnterior historialticket_estadoAnterior
-  estadoNuevo    historialticket_estadoNuevo
-  fecha          DateTime                       @default(now())
-  observacion    String?                        @db.VarChar(500)
-
-  @@index([idTicket], map: "HistorialTicket_idTicket_fkey")
-  @@index([idUsuario], map: "HistorialTicket_idUsuario_fkey")
-}
-
-model notificacion {
-  id             Int               @id @default(autoincrement())
+model Notificacion {
+  id             Int              @id @default(autoincrement())
+  Remitente      Usuario?         @relation("remitenteNotificacion", fields: [idRemitente], references: [id])
   idRemitente    Int?
+  Destinatario   Usuario          @relation("destinatarioNotificacion", fields: [idDestinatario], references: [id])
   idDestinatario Int
-  tipo           notificacion_tipo
-  leido          Boolean           @default(false)
-  mensaje        String            @db.VarChar(500)
-  fecha          DateTime          @default(now())
-
-  @@index([idDestinatario], map: "Notificacion_idDestinatario_fkey")
-  @@index([idRemitente], map: "Notificacion_idRemitente_fkey")
+  tipo           TipoNotificacion
+  leido          Boolean          @default(false)
+  mensaje        String           @db.VarChar(500)
+  fecha          DateTime         @default(now())
 }
 
-model regla_autotriage {
-  id          Int     @id @default(autoincrement())
-  nombre      String  @db.VarChar(50)
-  idCategoria Int
-  prioridad   Int
-  carga       Int
-  activa      Boolean @default(true)
-
-  @@index([idCategoria], map: "Regla_Autotriage_idCategoria_fkey")
-}
-
-model tecnico {
-  id               Int                      @id
-  disponible       Boolean                  @default(true)
-  motivoDisponible tecnico_motivoDisponible @default(disponible)
-  fechaDisponible  DateTime?                @default(now())
-  carga            Int                      @default(0)
-}
-
-model ticket {
-  id            Int           @id @default(autoincrement())
-  idUsuario     Int
-  idEtiqueta    Int
-  titulo        String        @db.VarChar(40)
-  descripcion   String        @db.VarChar(500)
-  fechaCreacion DateTime      @default(now())
-  fechaCierre   DateTime?
-  slaRespusta   DateTime?
-  slaSolucion   DateTime?
-  estado        EstadoTicket @default(pendiente)
-
-  @@index([idEtiqueta], map: "Ticket_idEtiqueta_fkey")
-  @@index([idUsuario], map: "Ticket_idUsuario_fkey")
-}
-
-model ticket_imagen {
-  id       Int     @id @default(autoincrement())
-  idTicket Int
-  imagen   Bytes?
-  url      String? @db.VarChar(200)
-
-  @@index([idTicket], map: "Ticket_Imagen_idTicket_fkey")
-}
-
-model usuario {
-  id           Int            @id @default(autoincrement())
-  nombre       String?        @db.VarChar(30)
-  imagen       String?        @db.VarChar(100)
-  correo       String         @unique(map: "Usuario_correo_key") @db.VarChar(35)
-  contrasenna  String         @db.VarChar(250)
-  role         Role   @default(USER)
-  ultimaSesion DateTime       @default(now())
-  estado       Boolean        @default(true)
-  idioma       usuario_idioma @default(es)
-}
-
-model valoracion {
-  id         Int      @id @default(autoincrement())
-  idTicket   Int
-  idUsuario  Int
-  puntaje    Int
-  comentario String?  @db.VarChar(300)
-  fecha      DateTime @default(now())
-
-  @@index([idTicket], map: "Valoracion_idTicket_fkey")
-  @@index([idUsuario], map: "Valoracion_idUsuario_fkey")
-}
-
-enum tecnico_motivoDisponible {
-  disponible
-  almuerzo
-  descanso
-  ausente
-}
-
-enum historialticket_estadoAnterior {
-  pendiente
-  asignado
-  en_proceso
-  resuelto
-  cerrado
-}
-
-enum notificacion_tipo {
+enum TipoNotificacion {
   asignacion
   cambio_estado
   observacion
@@ -204,12 +61,45 @@ enum notificacion_tipo {
   nuevo
 }
 
-enum historialticket_estadoNuevo {
-  pendiente
-  asignado
-  en_proceso
-  resuelto
-  cerrado
+//////////  Tecnico y Especialidad  //////////
+model Tecnico {
+  usuario          Usuario          @relation(fields: [id], references: [id])
+  id               Int              @id
+  disponible       Boolean          @default(true)
+  motivoDisponible MotivoDisponible @default(disponible)
+  fechaDisponible  DateTime?        @default(now())
+  carga            Int              @default(0)
+  especialidades   Especialidad[]
+  Asignacion       Asignacion[]
+}
+
+enum MotivoDisponible {
+  disponible
+  almuerzo
+  descanso
+  ausente
+}
+
+model Especialidad {
+  id          Int                @id @default(autoincrement())
+  nombre      String             @db.VarChar(50)
+  descripcion String             @db.VarChar(200)
+  tecnicos    Tecnico[]
+  categorias  Categoria[]
+  reglas      Regla_Autotriage[]
+}
+
+//////////  Categorias  //////////
+model Categoria {
+  id                    Int                @id @default(autoincrement())
+  nombre                String             @db.VarChar(30)
+  descripcion           String             @db.VarChar(200)
+  tiempoMaximoRespuesta Float
+  tiempoMaximoSolucion  Float
+  prioridad             Prioridad
+  especialidades        Especialidad[]
+  etiquetas             Etiqueta[]
+  reglas                Regla_Autotriage[]
 }
 
 enum Prioridad {
@@ -218,20 +108,32 @@ enum Prioridad {
   alta
 }
 
-enum Role {
-  USER
-  TEC
-  ADMIN
+model Etiqueta {
+  id          Int                @id @default(autoincrement())
+  categoria   Categoria          @relation(fields: [idCategoria], references: [id])
+  idCategoria Int
+  nombre      String             @db.VarChar(50)
+  Ticket      Ticket[]
+  regla       Regla_Autotriage[]
 }
 
-enum MetodoAsignacion {
-  manual
-  automatico
-}
-
-enum usuario_idioma {
-  es
-  en
+//////////  Tickets e Incidencias  //////////
+model Ticket {
+  id            Int               @id @default(autoincrement())
+  usuario       Usuario           @relation(fields: [idUsuario], references: [id])
+  idUsuario     Int
+  etiqueta      Etiqueta          @relation(fields: [idEtiqueta], references: [id])
+  idEtiqueta    Int
+  titulo        String            @db.VarChar(40)
+  descripcion   String            @db.VarChar(500)
+  fechaCreacion DateTime          @default(now())
+  fechaCierre   DateTime?
+  slaRespusta   DateTime?
+  slaSolucion   DateTime?
+  estado        EstadoTicket      @default(pendiente)
+  historial     HistorialTicket[]
+  asignaciones  Asignacion[]
+  Valoracion    Valoracion[]
 }
 
 enum EstadoTicket {
@@ -240,4 +142,70 @@ enum EstadoTicket {
   en_proceso
   resuelto
   cerrado
+}
+
+model HistorialTicket {
+  id             Int             @id @default(autoincrement())
+  ticket         Ticket          @relation(fields: [idTicket], references: [id])
+  idTicket       Int
+  usuario        Usuario?        @relation(fields: [idUsuario], references: [id])
+  idUsuario      Int
+  estadoAnterior EstadoTicket
+  estadoNuevo    EstadoTicket
+  fecha          DateTime        @default(now())
+  observacion    String?         @db.VarChar(500)
+  imagenes       Ticket_Imagen[]
+}
+
+model Ticket_Imagen {
+  id          Int             @id @default(autoincrement())
+  historial   HistorialTicket @relation(fields: [idHistorial], references: [id])
+  idHistorial Int
+  imagen      Bytes?
+  url         String?         @db.VarChar(200)
+}
+
+model Asignacion {
+  id               Int               @id @default(autoincrement())
+  ticket           Ticket            @relation(fields: [idTicket], references: [id])
+  idTicket         Int
+  tecnico          Tecnico           @relation(fields: [idTecnico], references: [id])
+  idTecnico        Int
+  regla            Regla_Autotriage? @relation(fields: [idRegla], references: [id])
+  idRegla          Int?
+  fecha            DateTime          @default(now())
+  puntajePrioridad Int
+  motivo           String?           @db.VarChar(300)
+  activo           Boolean           @default(true)
+  metodo           MetodoAsignacion?
+}
+
+enum MetodoAsignacion {
+  manual
+  automatico
+}
+
+model Valoracion {
+  id         Int      @id @default(autoincrement())
+  ticket     Ticket   @relation(fields: [idTicket], references: [id])
+  idTicket   Int
+  usuario    Usuario  @relation(fields: [idUsuario], references: [id])
+  idUsuario  Int
+  puntaje    Int
+  comentario String?  @db.VarChar(300)
+  fecha      DateTime @default(now())
+}
+
+///////////  Reglas autotriage  //////////
+model Regla_Autotriage {
+  id             Int            @id @default(autoincrement())
+  nombre         String         @db.VarChar(50)
+  categoria      Categoria      @relation(fields: [idCategoria], references: [id])
+  idCategoria    Int
+  prioridad      Int
+  carga          Int
+  etiquetas      Etiqueta[]
+  especialidades Especialidad[]
+  asignaciones   Asignacion[]
+  activa         Boolean        @default(true)
 }

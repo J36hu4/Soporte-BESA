@@ -161,66 +161,14 @@ html {
     }
 
     .bg-gradient-#{$type} {
-      background: linear-gradient(-45deg, #{map.get($palette, 50)}, #{map.get($palette, 10)});
+      background: linear-gradient(-45deg, #{map.get($palette, 50)}, #{map.get($palette, 30)});
     }
 
     .bg-#{$type} {
       background: map.get($palette, 50);
     }
 
-    .btn-#{$type} {
-      backdrop-filter: blur(12px);
-      color: white;
-      border-radius: 8px;
-      padding: 0.6em 1.5em;
-      font-weight: 600;
-      font-size: 0.875rem;
-      letter-spacing: 0.5px;
-      border: 1px solid rgba(map.get($palette, 40), 1);
-      backdrop-filter: blur(10px);
-      box-shadow: -4px 4px 15px rgba(map.get($palette, 30), 0.9);
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
 
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: -6px 6px 25px rgba(map.get($palette, 30), 0.9);
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        border-radius: 8px;
-        inset: 0;
-        background: linear-gradient(-45deg, #{map.get($palette, 50)}, #{map.get($palette, 10)});
-        z-index: -1;
-        transition: opacity 0.4s ease;
-        opacity: 1;
-      }
-
-      &:hover::before {
-        opacity: 0;
-      }
-
-      &::after {
-        border-radius: 8px;
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(-45deg, #{map.get($palette, 10)}, #{map.get($palette, 50)});
-        z-index: -2;
-      }
-
-      &:active {
-        transform: scale(0.98);
-        box-shadow: 0 3px 15px rgba(map.get($palette, 50), 0.25);
-      }
-
-      &:focus-visible {
-        outline: 2px solid rgba(map.get($palette, 60), 0.5);
-        outline-offset: 2px;
-      }
-    }
 
     // .#{$type}-title {
     //     font-weight: bold;
@@ -302,6 +250,224 @@ html {
       }
     }
 
+
+
+  }
+
+
+  //Controles
+  @each $type, $palette in (primary: colors.$primary-palette, secondary: colors.$secondary-palette, tertiary: colors.$tertiary-palette, error: colors.$error-palette,
+    success: colors.$success-palette, warning: colors.$warning-palette) {
+
+    .btn-#{$type} {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: map.get($palette, 50);
+      background-color: transparent;
+      border-radius: 8px;
+      padding: 0.6em 1em;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-align: center;
+      border: 1px solid rgba(map.get($palette, 50), 1);
+      backdrop-filter: blur(10px);
+      box-shadow: -4px 4px 15px rgba(map.get($palette, 30), 0.3);
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+
+      mat-icon {
+        font-size: 1.35rem;
+        height: fit-content;
+        width: fit-content;
+        padding: 0;
+        margin: -4px -8px;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: -4px 4px 15px rgba(map.get($palette, 30), 0.6);
+        background-color: rgba(map.get($palette, 60), 0.2);
+      }
+
+      &.filled {
+        color: white;
+        background-color: map.get($palette, 50);
+
+        &:hover {
+          background-color: map.get($palette, 30);
+        }
+      }
+
+      &.gradient {
+        color: white;
+
+        &::before {
+          content: '';
+          position: absolute;
+          border-radius: 8px;
+          inset: 0;
+          background: linear-gradient(-45deg, #{map.get($palette, 50)}, #{map.get($palette, 10)});
+          z-index: -1;
+          transition: opacity 0.4s ease;
+          opacity: 1;
+        }
+
+        &:hover::before {
+          opacity: 0;
+        }
+
+        &::after {
+          border-radius: 8px;
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(-45deg, #{map.get($palette, 10)}, #{map.get($palette, 50)});
+          z-index: -2;
+        }
+      }
+
+      &:active {
+        transform: scale(0.98);
+        box-shadow: 0 3px 15px rgba(map.get($palette, 50), 0.25);
+      }
+
+      &:focus-visible {
+        outline: 2px solid rgba(map.get($palette, 60), 0.5);
+        outline-offset: 2px;
+      }
+    }
+
+    .btn-atras {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 15px 8px 20px;
+      margin: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      height: 40px;
+      cursor: pointer;
+      background-color: white;
+      transition: all .1s ease;
+      font-weight: bold;
+      background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 40)});
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: white;
+
+      mat-icon {
+        font-weight: bold;
+        font-size: 1.35rem;
+        height: fit-content;
+        width: fit-content;
+        padding: 0;
+        margin: -4px -8px;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+      }
+
+      &:active {
+        transform: scale(0.98);
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.25);
+      }
+    }
+
+    select {
+      background-color: white;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid #1976d2;
+      padding: 8px;
+    }
+
+     input {
+      background-color: white;
+      border-radius: 8px;
+      border: 1px solid #1976d2;
+      padding: 8px;
+     }
+
+    .input-group-#{$type} {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1em;
+      margin-bottom: 1.2em;
+      position: relative;
+      width: 100%;
+      padding-bottom: 5px;
+      overflow: hidden;
+
+      label {
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: map.get($palette, 50);
+        letter-spacing: 0.3px;
+      }
+
+      div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        mat-icon {
+          background: linear-gradient(to right, #{map.get($palette, 50)}, #{map.get($palette, 10)});
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
+        }
+      }
+
+      input {
+        width: 100%;
+        padding: 3px 2px 4px 5px;
+        font-size: 1.05rem;
+        font-weight: 500;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background-color: transparent;
+        color: var(--mat-sys-on-surface);
+        outline: none;
+        position: relative;
+        z-index: 1;
+
+        &::placeholder {
+          color: rgba(map.get($palette, 60), 0.5);
+          font-weight: 400;
+          font-size: 1rem;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(to right, #{map.get($palette, 50)}, #{map.get($palette, 10)});
+        opacity: 1;
+        transition: opacity 0.4s ease;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+
+  }
+
+  //Textos
+  @each $type, $palette in (primary: colors.$primary-palette, secondary: colors.$secondary-palette, tertiary: colors.$tertiary-palette, error: colors.$error-palette,
+    success: colors.$success-palette, warning: colors.$warning-palette) {
     .title-#{$type} {
       font-weight: bold;
       display: inline-block;
@@ -313,7 +479,28 @@ html {
       color: transparent;
     }
 
+    .title-page {
+      font-weight: bold;
+      background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 10)});
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      margin: 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      font-size: 1.5rem;
+      border-radius: 10px;
+      height: 40px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
+
 
 
   // Card header
@@ -330,224 +517,227 @@ html {
   }
 
   // Listas
-  .lista-datos {
-    background-color: white;
-    padding: 10px 20px 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    width: 100%;
-    box-sizing: border-box;
+  @each $type, $palette in (primary: colors.$primary-palette, secondary: colors.$secondary-palette, tertiary: colors.$tertiary-palette, error: colors.$error-palette,
+    success: colors.$success-palette, warning: colors.$warning-palette) {
+    .lista-datos {
+      background-color: white;
+      padding: 10px 20px 20px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      width: 100%;
+      box-sizing: border-box;
 
-    .datos-btns {
-      font-size: .8rem;
-      padding: 8px 10px;
-      box-shadow: none;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-      align-items: center;
-      gap: 5px;
-
-      mat-icon {
-        font-size: 1.2rem;
-        height: fit-content;
-        width: fit-content;
-        padding: 0;
-        margin: -2px 0 0;
+      .datos-btns {
+        font-size: .8rem;
+        padding: 8px 10px;
+        box-shadow: none;
+        display: flex;
+        justify-content: center;
         text-align: center;
+        align-items: center;
+        gap: 5px;
 
+        mat-icon {
+          font-size: 1.2rem;
+          height: fit-content;
+          width: fit-content;
+          padding: 0;
+          margin: -2px 0 0;
+          text-align: center;
+
+        }
       }
-    }
 
-    .header-datos {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: fit-content;
-      margin: 0 0 10px;
-      border-radius: 10px;
-      gap: 10px;
-
-      .header-datos-info {
+      .header-datos {
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: space-between;
+        height: fit-content;
+        margin: 0 0 10px;
+        border-radius: 10px;
         gap: 10px;
-        flex: 1;
-      }
 
-      h2 {
-        font-size: 1.4rem;
-        margin: 0;
-        border-right: 2px solid rgb(194, 194, 194);
-        padding-right: 15px;
-      }
-
-      .tipo-group-datos {
-        display: flex;
-        gap: 8px;
-
-        &.hidden {
-          display: none;
-        }
-
-        button {
+        .header-datos-info {
           display: flex;
           align-items: center;
-          justify-content: center;
-          border: 1px solid rgb(194, 194, 194);
-          border-radius: 15px;
-          background-color: white;
-          padding: 2px 10px;
-          cursor: pointer;
-          transition: all .3s;
+          justify-content: start;
+          gap: 10px;
+          flex: 1;
+        }
 
-          span {
-            font-size: 0.9rem;
-            height: fit-content;
-            padding: 0;
-            margin: 1.5px 0 0 4px;
-          }
+        h2 {
+          font-size: 1.4rem;
+          margin: 0;
+          border-right: 2px solid rgb(194, 194, 194);
+          padding-right: 15px;
+        }
 
-          mat-icon {
-            font-size: 1.2rem;
-            width: fit-content;
-            height: fit-content;
-          }
-
-          &:hover {
-            transform: scale(1.04);
-            background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 10)});
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            border: 1px solid map.get(colors.$primary-palette, 50);
-          }
+        .tipo-group-datos {
+          display: flex;
+          gap: 8px;
 
           &.hidden {
             display: none;
           }
 
-          &.select {
-            color: white;
-            font-weight: 100;
-            background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 10)});
+          button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgb(194, 194, 194);
+            border-radius: 15px;
+            background-color: white;
+            padding: 2px 10px;
+            cursor: pointer;
             transition: all .3s;
 
+            span {
+              font-size: 0.9rem;
+              height: fit-content;
+              padding: 0;
+              margin: 1.5px 0 0 4px;
+            }
+
+            mat-icon {
+              font-size: 1.2rem;
+              width: fit-content;
+              height: fit-content;
+            }
+
             &:hover {
+              transform: scale(1.04);
               background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 10)});
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               background-clip: text;
+              border: 1px solid map.get(colors.$primary-palette, 50);
+            }
+
+            &.hidden {
+              display: none;
+            }
+
+            &.select {
+              color: white;
+              font-weight: 100;
+              background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 10)});
               transition: all .3s;
+
+              &:hover {
+                background: linear-gradient(to right, #{map.get(colors.$primary-palette, 50)}, #{map.get(colors.$primary-palette, 10)});
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                transition: all .3s;
+              }
             }
           }
         }
-      }
 
-      .button-group-datos {
-        display: flex;
-        gap: 10px;
-      }
-    }
-  }
-
-  .tabla-datos {
-    width: 100%;
-    overflow: hidden;
-    border-collapse: collapse;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    border-radius: 12px;
-    width: 100%;
-    box-sizing: border-box;
-
-    th {
-      padding: 10px 10px;
-      font-size: bold;
-      text-align: center;
-      color: white;
-    }
-
-    tr {
-      padding: 5px;
-    }
-
-    td {
-      padding: 5px;
-      border-bottom: 1px solid #ccc;
-      border-right: 1px solid #ccc;
-      text-align: left;
-      cursor: default;
-
-      p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        .button-group-datos {
+          display: flex;
+          gap: 10px;
+        }
       }
     }
-  }
 
-  .grid-datos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding-top: 10px;
-    justify-content: center;
-
-    .card-grid {
+    .tabla-datos {
+      width: 100%;
+      overflow: hidden;
+      border-collapse: collapse;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       border-radius: 12px;
-      padding: 10px;
-      flex: 1 1 300px;
-      max-width: 300px;
+      width: 100%;
       box-sizing: border-box;
-      border-left: 6px green solid;
 
-      .card-grid-header {
+      th {
+        padding: 10px 10px;
+        font-size: bold;
+        text-align: center;
+        color: white;
+      }
+
+      tr {
+        padding: 5px;
+      }
+
+      td {
+        padding: 5px;
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        text-align: left;
+        cursor: default;
+
         p {
-          margin: 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-
-        p:nth-child(2) {
-          color: #6d6d6d;
-          font-size: .775rem;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
         }
       }
+    }
 
-      .card-grid-info {
-        margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: end;
+    .grid-datos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-top: 10px;
+      justify-content: center;
 
-        p {
-          margin: 0;
-          color: #6d6d6d;
-          font-size: .7rem;
+      .card-grid-#{$type} {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        padding: 10px;
+        flex: 1 1 300px;
+        max-width: 300px;
+        box-sizing: border-box;
+        border-left: 4px solid #{map.get($palette, 60)};
+        border-bottom: 4px solid #{map.get($palette, 60)};
 
-          span {
-            color: rgb(0, 0, 0);
-            font-weight: bold;
-            font-size: .8rem;
+        .card-grid-header {
+          p {
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
 
-          &:nth-child(1) {
-            margin-bottom: 5px;
+          p:nth-child(2) {
+            color: #6d6d6d;
+            font-size: .775rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+
+        .card-grid-info {
+          margin-top: 10px;
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+
+          p {
+            margin: 0;
+            color: #6d6d6d;
+            font-size: .7rem;
 
             span {
-              font-size: .95rem;
+              color: rgb(0, 0, 0);
+              font-weight: bold;
+              font-size: .8rem;
+            }
 
+            &:nth-child(1) {
+              margin-bottom: 5px;
+
+              span {
+                font-size: .95rem;
+
+              }
             }
           }
         }
       }
     }
   }
-
 }

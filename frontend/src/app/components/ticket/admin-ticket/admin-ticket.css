@@ -1,0 +1,107 @@
+.Tickets-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 15px;
+}
+
+.tabla-datos {
+
+  td {
+    &.codigo {
+      text-align: center;
+    }
+
+    &.content {
+      padding-left: 10px;
+
+      p {
+        padding: 0;
+        margin: 5px 0 0;
+        font-size: 1rem;
+      }
+
+      span {
+        font-size: .82rem;
+        color: rgb(117, 117, 117);
+        letter-spacing: .5px;
+      }
+    }
+
+    &.prioridad {
+      text-align: center;
+      padding: 0;
+
+      p {
+        padding: 5px 15px;
+        border-radius: 15px;
+        color: white;
+        margin: 0;
+        width: fit-content;
+        margin: auto;
+      }
+    }
+
+    &.estado {
+      text-align: center;
+
+      p {
+        padding: 5px 15px;
+        border-radius: 15px;
+        color: white;
+        background-color: rgb(90, 90, 90);
+        margin: 0;
+        width: fit-content;
+        margin: auto;
+      }
+    }
+
+  }
+}
+
+.filtros {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+  border-radius: 10px;
+
+  input {
+    flex-grow: 1;
+  }
+
+  .orden {
+    display: flex;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+    font-size: 1rem;
+    padding: 10px;
+
+    input,
+    select,
+    .orden,
+    button {
+      width: 100%;
+    }
+
+    .orden {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 0.6rem;
+    }
+  }
+}

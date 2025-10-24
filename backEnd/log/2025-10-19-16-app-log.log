@@ -1,0 +1,41 @@
+2025-10-19 16:51:35.866 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.count()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:56:36
+
+  53     }
+  54 }),
+  55 
+→ 56 this.prisma.ticket.count({
+       select: {
+         _count: {
+           select: {
+             _all: true
+           }
+         }
+       },
+       where: {
+         usuarioId: 3,
+         ~~~~~~~~~
+     ?   AND?: TicketWhereInput | TicketWhereInput[],
+     ?   OR?: TicketWhereInput[],
+     ?   NOT?: TicketWhereInput | TicketWhereInput[],
+     ?   id?: IntFilter | Int,
+     ?   idUsuario?: IntFilter | Int,
+     ?   idEtiqueta?: IntFilter | Int,
+     ?   titulo?: StringFilter | String,
+     ?   descripcion?: StringFilter | String,
+     ?   fechaCreacion?: DateTimeFilter | DateTime,
+     ?   fechaCierre?: DateTimeNullableFilter | DateTime | Null,
+     ?   slaRespusta?: DateTimeNullableFilter | DateTime | Null,
+     ?   slaSolucion?: DateTimeNullableFilter | DateTime | Null,
+     ?   estado?: EnumEstadoTicketFilter | EstadoTicket,
+     ?   usuario?: UsuarioScalarRelationFilter | UsuarioWhereInput,
+     ?   etiqueta?: EtiquetaScalarRelationFilter | EtiquetaWhereInput,
+     ?   historial?: HistorialTicketListRelationFilter,
+     ?   imagenes?: Ticket_ImagenListRelationFilter,
+     ?   asignaciones?: AsignacionListRelationFilter,
+     ?   Valoracion?: ValoracionListRelationFilter
+       }
+     })
+
+Unknown argument `usuarioId`. Did you mean `usuario`? Available options are marked with ?.

@@ -1,0 +1,192 @@
+2025-10-20 11:18:03.180 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:70:36
+
+  67 };
+  68 
+  69 const [lista, total] = await Promise.all([
+→ 70     this.prisma.ticket.findMany({
+           where: {
+             idUsuario: 3,
+             OR: [
+               {
+                 id: NaN
+               },
+               {
+                 titulo: {
+                   contains: "contra"
+                 }
+               }
+             ]
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Argument `id` is missing.
+2025-10-20 11:18:05.979 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:70:36
+
+  67 };
+  68 
+  69 const [lista, total] = await Promise.all([
+→ 70     this.prisma.ticket.findMany({
+           where: {
+             idUsuario: 3,
+             OR: [
+               {
+                 id: NaN
+               },
+               {
+                 titulo: {
+                   contains: "contra"
+                 }
+               }
+             ]
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Argument `id` is missing.
+2025-10-20 11:23:29.203 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.count()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:90:36
+
+  87     }
+  88 }),
+  89 
+→ 90 this.prisma.ticket.count({
+       select: {
+         _count: {
+           select: {
+             _all: true
+           }
+         }
+       },
+       where: {
+         idUsuario: 3,
+         OR: [
+           {
+             id: NaN
+           },
+           {
+             titulo: {
+               contains: "contra"
+             }
+           }
+         ]
+       }
+     })
+
+Argument `id` is missing.
+2025-10-20 11:25:36.255 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:70:36
+
+  67 };
+  68 
+  69 const [lista, total] = await Promise.all([
+→ 70     this.prisma.ticket.findMany({
+           where: {
+             idUsuario: 3
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             prioridad: "asc",
+             ~~~~~~~~~
+         ?   id?: SortOrder,
+         ?   idUsuario?: SortOrder,
+         ?   idEtiqueta?: SortOrder,
+         ?   titulo?: SortOrder,
+         ?   descripcion?: SortOrder,
+         ?   fechaCreacion?: SortOrder,
+         ?   fechaCierre?: SortOrder | SortOrderInput,
+         ?   slaRespusta?: SortOrder | SortOrderInput,
+         ?   slaSolucion?: SortOrder | SortOrderInput,
+         ?   estado?: SortOrder,
+         ?   usuario?: UsuarioOrderByWithRelationInput,
+         ?   etiqueta?: EtiquetaOrderByWithRelationInput,
+         ?   historial?: HistorialTicketOrderByRelationAggregateInput,
+         ?   imagenes?: Ticket_ImagenOrderByRelationAggregateInput,
+         ?   asignaciones?: AsignacionOrderByRelationAggregateInput,
+         ?   Valoracion?: ValoracionOrderByRelationAggregateInput,
+         ?   _relevance?: TicketOrderByRelevanceInput
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Unknown argument `prioridad`. Available options are marked with ?.

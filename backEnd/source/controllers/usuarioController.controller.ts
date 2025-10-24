@@ -2,16 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AppError } from '../errors/custom.error';
-import { PrismaClient } from '../../generated/prisma';
+import { Prisma, PrismaClient } from '../../generated/prisma';
 
 export class UsuarioController {
     prisma = new PrismaClient();
 
-    auth = async (
-        request: Request,
-        response: Response,
-        next: NextFunction
-    ) => {
+    auth = async (request: Request, response: Response, next: NextFunction) => {
         try {
             const { myCorreo, myContrasenna } = request.body;
 
@@ -39,7 +35,7 @@ export class UsuarioController {
                     idioma: usuario.idioma,
                     correo: usuario.correo,
                     nombre: usuario.nombre,
-                    rol: usuario.role,
+                    role: usuario.role,
                     imagen: usuario.imagen ? usuario.imagen : ''
                 },
                 process.env.JWT_SECRET as string, // ← Clave secreta obligatoria
@@ -52,4 +48,6 @@ export class UsuarioController {
             next(AppError.internalServer('Error interno del servidor'));
         }
     };
+
+
 }

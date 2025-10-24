@@ -1,0 +1,54 @@
+.paginador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    select {
+        background-color: white;
+        cursor: pointer;
+        border-radius: 8px;
+        border: 2px solid #1976d2;
+        padding: 5px;
+    }
+
+    .pg-btns {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .pageBtn {
+        border: none;
+        border-radius: 50%;
+        width: 1.7rem;
+        height: 1.7rem;
+        background-color: #0d78e446;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+        &.active {
+            background-color: #1976d2;
+            color: white;
+            font-weight: bold;
+            width: 2.6rem;
+            height: 2.6rem;
+            font-size: 1.2rem;
+        }
+
+        &.extremo {
+            width: 1.4rem;
+            height: 1.4rem;
+            font-size: 0.7rem;
+            background-color: white;
+        }
+
+        &:hover {}
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}

@@ -56,7 +56,7 @@ export class LoginModule {
         setTimeout(() => {
           this.router.navigate(['/inicio']);
           this.cargando = false;
-          this.noti.success('Bienvenido', usuario?.nombre ?? '', 5000);
+          this.noti.success('Bienvenido/a, ' + (usuario?.nombre ?? ''), '', 5000);
         }, restante);
       },
       error: err => {
@@ -65,7 +65,7 @@ export class LoginModule {
 
         setTimeout(() => {
           if (err.status === 401) {
-            this.noti.error('Credenciales incorrectas', 'El correo o la contraseña son incorrectas', 5000);
+            this.noti.error('Credenciales incorrectas', 'El correo o la contraseña son incorrectas', 6000);
             this.error = { correo: true, contra: true };
             this.contrasenna ="";
             this.correo = '';

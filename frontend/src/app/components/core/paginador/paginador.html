@@ -1,0 +1,24 @@
+<div class="paginador">
+    
+    <div class="pg-btns">
+
+    <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1" class="btn-primary filled"><mat-icon>arrow_circle_left</mat-icon></button>
+
+    @for (p of paginasVisibles; track $index) {
+    <button [class]="'pageBtn ' + (p === paginaActual ? 'active' : (p === 1 && paginaActual !== 2) || (p === totalPaginas && paginaActual !== totalPaginas-1) ? 'extremo' : '')" (click)="cambiarPagina(p)">
+        {{ p }}
+    </button>
+    }
+
+    <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas" class="btn-primary filled"><mat-icon>arrow_circle_right</mat-icon></button>
+    </div>
+
+    <label>
+        Items por página:
+        <select [ngModel]="itemsPorPagina" (ngModelChange)="cambiarItemsPorPagina($event)">
+            @for (cantidad of opcionesPorPagina; track $index) {
+            <option [value]="cantidad">{{ cantidad }}</option>
+            }
+        </select>
+    </label>
+</div>

@@ -11,6 +11,6 @@ export class PageNotFound {
   constructor(private router: Router) { } 
   irInicio() { 
     // Redireccionar a la ruta raíz  
-    this.router.navigate(['/']); 
+    this.router.navigate(['/inicio']); 
   } 
 }

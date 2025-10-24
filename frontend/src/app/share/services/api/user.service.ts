@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BaseAPI } from './base-api';
 import { environment } from '../../../../environments/environment.development';
-import { UserModel } from '../../models/UsuarioModel';
+import { UserModel, Usuario } from '../../models/UsuarioModel';
 import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode'
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Injectable({
     providedIn: 'root'
 })
-export class UserService extends BaseAPI<UserModel> {
+export class UserService extends BaseAPI<Usuario> {
     override urlAPI: string = environment.apiURL;
     urlUser: string = environment.endPointUser;
 
@@ -29,7 +29,6 @@ export class UserService extends BaseAPI<UserModel> {
         const token = sessionStorage.getItem('token');
         if (!token) return null;
         const usuario: UserModel = jwtDecode<UserModel>(token);
-        console.log(usuario);
         return usuario;
     }
 
@@ -37,11 +36,22 @@ export class UserService extends BaseAPI<UserModel> {
     isAuthenticated(): boolean {
         const token = sessionStorage.getItem('token');
         if (!token) return false;
-        return true;
+
+        try {
+            const decoded = jwtDecode<{ exp: number }>(token);
+            const now = Math.floor(Date.now() / 1000); // tiempo actual en segundos
+
+            return decoded.exp > now;
+        } catch (error) {
+            console.error('Token inválido o corrupto:', error);
+            return false;
+        }
     }
+
 
     logOut(): void {
         sessionStorage.removeItem('token'); // Elimina el token
+        sessionStorage.removeItem('menuClose');
         this.router.navigate(['/login']); // Redirige al login
     }
 

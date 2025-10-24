@@ -196,7 +196,7 @@ exports.Prisma.HistorialTicketScalarFieldEnum = {
 
 exports.Prisma.Ticket_ImagenScalarFieldEnum = {
   id: 'id',
-  idTicket: 'idTicket',
+  idHistorial: 'idHistorial',
   imagen: 'imagen',
   url: 'url'
 };

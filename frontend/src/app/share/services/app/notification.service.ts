@@ -18,27 +18,28 @@ export class NotificationService {
 
     mensaje(
         title: string | null,
-        message: string,
+        description: string,
         type: TipoMessage,
         duration: number = 4000
     ): void {
         const options = {
             duration,
-            position: 'top-center' as const, 
+            description,
+            position: 'top-center' as const,
         };
 
         switch (type) {
             case TipoMessage.success:
-                toast.success(title ? `${title}: ${message}` : message, options);
+                toast.success(title ?? '', options);
                 break;
             case TipoMessage.info:
-                toast.message(title ? `${title}: ${message}` : message, options);
+                toast.message(title ?? '', options);
                 break;
             case TipoMessage.warning:
-                toast.warning(title ? `${title}: ${message}` : message, options);
+                toast.warning(title ?? '', options);
                 break;
             case TipoMessage.error:
-                toast.error(title ? `${title}: ${message}` : message, options);
+                toast.error(title ?? '', options);
                 break;
         }
     }

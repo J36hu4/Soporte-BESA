@@ -1,14 +1,57 @@
-export interface TicketsModel {
-    id: number,
-    usuario: {nombre: string},
-    etiqueta: {nombre: string, categoria: {nombre: string, prioridad: string}},
-    titulo: string,
-    fechaCreacion: Date,
-    estado: string
+import { Etiqueta, ReglaAutotriage } from "./CategoriaModel";
+import { EstadoTicket, MetodoAsignacion } from "./Enums";
+import { Tecnico, Usuario } from "./UsuarioModel";
 
-//     email: string;
-//     nombre?: string;
-//     role: RoleModel;
-//     password: string;
-//     ordenes: OrdenModel[];
+export interface Ticket {
+  id: number;
+  usuario: Usuario;
+  etiqueta: Etiqueta;
+  titulo: string;
+  descripcion: string;
+  fechaCreacion: Date;
+  fechaCierre?: Date;
+  slaRespusta?: Date;
+  slaSolucion?: Date;
+  estado: EstadoTicket;
+  historial?: HistorialTicket[];
+  asignaciones?: Asignacion[];
+  Valoracion?: Valoracion[];
+}
+
+export interface HistorialTicket {
+  id: number;
+  usuario?: Usuario;
+  estadoAnterior: EstadoTicket;
+  estadoNuevo: EstadoTicket;
+  fecha: Date;
+  observacion?: string;
+  imagenes?: TicketImagen[];
+}
+
+export interface TicketImagen {
+  id: number;
+  historial: HistorialTicket;
+  imagen?: Uint8Array;
+  url?: string;
+}
+
+export interface Asignacion {
+  id: number;
+  ticket: Ticket;
+  tecnico: Tecnico;
+  regla?: ReglaAutotriage;
+  fecha: Date;
+  puntajePrioridad: number;
+  motivo?: string;
+  activo: boolean;
+  metodo?: MetodoAsignacion;
+}
+
+export interface Valoracion {
+  id: number;
+  ticket: Ticket;
+  usuario: Usuario;
+  puntaje: number;
+  comentario?: string;
+  fecha: Date;
 }

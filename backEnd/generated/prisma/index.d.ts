@@ -25,7 +25,7 @@ export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
 export type Notificacion = $Result.DefaultSelection<Prisma.$NotificacionPayload>
 /**
  * Model Tecnico
- * 
+ * ///////  Tecnico y Especialidad  //////////
  */
 export type Tecnico = $Result.DefaultSelection<Prisma.$TecnicoPayload>
 /**
@@ -35,7 +35,7 @@ export type Tecnico = $Result.DefaultSelection<Prisma.$TecnicoPayload>
 export type Especialidad = $Result.DefaultSelection<Prisma.$EspecialidadPayload>
 /**
  * Model Categoria
- * 
+ * ///////  Categorias  //////////
  */
 export type Categoria = $Result.DefaultSelection<Prisma.$CategoriaPayload>
 /**
@@ -45,7 +45,7 @@ export type Categoria = $Result.DefaultSelection<Prisma.$CategoriaPayload>
 export type Etiqueta = $Result.DefaultSelection<Prisma.$EtiquetaPayload>
 /**
  * Model Ticket
- * 
+ * ///////  Tickets e Incidencias  //////////
  */
 export type Ticket = $Result.DefaultSelection<Prisma.$TicketPayload>
 /**
@@ -2083,12 +2083,12 @@ export namespace Prisma {
 
   export type EtiquetaCountOutputType = {
     Ticket: number
-    autoTriage: number
+    regla: number
   }
 
   export type EtiquetaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Ticket?: boolean | EtiquetaCountOutputTypeCountTicketArgs
-    autoTriage?: boolean | EtiquetaCountOutputTypeCountAutoTriageArgs
+    regla?: boolean | EtiquetaCountOutputTypeCountReglaArgs
   }
 
   // Custom InputTypes
@@ -2112,7 +2112,7 @@ export namespace Prisma {
   /**
    * EtiquetaCountOutputType without action
    */
-  export type EtiquetaCountOutputTypeCountAutoTriageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type EtiquetaCountOutputTypeCountReglaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: Regla_AutotriageWhereInput
   }
 
@@ -2123,14 +2123,12 @@ export namespace Prisma {
 
   export type TicketCountOutputType = {
     historial: number
-    imagenes: number
     asignaciones: number
     Valoracion: number
   }
 
   export type TicketCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     historial?: boolean | TicketCountOutputTypeCountHistorialArgs
-    imagenes?: boolean | TicketCountOutputTypeCountImagenesArgs
     asignaciones?: boolean | TicketCountOutputTypeCountAsignacionesArgs
     Valoracion?: boolean | TicketCountOutputTypeCountValoracionArgs
   }
@@ -2156,13 +2154,6 @@ export namespace Prisma {
   /**
    * TicketCountOutputType without action
    */
-  export type TicketCountOutputTypeCountImagenesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: Ticket_ImagenWhereInput
-  }
-
-  /**
-   * TicketCountOutputType without action
-   */
   export type TicketCountOutputTypeCountAsignacionesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AsignacionWhereInput
   }
@@ -2172,6 +2163,37 @@ export namespace Prisma {
    */
   export type TicketCountOutputTypeCountValoracionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ValoracionWhereInput
+  }
+
+
+  /**
+   * Count Type HistorialTicketCountOutputType
+   */
+
+  export type HistorialTicketCountOutputType = {
+    imagenes: number
+  }
+
+  export type HistorialTicketCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    imagenes?: boolean | HistorialTicketCountOutputTypeCountImagenesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * HistorialTicketCountOutputType without action
+   */
+  export type HistorialTicketCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the HistorialTicketCountOutputType
+     */
+    select?: HistorialTicketCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * HistorialTicketCountOutputType without action
+   */
+  export type HistorialTicketCountOutputTypeCountImagenesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Ticket_ImagenWhereInput
   }
 
 
@@ -7717,7 +7739,7 @@ export namespace Prisma {
     nombre?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     Ticket?: boolean | Etiqueta$TicketArgs<ExtArgs>
-    autoTriage?: boolean | Etiqueta$autoTriageArgs<ExtArgs>
+    regla?: boolean | Etiqueta$reglaArgs<ExtArgs>
     _count?: boolean | EtiquetaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["etiqueta"]>
 
@@ -7733,7 +7755,7 @@ export namespace Prisma {
   export type EtiquetaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     Ticket?: boolean | Etiqueta$TicketArgs<ExtArgs>
-    autoTriage?: boolean | Etiqueta$autoTriageArgs<ExtArgs>
+    regla?: boolean | Etiqueta$reglaArgs<ExtArgs>
     _count?: boolean | EtiquetaCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7742,7 +7764,7 @@ export namespace Prisma {
     objects: {
       categoria: Prisma.$CategoriaPayload<ExtArgs>
       Ticket: Prisma.$TicketPayload<ExtArgs>[]
-      autoTriage: Prisma.$Regla_AutotriagePayload<ExtArgs>[]
+      regla: Prisma.$Regla_AutotriagePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8090,7 +8112,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     categoria<T extends CategoriaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoriaDefaultArgs<ExtArgs>>): Prisma__CategoriaClient<$Result.GetResult<Prisma.$CategoriaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     Ticket<T extends Etiqueta$TicketArgs<ExtArgs> = {}>(args?: Subset<T, Etiqueta$TicketArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    autoTriage<T extends Etiqueta$autoTriageArgs<ExtArgs> = {}>(args?: Subset<T, Etiqueta$autoTriageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Regla_AutotriagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    regla<T extends Etiqueta$reglaArgs<ExtArgs> = {}>(args?: Subset<T, Etiqueta$reglaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Regla_AutotriagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8490,9 +8512,9 @@ export namespace Prisma {
   }
 
   /**
-   * Etiqueta.autoTriage
+   * Etiqueta.regla
    */
-  export type Etiqueta$autoTriageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Etiqueta$reglaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Regla_Autotriage
      */
@@ -8781,7 +8803,6 @@ export namespace Prisma {
     usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
     etiqueta?: boolean | EtiquetaDefaultArgs<ExtArgs>
     historial?: boolean | Ticket$historialArgs<ExtArgs>
-    imagenes?: boolean | Ticket$imagenesArgs<ExtArgs>
     asignaciones?: boolean | Ticket$asignacionesArgs<ExtArgs>
     Valoracion?: boolean | Ticket$ValoracionArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
@@ -8807,7 +8828,6 @@ export namespace Prisma {
     usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
     etiqueta?: boolean | EtiquetaDefaultArgs<ExtArgs>
     historial?: boolean | Ticket$historialArgs<ExtArgs>
-    imagenes?: boolean | Ticket$imagenesArgs<ExtArgs>
     asignaciones?: boolean | Ticket$asignacionesArgs<ExtArgs>
     Valoracion?: boolean | Ticket$ValoracionArgs<ExtArgs>
     _count?: boolean | TicketCountOutputTypeDefaultArgs<ExtArgs>
@@ -8819,7 +8839,6 @@ export namespace Prisma {
       usuario: Prisma.$UsuarioPayload<ExtArgs>
       etiqueta: Prisma.$EtiquetaPayload<ExtArgs>
       historial: Prisma.$HistorialTicketPayload<ExtArgs>[]
-      imagenes: Prisma.$Ticket_ImagenPayload<ExtArgs>[]
       asignaciones: Prisma.$AsignacionPayload<ExtArgs>[]
       Valoracion: Prisma.$ValoracionPayload<ExtArgs>[]
     }
@@ -9177,7 +9196,6 @@ export namespace Prisma {
     usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     etiqueta<T extends EtiquetaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EtiquetaDefaultArgs<ExtArgs>>): Prisma__EtiquetaClient<$Result.GetResult<Prisma.$EtiquetaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     historial<T extends Ticket$historialArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$historialArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HistorialTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    imagenes<T extends Ticket$imagenesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$imagenesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Ticket_ImagenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     asignaciones<T extends Ticket$asignacionesArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$asignacionesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AsignacionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Valoracion<T extends Ticket$ValoracionArgs<ExtArgs> = {}>(args?: Subset<T, Ticket$ValoracionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ValoracionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -9586,30 +9604,6 @@ export namespace Prisma {
   }
 
   /**
-   * Ticket.imagenes
-   */
-  export type Ticket$imagenesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ticket_Imagen
-     */
-    select?: Ticket_ImagenSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ticket_Imagen
-     */
-    omit?: Ticket_ImagenOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: Ticket_ImagenInclude<ExtArgs> | null
-    where?: Ticket_ImagenWhereInput
-    orderBy?: Ticket_ImagenOrderByWithRelationInput | Ticket_ImagenOrderByWithRelationInput[]
-    cursor?: Ticket_ImagenWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: Ticket_ImagenScalarFieldEnum | Ticket_ImagenScalarFieldEnum[]
-  }
-
-  /**
    * Ticket.asignaciones
    */
   export type Ticket$asignacionesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9900,6 +9894,8 @@ export namespace Prisma {
     observacion?: boolean
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
     usuario?: boolean | HistorialTicket$usuarioArgs<ExtArgs>
+    imagenes?: boolean | HistorialTicket$imagenesArgs<ExtArgs>
+    _count?: boolean | HistorialTicketCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["historialTicket"]>
 
 
@@ -9918,6 +9914,8 @@ export namespace Prisma {
   export type HistorialTicketInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ticket?: boolean | TicketDefaultArgs<ExtArgs>
     usuario?: boolean | HistorialTicket$usuarioArgs<ExtArgs>
+    imagenes?: boolean | HistorialTicket$imagenesArgs<ExtArgs>
+    _count?: boolean | HistorialTicketCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $HistorialTicketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9925,6 +9923,7 @@ export namespace Prisma {
     objects: {
       ticket: Prisma.$TicketPayload<ExtArgs>
       usuario: Prisma.$UsuarioPayload<ExtArgs> | null
+      imagenes: Prisma.$Ticket_ImagenPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -10276,6 +10275,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     ticket<T extends TicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TicketDefaultArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     usuario<T extends HistorialTicket$usuarioArgs<ExtArgs> = {}>(args?: Subset<T, HistorialTicket$usuarioArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    imagenes<T extends HistorialTicket$imagenesArgs<ExtArgs> = {}>(args?: Subset<T, HistorialTicket$imagenesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Ticket_ImagenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -10674,6 +10674,30 @@ export namespace Prisma {
   }
 
   /**
+   * HistorialTicket.imagenes
+   */
+  export type HistorialTicket$imagenesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ticket_Imagen
+     */
+    select?: Ticket_ImagenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ticket_Imagen
+     */
+    omit?: Ticket_ImagenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Ticket_ImagenInclude<ExtArgs> | null
+    where?: Ticket_ImagenWhereInput
+    orderBy?: Ticket_ImagenOrderByWithRelationInput | Ticket_ImagenOrderByWithRelationInput[]
+    cursor?: Ticket_ImagenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Ticket_ImagenScalarFieldEnum | Ticket_ImagenScalarFieldEnum[]
+  }
+
+  /**
    * HistorialTicket without action
    */
   export type HistorialTicketDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10706,31 +10730,31 @@ export namespace Prisma {
 
   export type Ticket_ImagenAvgAggregateOutputType = {
     id: number | null
-    idTicket: number | null
+    idHistorial: number | null
   }
 
   export type Ticket_ImagenSumAggregateOutputType = {
     id: number | null
-    idTicket: number | null
+    idHistorial: number | null
   }
 
   export type Ticket_ImagenMinAggregateOutputType = {
     id: number | null
-    idTicket: number | null
+    idHistorial: number | null
     imagen: Uint8Array | null
     url: string | null
   }
 
   export type Ticket_ImagenMaxAggregateOutputType = {
     id: number | null
-    idTicket: number | null
+    idHistorial: number | null
     imagen: Uint8Array | null
     url: string | null
   }
 
   export type Ticket_ImagenCountAggregateOutputType = {
     id: number
-    idTicket: number
+    idHistorial: number
     imagen: number
     url: number
     _all: number
@@ -10739,31 +10763,31 @@ export namespace Prisma {
 
   export type Ticket_ImagenAvgAggregateInputType = {
     id?: true
-    idTicket?: true
+    idHistorial?: true
   }
 
   export type Ticket_ImagenSumAggregateInputType = {
     id?: true
-    idTicket?: true
+    idHistorial?: true
   }
 
   export type Ticket_ImagenMinAggregateInputType = {
     id?: true
-    idTicket?: true
+    idHistorial?: true
     imagen?: true
     url?: true
   }
 
   export type Ticket_ImagenMaxAggregateInputType = {
     id?: true
-    idTicket?: true
+    idHistorial?: true
     imagen?: true
     url?: true
   }
 
   export type Ticket_ImagenCountAggregateInputType = {
     id?: true
-    idTicket?: true
+    idHistorial?: true
     imagen?: true
     url?: true
     _all?: true
@@ -10857,7 +10881,7 @@ export namespace Prisma {
 
   export type Ticket_ImagenGroupByOutputType = {
     id: number
-    idTicket: number
+    idHistorial: number
     imagen: Uint8Array | null
     url: string | null
     _count: Ticket_ImagenCountAggregateOutputType | null
@@ -10883,34 +10907,34 @@ export namespace Prisma {
 
   export type Ticket_ImagenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    idTicket?: boolean
+    idHistorial?: boolean
     imagen?: boolean
     url?: boolean
-    ticket?: boolean | TicketDefaultArgs<ExtArgs>
+    historial?: boolean | HistorialTicketDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ticket_Imagen"]>
 
 
 
   export type Ticket_ImagenSelectScalar = {
     id?: boolean
-    idTicket?: boolean
+    idHistorial?: boolean
     imagen?: boolean
     url?: boolean
   }
 
-  export type Ticket_ImagenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idTicket" | "imagen" | "url", ExtArgs["result"]["ticket_Imagen"]>
+  export type Ticket_ImagenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idHistorial" | "imagen" | "url", ExtArgs["result"]["ticket_Imagen"]>
   export type Ticket_ImagenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ticket?: boolean | TicketDefaultArgs<ExtArgs>
+    historial?: boolean | HistorialTicketDefaultArgs<ExtArgs>
   }
 
   export type $Ticket_ImagenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ticket_Imagen"
     objects: {
-      ticket: Prisma.$TicketPayload<ExtArgs>
+      historial: Prisma.$HistorialTicketPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      idTicket: number
+      idHistorial: number
       imagen: Uint8Array | null
       url: string | null
     }, ExtArgs["result"]["ticket_Imagen"]>
@@ -11253,7 +11277,7 @@ export namespace Prisma {
    */
   export interface Prisma__Ticket_ImagenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    ticket<T extends TicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TicketDefaultArgs<ExtArgs>>): Prisma__TicketClient<$Result.GetResult<Prisma.$TicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    historial<T extends HistorialTicketDefaultArgs<ExtArgs> = {}>(args?: Subset<T, HistorialTicketDefaultArgs<ExtArgs>>): Prisma__HistorialTicketClient<$Result.GetResult<Prisma.$HistorialTicketPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11284,7 +11308,7 @@ export namespace Prisma {
    */
   interface Ticket_ImagenFieldRefs {
     readonly id: FieldRef<"Ticket_Imagen", 'Int'>
-    readonly idTicket: FieldRef<"Ticket_Imagen", 'Int'>
+    readonly idHistorial: FieldRef<"Ticket_Imagen", 'Int'>
     readonly imagen: FieldRef<"Ticket_Imagen", 'Bytes'>
     readonly url: FieldRef<"Ticket_Imagen", 'String'>
   }
@@ -14874,7 +14898,7 @@ export namespace Prisma {
 
   export const Ticket_ImagenScalarFieldEnum: {
     id: 'id',
-    idTicket: 'idTicket',
+    idHistorial: 'idHistorial',
     imagen: 'imagen',
     url: 'url'
   };
@@ -15478,7 +15502,7 @@ export namespace Prisma {
     nombre?: StringFilter<"Etiqueta"> | string
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
     Ticket?: TicketListRelationFilter
-    autoTriage?: Regla_AutotriageListRelationFilter
+    regla?: Regla_AutotriageListRelationFilter
   }
 
   export type EtiquetaOrderByWithRelationInput = {
@@ -15487,7 +15511,7 @@ export namespace Prisma {
     nombre?: SortOrder
     categoria?: CategoriaOrderByWithRelationInput
     Ticket?: TicketOrderByRelationAggregateInput
-    autoTriage?: Regla_AutotriageOrderByRelationAggregateInput
+    regla?: Regla_AutotriageOrderByRelationAggregateInput
     _relevance?: EtiquetaOrderByRelevanceInput
   }
 
@@ -15500,7 +15524,7 @@ export namespace Prisma {
     nombre?: StringFilter<"Etiqueta"> | string
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
     Ticket?: TicketListRelationFilter
-    autoTriage?: Regla_AutotriageListRelationFilter
+    regla?: Regla_AutotriageListRelationFilter
   }, "id">
 
   export type EtiquetaOrderByWithAggregationInput = {
@@ -15540,7 +15564,6 @@ export namespace Prisma {
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     etiqueta?: XOR<EtiquetaScalarRelationFilter, EtiquetaWhereInput>
     historial?: HistorialTicketListRelationFilter
-    imagenes?: Ticket_ImagenListRelationFilter
     asignaciones?: AsignacionListRelationFilter
     Valoracion?: ValoracionListRelationFilter
   }
@@ -15559,7 +15582,6 @@ export namespace Prisma {
     usuario?: UsuarioOrderByWithRelationInput
     etiqueta?: EtiquetaOrderByWithRelationInput
     historial?: HistorialTicketOrderByRelationAggregateInput
-    imagenes?: Ticket_ImagenOrderByRelationAggregateInput
     asignaciones?: AsignacionOrderByRelationAggregateInput
     Valoracion?: ValoracionOrderByRelationAggregateInput
     _relevance?: TicketOrderByRelevanceInput
@@ -15582,7 +15604,6 @@ export namespace Prisma {
     usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     etiqueta?: XOR<EtiquetaScalarRelationFilter, EtiquetaWhereInput>
     historial?: HistorialTicketListRelationFilter
-    imagenes?: Ticket_ImagenListRelationFilter
     asignaciones?: AsignacionListRelationFilter
     Valoracion?: ValoracionListRelationFilter
   }, "id">
@@ -15634,6 +15655,7 @@ export namespace Prisma {
     observacion?: StringNullableFilter<"HistorialTicket"> | string | null
     ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
     usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+    imagenes?: Ticket_ImagenListRelationFilter
   }
 
   export type HistorialTicketOrderByWithRelationInput = {
@@ -15646,6 +15668,7 @@ export namespace Prisma {
     observacion?: SortOrderInput | SortOrder
     ticket?: TicketOrderByWithRelationInput
     usuario?: UsuarioOrderByWithRelationInput
+    imagenes?: Ticket_ImagenOrderByRelationAggregateInput
     _relevance?: HistorialTicketOrderByRelevanceInput
   }
 
@@ -15662,6 +15685,7 @@ export namespace Prisma {
     observacion?: StringNullableFilter<"HistorialTicket"> | string | null
     ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
     usuario?: XOR<UsuarioNullableScalarRelationFilter, UsuarioWhereInput> | null
+    imagenes?: Ticket_ImagenListRelationFilter
   }, "id">
 
   export type HistorialTicketOrderByWithAggregationInput = {
@@ -15697,18 +15721,18 @@ export namespace Prisma {
     OR?: Ticket_ImagenWhereInput[]
     NOT?: Ticket_ImagenWhereInput | Ticket_ImagenWhereInput[]
     id?: IntFilter<"Ticket_Imagen"> | number
-    idTicket?: IntFilter<"Ticket_Imagen"> | number
+    idHistorial?: IntFilter<"Ticket_Imagen"> | number
     imagen?: BytesNullableFilter<"Ticket_Imagen"> | Uint8Array | null
     url?: StringNullableFilter<"Ticket_Imagen"> | string | null
-    ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
+    historial?: XOR<HistorialTicketScalarRelationFilter, HistorialTicketWhereInput>
   }
 
   export type Ticket_ImagenOrderByWithRelationInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
     imagen?: SortOrderInput | SortOrder
     url?: SortOrderInput | SortOrder
-    ticket?: TicketOrderByWithRelationInput
+    historial?: HistorialTicketOrderByWithRelationInput
     _relevance?: Ticket_ImagenOrderByRelevanceInput
   }
 
@@ -15717,15 +15741,15 @@ export namespace Prisma {
     AND?: Ticket_ImagenWhereInput | Ticket_ImagenWhereInput[]
     OR?: Ticket_ImagenWhereInput[]
     NOT?: Ticket_ImagenWhereInput | Ticket_ImagenWhereInput[]
-    idTicket?: IntFilter<"Ticket_Imagen"> | number
+    idHistorial?: IntFilter<"Ticket_Imagen"> | number
     imagen?: BytesNullableFilter<"Ticket_Imagen"> | Uint8Array | null
     url?: StringNullableFilter<"Ticket_Imagen"> | string | null
-    ticket?: XOR<TicketScalarRelationFilter, TicketWhereInput>
+    historial?: XOR<HistorialTicketScalarRelationFilter, HistorialTicketWhereInput>
   }, "id">
 
   export type Ticket_ImagenOrderByWithAggregationInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
     imagen?: SortOrderInput | SortOrder
     url?: SortOrderInput | SortOrder
     _count?: Ticket_ImagenCountOrderByAggregateInput
@@ -15740,7 +15764,7 @@ export namespace Prisma {
     OR?: Ticket_ImagenScalarWhereWithAggregatesInput[]
     NOT?: Ticket_ImagenScalarWhereWithAggregatesInput | Ticket_ImagenScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Ticket_Imagen"> | number
-    idTicket?: IntWithAggregatesFilter<"Ticket_Imagen"> | number
+    idHistorial?: IntWithAggregatesFilter<"Ticket_Imagen"> | number
     imagen?: BytesNullableWithAggregatesFilter<"Ticket_Imagen"> | Uint8Array | null
     url?: StringNullableWithAggregatesFilter<"Ticket_Imagen"> | string | null
   }
@@ -16327,7 +16351,7 @@ export namespace Prisma {
     nombre: string
     categoria: CategoriaCreateNestedOneWithoutEtiquetasInput
     Ticket?: TicketCreateNestedManyWithoutEtiquetaInput
-    autoTriage?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
+    regla?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUncheckedCreateInput = {
@@ -16335,14 +16359,14 @@ export namespace Prisma {
     idCategoria: number
     nombre: string
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
-    autoTriage?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
+    regla?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUpdateInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     categoria?: CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput
     Ticket?: TicketUpdateManyWithoutEtiquetaNestedInput
-    autoTriage?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
+    regla?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateInput = {
@@ -16350,7 +16374,7 @@ export namespace Prisma {
     idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
-    autoTriage?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
+    regla?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaCreateManyInput = {
@@ -16380,7 +16404,6 @@ export namespace Prisma {
     usuario: UsuarioCreateNestedOneWithoutTicketInput
     etiqueta: EtiquetaCreateNestedOneWithoutTicketInput
     historial?: HistorialTicketCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionCreateNestedManyWithoutTicketInput
   }
@@ -16397,7 +16420,6 @@ export namespace Prisma {
     slaSolucion?: Date | string | null
     estado?: $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -16413,7 +16435,6 @@ export namespace Prisma {
     usuario?: UsuarioUpdateOneRequiredWithoutTicketNestedInput
     etiqueta?: EtiquetaUpdateOneRequiredWithoutTicketNestedInput
     historial?: HistorialTicketUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUpdateManyWithoutTicketNestedInput
   }
@@ -16430,7 +16451,6 @@ export namespace Prisma {
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -16478,6 +16498,7 @@ export namespace Prisma {
     observacion?: string | null
     ticket: TicketCreateNestedOneWithoutHistorialInput
     usuario?: UsuarioCreateNestedOneWithoutHistorialTicketInput
+    imagenes?: Ticket_ImagenCreateNestedManyWithoutHistorialInput
   }
 
   export type HistorialTicketUncheckedCreateInput = {
@@ -16488,6 +16509,7 @@ export namespace Prisma {
     estadoNuevo: $Enums.EstadoTicket
     fecha?: Date | string
     observacion?: string | null
+    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutHistorialInput
   }
 
   export type HistorialTicketUpdateInput = {
@@ -16497,6 +16519,7 @@ export namespace Prisma {
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
     ticket?: TicketUpdateOneRequiredWithoutHistorialNestedInput
     usuario?: UsuarioUpdateOneWithoutHistorialTicketNestedInput
+    imagenes?: Ticket_ImagenUpdateManyWithoutHistorialNestedInput
   }
 
   export type HistorialTicketUncheckedUpdateInput = {
@@ -16507,6 +16530,7 @@ export namespace Prisma {
     estadoNuevo?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutHistorialNestedInput
   }
 
   export type HistorialTicketCreateManyInput = {
@@ -16539,12 +16563,12 @@ export namespace Prisma {
   export type Ticket_ImagenCreateInput = {
     imagen?: Uint8Array | null
     url?: string | null
-    ticket: TicketCreateNestedOneWithoutImagenesInput
+    historial: HistorialTicketCreateNestedOneWithoutImagenesInput
   }
 
   export type Ticket_ImagenUncheckedCreateInput = {
     id?: number
-    idTicket: number
+    idHistorial: number
     imagen?: Uint8Array | null
     url?: string | null
   }
@@ -16552,19 +16576,19 @@ export namespace Prisma {
   export type Ticket_ImagenUpdateInput = {
     imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
-    ticket?: TicketUpdateOneRequiredWithoutImagenesNestedInput
+    historial?: HistorialTicketUpdateOneRequiredWithoutImagenesNestedInput
   }
 
   export type Ticket_ImagenUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idTicket?: IntFieldUpdateOperationsInput | number
+    idHistorial?: IntFieldUpdateOperationsInput | number
     imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type Ticket_ImagenCreateManyInput = {
     id?: number
-    idTicket: number
+    idHistorial: number
     imagen?: Uint8Array | null
     url?: string | null
   }
@@ -16576,7 +16600,7 @@ export namespace Prisma {
 
   export type Ticket_ImagenUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idTicket?: IntFieldUpdateOperationsInput | number
+    idHistorial?: IntFieldUpdateOperationsInput | number
     imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
     url?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -16723,7 +16747,7 @@ export namespace Prisma {
     carga: number
     activa?: boolean
     categoria: CategoriaCreateNestedOneWithoutReglasInput
-    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutReglaInput
     especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
   }
@@ -16735,7 +16759,7 @@ export namespace Prisma {
     prioridad: number
     carga: number
     activa?: boolean
-    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutReglaInput
     especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
   }
@@ -16746,7 +16770,7 @@ export namespace Prisma {
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
     categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
-    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutReglaNestedInput
     especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
   }
@@ -16758,7 +16782,7 @@ export namespace Prisma {
     prioridad?: IntFieldUpdateOperationsInput | number
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
-    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutReglaNestedInput
     especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
   }
@@ -17458,16 +17482,6 @@ export namespace Prisma {
     isNot?: EtiquetaWhereInput
   }
 
-  export type Ticket_ImagenListRelationFilter = {
-    every?: Ticket_ImagenWhereInput
-    some?: Ticket_ImagenWhereInput
-    none?: Ticket_ImagenWhereInput
-  }
-
-  export type Ticket_ImagenOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type TicketOrderByRelevanceInput = {
     fields: TicketOrderByRelevanceFieldEnum | TicketOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -17540,6 +17554,16 @@ export namespace Prisma {
     isNot?: TicketWhereInput
   }
 
+  export type Ticket_ImagenListRelationFilter = {
+    every?: Ticket_ImagenWhereInput
+    some?: Ticket_ImagenWhereInput
+    none?: Ticket_ImagenWhereInput
+  }
+
+  export type Ticket_ImagenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type HistorialTicketOrderByRelevanceInput = {
     fields: HistorialTicketOrderByRelevanceFieldEnum | HistorialTicketOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -17595,6 +17619,11 @@ export namespace Prisma {
     not?: NestedBytesNullableFilter<$PrismaModel> | Uint8Array | null
   }
 
+  export type HistorialTicketScalarRelationFilter = {
+    is?: HistorialTicketWhereInput
+    isNot?: HistorialTicketWhereInput
+  }
+
   export type Ticket_ImagenOrderByRelevanceInput = {
     fields: Ticket_ImagenOrderByRelevanceFieldEnum | Ticket_ImagenOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -17603,33 +17632,33 @@ export namespace Prisma {
 
   export type Ticket_ImagenCountOrderByAggregateInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
     imagen?: SortOrder
     url?: SortOrder
   }
 
   export type Ticket_ImagenAvgOrderByAggregateInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
   }
 
   export type Ticket_ImagenMaxOrderByAggregateInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
     imagen?: SortOrder
     url?: SortOrder
   }
 
   export type Ticket_ImagenMinOrderByAggregateInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
     imagen?: SortOrder
     url?: SortOrder
   }
 
   export type Ticket_ImagenSumOrderByAggregateInput = {
     id?: SortOrder
-    idTicket?: SortOrder
+    idHistorial?: SortOrder
   }
 
   export type BytesNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -18610,13 +18639,6 @@ export namespace Prisma {
     connect?: HistorialTicketWhereUniqueInput | HistorialTicketWhereUniqueInput[]
   }
 
-  export type Ticket_ImagenCreateNestedManyWithoutTicketInput = {
-    create?: XOR<Ticket_ImagenCreateWithoutTicketInput, Ticket_ImagenUncheckedCreateWithoutTicketInput> | Ticket_ImagenCreateWithoutTicketInput[] | Ticket_ImagenUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutTicketInput | Ticket_ImagenCreateOrConnectWithoutTicketInput[]
-    createMany?: Ticket_ImagenCreateManyTicketInputEnvelope
-    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-  }
-
   export type AsignacionCreateNestedManyWithoutTicketInput = {
     create?: XOR<AsignacionCreateWithoutTicketInput, AsignacionUncheckedCreateWithoutTicketInput> | AsignacionCreateWithoutTicketInput[] | AsignacionUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: AsignacionCreateOrConnectWithoutTicketInput | AsignacionCreateOrConnectWithoutTicketInput[]
@@ -18636,13 +18658,6 @@ export namespace Prisma {
     connectOrCreate?: HistorialTicketCreateOrConnectWithoutTicketInput | HistorialTicketCreateOrConnectWithoutTicketInput[]
     createMany?: HistorialTicketCreateManyTicketInputEnvelope
     connect?: HistorialTicketWhereUniqueInput | HistorialTicketWhereUniqueInput[]
-  }
-
-  export type Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput = {
-    create?: XOR<Ticket_ImagenCreateWithoutTicketInput, Ticket_ImagenUncheckedCreateWithoutTicketInput> | Ticket_ImagenCreateWithoutTicketInput[] | Ticket_ImagenUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutTicketInput | Ticket_ImagenCreateOrConnectWithoutTicketInput[]
-    createMany?: Ticket_ImagenCreateManyTicketInputEnvelope
-    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
   }
 
   export type AsignacionUncheckedCreateNestedManyWithoutTicketInput = {
@@ -18693,20 +18708,6 @@ export namespace Prisma {
     deleteMany?: HistorialTicketScalarWhereInput | HistorialTicketScalarWhereInput[]
   }
 
-  export type Ticket_ImagenUpdateManyWithoutTicketNestedInput = {
-    create?: XOR<Ticket_ImagenCreateWithoutTicketInput, Ticket_ImagenUncheckedCreateWithoutTicketInput> | Ticket_ImagenCreateWithoutTicketInput[] | Ticket_ImagenUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutTicketInput | Ticket_ImagenCreateOrConnectWithoutTicketInput[]
-    upsert?: Ticket_ImagenUpsertWithWhereUniqueWithoutTicketInput | Ticket_ImagenUpsertWithWhereUniqueWithoutTicketInput[]
-    createMany?: Ticket_ImagenCreateManyTicketInputEnvelope
-    set?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    disconnect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    delete?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    update?: Ticket_ImagenUpdateWithWhereUniqueWithoutTicketInput | Ticket_ImagenUpdateWithWhereUniqueWithoutTicketInput[]
-    updateMany?: Ticket_ImagenUpdateManyWithWhereWithoutTicketInput | Ticket_ImagenUpdateManyWithWhereWithoutTicketInput[]
-    deleteMany?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
-  }
-
   export type AsignacionUpdateManyWithoutTicketNestedInput = {
     create?: XOR<AsignacionCreateWithoutTicketInput, AsignacionUncheckedCreateWithoutTicketInput> | AsignacionCreateWithoutTicketInput[] | AsignacionUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: AsignacionCreateOrConnectWithoutTicketInput | AsignacionCreateOrConnectWithoutTicketInput[]
@@ -18749,20 +18750,6 @@ export namespace Prisma {
     deleteMany?: HistorialTicketScalarWhereInput | HistorialTicketScalarWhereInput[]
   }
 
-  export type Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput = {
-    create?: XOR<Ticket_ImagenCreateWithoutTicketInput, Ticket_ImagenUncheckedCreateWithoutTicketInput> | Ticket_ImagenCreateWithoutTicketInput[] | Ticket_ImagenUncheckedCreateWithoutTicketInput[]
-    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutTicketInput | Ticket_ImagenCreateOrConnectWithoutTicketInput[]
-    upsert?: Ticket_ImagenUpsertWithWhereUniqueWithoutTicketInput | Ticket_ImagenUpsertWithWhereUniqueWithoutTicketInput[]
-    createMany?: Ticket_ImagenCreateManyTicketInputEnvelope
-    set?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    disconnect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    delete?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
-    update?: Ticket_ImagenUpdateWithWhereUniqueWithoutTicketInput | Ticket_ImagenUpdateWithWhereUniqueWithoutTicketInput[]
-    updateMany?: Ticket_ImagenUpdateManyWithWhereWithoutTicketInput | Ticket_ImagenUpdateManyWithWhereWithoutTicketInput[]
-    deleteMany?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
-  }
-
   export type AsignacionUncheckedUpdateManyWithoutTicketNestedInput = {
     create?: XOR<AsignacionCreateWithoutTicketInput, AsignacionUncheckedCreateWithoutTicketInput> | AsignacionCreateWithoutTicketInput[] | AsignacionUncheckedCreateWithoutTicketInput[]
     connectOrCreate?: AsignacionCreateOrConnectWithoutTicketInput | AsignacionCreateOrConnectWithoutTicketInput[]
@@ -18803,6 +18790,20 @@ export namespace Prisma {
     connect?: UsuarioWhereUniqueInput
   }
 
+  export type Ticket_ImagenCreateNestedManyWithoutHistorialInput = {
+    create?: XOR<Ticket_ImagenCreateWithoutHistorialInput, Ticket_ImagenUncheckedCreateWithoutHistorialInput> | Ticket_ImagenCreateWithoutHistorialInput[] | Ticket_ImagenUncheckedCreateWithoutHistorialInput[]
+    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutHistorialInput | Ticket_ImagenCreateOrConnectWithoutHistorialInput[]
+    createMany?: Ticket_ImagenCreateManyHistorialInputEnvelope
+    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+  }
+
+  export type Ticket_ImagenUncheckedCreateNestedManyWithoutHistorialInput = {
+    create?: XOR<Ticket_ImagenCreateWithoutHistorialInput, Ticket_ImagenUncheckedCreateWithoutHistorialInput> | Ticket_ImagenCreateWithoutHistorialInput[] | Ticket_ImagenUncheckedCreateWithoutHistorialInput[]
+    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutHistorialInput | Ticket_ImagenCreateOrConnectWithoutHistorialInput[]
+    createMany?: Ticket_ImagenCreateManyHistorialInputEnvelope
+    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+  }
+
   export type TicketUpdateOneRequiredWithoutHistorialNestedInput = {
     create?: XOR<TicketCreateWithoutHistorialInput, TicketUncheckedCreateWithoutHistorialInput>
     connectOrCreate?: TicketCreateOrConnectWithoutHistorialInput
@@ -18821,22 +18822,50 @@ export namespace Prisma {
     update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutHistorialTicketInput, UsuarioUpdateWithoutHistorialTicketInput>, UsuarioUncheckedUpdateWithoutHistorialTicketInput>
   }
 
-  export type TicketCreateNestedOneWithoutImagenesInput = {
-    create?: XOR<TicketCreateWithoutImagenesInput, TicketUncheckedCreateWithoutImagenesInput>
-    connectOrCreate?: TicketCreateOrConnectWithoutImagenesInput
-    connect?: TicketWhereUniqueInput
+  export type Ticket_ImagenUpdateManyWithoutHistorialNestedInput = {
+    create?: XOR<Ticket_ImagenCreateWithoutHistorialInput, Ticket_ImagenUncheckedCreateWithoutHistorialInput> | Ticket_ImagenCreateWithoutHistorialInput[] | Ticket_ImagenUncheckedCreateWithoutHistorialInput[]
+    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutHistorialInput | Ticket_ImagenCreateOrConnectWithoutHistorialInput[]
+    upsert?: Ticket_ImagenUpsertWithWhereUniqueWithoutHistorialInput | Ticket_ImagenUpsertWithWhereUniqueWithoutHistorialInput[]
+    createMany?: Ticket_ImagenCreateManyHistorialInputEnvelope
+    set?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    disconnect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    delete?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    update?: Ticket_ImagenUpdateWithWhereUniqueWithoutHistorialInput | Ticket_ImagenUpdateWithWhereUniqueWithoutHistorialInput[]
+    updateMany?: Ticket_ImagenUpdateManyWithWhereWithoutHistorialInput | Ticket_ImagenUpdateManyWithWhereWithoutHistorialInput[]
+    deleteMany?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
+  }
+
+  export type Ticket_ImagenUncheckedUpdateManyWithoutHistorialNestedInput = {
+    create?: XOR<Ticket_ImagenCreateWithoutHistorialInput, Ticket_ImagenUncheckedCreateWithoutHistorialInput> | Ticket_ImagenCreateWithoutHistorialInput[] | Ticket_ImagenUncheckedCreateWithoutHistorialInput[]
+    connectOrCreate?: Ticket_ImagenCreateOrConnectWithoutHistorialInput | Ticket_ImagenCreateOrConnectWithoutHistorialInput[]
+    upsert?: Ticket_ImagenUpsertWithWhereUniqueWithoutHistorialInput | Ticket_ImagenUpsertWithWhereUniqueWithoutHistorialInput[]
+    createMany?: Ticket_ImagenCreateManyHistorialInputEnvelope
+    set?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    disconnect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    delete?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    connect?: Ticket_ImagenWhereUniqueInput | Ticket_ImagenWhereUniqueInput[]
+    update?: Ticket_ImagenUpdateWithWhereUniqueWithoutHistorialInput | Ticket_ImagenUpdateWithWhereUniqueWithoutHistorialInput[]
+    updateMany?: Ticket_ImagenUpdateManyWithWhereWithoutHistorialInput | Ticket_ImagenUpdateManyWithWhereWithoutHistorialInput[]
+    deleteMany?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
+  }
+
+  export type HistorialTicketCreateNestedOneWithoutImagenesInput = {
+    create?: XOR<HistorialTicketCreateWithoutImagenesInput, HistorialTicketUncheckedCreateWithoutImagenesInput>
+    connectOrCreate?: HistorialTicketCreateOrConnectWithoutImagenesInput
+    connect?: HistorialTicketWhereUniqueInput
   }
 
   export type NullableBytesFieldUpdateOperationsInput = {
     set?: Uint8Array | null
   }
 
-  export type TicketUpdateOneRequiredWithoutImagenesNestedInput = {
-    create?: XOR<TicketCreateWithoutImagenesInput, TicketUncheckedCreateWithoutImagenesInput>
-    connectOrCreate?: TicketCreateOrConnectWithoutImagenesInput
-    upsert?: TicketUpsertWithoutImagenesInput
-    connect?: TicketWhereUniqueInput
-    update?: XOR<XOR<TicketUpdateToOneWithWhereWithoutImagenesInput, TicketUpdateWithoutImagenesInput>, TicketUncheckedUpdateWithoutImagenesInput>
+  export type HistorialTicketUpdateOneRequiredWithoutImagenesNestedInput = {
+    create?: XOR<HistorialTicketCreateWithoutImagenesInput, HistorialTicketUncheckedCreateWithoutImagenesInput>
+    connectOrCreate?: HistorialTicketCreateOrConnectWithoutImagenesInput
+    upsert?: HistorialTicketUpsertWithoutImagenesInput
+    connect?: HistorialTicketWhereUniqueInput
+    update?: XOR<XOR<HistorialTicketUpdateToOneWithWhereWithoutImagenesInput, HistorialTicketUpdateWithoutImagenesInput>, HistorialTicketUncheckedUpdateWithoutImagenesInput>
   }
 
   export type TicketCreateNestedOneWithoutAsignacionesInput = {
@@ -18921,9 +18950,9 @@ export namespace Prisma {
     connect?: CategoriaWhereUniqueInput
   }
 
-  export type EtiquetaCreateNestedManyWithoutAutoTriageInput = {
-    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
-    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
+  export type EtiquetaCreateNestedManyWithoutReglaInput = {
+    create?: XOR<EtiquetaCreateWithoutReglaInput, EtiquetaUncheckedCreateWithoutReglaInput> | EtiquetaCreateWithoutReglaInput[] | EtiquetaUncheckedCreateWithoutReglaInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutReglaInput | EtiquetaCreateOrConnectWithoutReglaInput[]
     connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
   }
 
@@ -18940,9 +18969,9 @@ export namespace Prisma {
     connect?: AsignacionWhereUniqueInput | AsignacionWhereUniqueInput[]
   }
 
-  export type EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput = {
-    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
-    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
+  export type EtiquetaUncheckedCreateNestedManyWithoutReglaInput = {
+    create?: XOR<EtiquetaCreateWithoutReglaInput, EtiquetaUncheckedCreateWithoutReglaInput> | EtiquetaCreateWithoutReglaInput[] | EtiquetaUncheckedCreateWithoutReglaInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutReglaInput | EtiquetaCreateOrConnectWithoutReglaInput[]
     connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
   }
 
@@ -18967,16 +18996,16 @@ export namespace Prisma {
     update?: XOR<XOR<CategoriaUpdateToOneWithWhereWithoutReglasInput, CategoriaUpdateWithoutReglasInput>, CategoriaUncheckedUpdateWithoutReglasInput>
   }
 
-  export type EtiquetaUpdateManyWithoutAutoTriageNestedInput = {
-    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
-    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
-    upsert?: EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput[]
+  export type EtiquetaUpdateManyWithoutReglaNestedInput = {
+    create?: XOR<EtiquetaCreateWithoutReglaInput, EtiquetaUncheckedCreateWithoutReglaInput> | EtiquetaCreateWithoutReglaInput[] | EtiquetaUncheckedCreateWithoutReglaInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutReglaInput | EtiquetaCreateOrConnectWithoutReglaInput[]
+    upsert?: EtiquetaUpsertWithWhereUniqueWithoutReglaInput | EtiquetaUpsertWithWhereUniqueWithoutReglaInput[]
     set?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
     disconnect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
     delete?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
     connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
-    update?: EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput[]
-    updateMany?: EtiquetaUpdateManyWithWhereWithoutAutoTriageInput | EtiquetaUpdateManyWithWhereWithoutAutoTriageInput[]
+    update?: EtiquetaUpdateWithWhereUniqueWithoutReglaInput | EtiquetaUpdateWithWhereUniqueWithoutReglaInput[]
+    updateMany?: EtiquetaUpdateManyWithWhereWithoutReglaInput | EtiquetaUpdateManyWithWhereWithoutReglaInput[]
     deleteMany?: EtiquetaScalarWhereInput | EtiquetaScalarWhereInput[]
   }
 
@@ -19007,16 +19036,16 @@ export namespace Prisma {
     deleteMany?: AsignacionScalarWhereInput | AsignacionScalarWhereInput[]
   }
 
-  export type EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput = {
-    create?: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput> | EtiquetaCreateWithoutAutoTriageInput[] | EtiquetaUncheckedCreateWithoutAutoTriageInput[]
-    connectOrCreate?: EtiquetaCreateOrConnectWithoutAutoTriageInput | EtiquetaCreateOrConnectWithoutAutoTriageInput[]
-    upsert?: EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput[]
+  export type EtiquetaUncheckedUpdateManyWithoutReglaNestedInput = {
+    create?: XOR<EtiquetaCreateWithoutReglaInput, EtiquetaUncheckedCreateWithoutReglaInput> | EtiquetaCreateWithoutReglaInput[] | EtiquetaUncheckedCreateWithoutReglaInput[]
+    connectOrCreate?: EtiquetaCreateOrConnectWithoutReglaInput | EtiquetaCreateOrConnectWithoutReglaInput[]
+    upsert?: EtiquetaUpsertWithWhereUniqueWithoutReglaInput | EtiquetaUpsertWithWhereUniqueWithoutReglaInput[]
     set?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
     disconnect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
     delete?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
     connect?: EtiquetaWhereUniqueInput | EtiquetaWhereUniqueInput[]
-    update?: EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput | EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput[]
-    updateMany?: EtiquetaUpdateManyWithWhereWithoutAutoTriageInput | EtiquetaUpdateManyWithWhereWithoutAutoTriageInput[]
+    update?: EtiquetaUpdateWithWhereUniqueWithoutReglaInput | EtiquetaUpdateWithWhereUniqueWithoutReglaInput[]
+    updateMany?: EtiquetaUpdateManyWithWhereWithoutReglaInput | EtiquetaUpdateManyWithWhereWithoutReglaInput[]
     deleteMany?: EtiquetaScalarWhereInput | EtiquetaScalarWhereInput[]
   }
 
@@ -19442,7 +19471,6 @@ export namespace Prisma {
     estado?: $Enums.EstadoTicket
     etiqueta: EtiquetaCreateNestedOneWithoutTicketInput
     historial?: HistorialTicketCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionCreateNestedManyWithoutTicketInput
   }
@@ -19458,7 +19486,6 @@ export namespace Prisma {
     slaSolucion?: Date | string | null
     estado?: $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -19479,6 +19506,7 @@ export namespace Prisma {
     fecha?: Date | string
     observacion?: string | null
     ticket: TicketCreateNestedOneWithoutHistorialInput
+    imagenes?: Ticket_ImagenCreateNestedManyWithoutHistorialInput
   }
 
   export type HistorialTicketUncheckedCreateWithoutUsuarioInput = {
@@ -19488,6 +19516,7 @@ export namespace Prisma {
     estadoNuevo: $Enums.EstadoTicket
     fecha?: Date | string
     observacion?: string | null
+    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutHistorialInput
   }
 
   export type HistorialTicketCreateOrConnectWithoutUsuarioInput = {
@@ -20148,7 +20177,7 @@ export namespace Prisma {
     carga: number
     activa?: boolean
     categoria: CategoriaCreateNestedOneWithoutReglasInput
-    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutReglaInput
     asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
   }
 
@@ -20159,7 +20188,7 @@ export namespace Prisma {
     prioridad: number
     carga: number
     activa?: boolean
-    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutReglaInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
   }
 
@@ -20263,14 +20292,14 @@ export namespace Prisma {
   export type EtiquetaCreateWithoutCategoriaInput = {
     nombre: string
     Ticket?: TicketCreateNestedManyWithoutEtiquetaInput
-    autoTriage?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
+    regla?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUncheckedCreateWithoutCategoriaInput = {
     id?: number
     nombre: string
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
-    autoTriage?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
+    regla?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaCreateOrConnectWithoutCategoriaInput = {
@@ -20288,7 +20317,7 @@ export namespace Prisma {
     prioridad: number
     carga: number
     activa?: boolean
-    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutReglaInput
     especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionCreateNestedManyWithoutReglaInput
   }
@@ -20299,7 +20328,7 @@ export namespace Prisma {
     prioridad: number
     carga: number
     activa?: boolean
-    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutReglaInput
     especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutReglaInput
   }
@@ -20407,7 +20436,6 @@ export namespace Prisma {
     estado?: $Enums.EstadoTicket
     usuario: UsuarioCreateNestedOneWithoutTicketInput
     historial?: HistorialTicketCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionCreateNestedManyWithoutTicketInput
   }
@@ -20423,7 +20451,6 @@ export namespace Prisma {
     slaSolucion?: Date | string | null
     estado?: $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -20569,14 +20596,14 @@ export namespace Prisma {
   export type EtiquetaCreateWithoutTicketInput = {
     nombre: string
     categoria: CategoriaCreateNestedOneWithoutEtiquetasInput
-    autoTriage?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
+    regla?: Regla_AutotriageCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaUncheckedCreateWithoutTicketInput = {
     id?: number
     idCategoria: number
     nombre: string
-    autoTriage?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
+    regla?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
   export type EtiquetaCreateOrConnectWithoutTicketInput = {
@@ -20590,6 +20617,7 @@ export namespace Prisma {
     fecha?: Date | string
     observacion?: string | null
     usuario?: UsuarioCreateNestedOneWithoutHistorialTicketInput
+    imagenes?: Ticket_ImagenCreateNestedManyWithoutHistorialInput
   }
 
   export type HistorialTicketUncheckedCreateWithoutTicketInput = {
@@ -20599,6 +20627,7 @@ export namespace Prisma {
     estadoNuevo: $Enums.EstadoTicket
     fecha?: Date | string
     observacion?: string | null
+    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutHistorialInput
   }
 
   export type HistorialTicketCreateOrConnectWithoutTicketInput = {
@@ -20608,27 +20637,6 @@ export namespace Prisma {
 
   export type HistorialTicketCreateManyTicketInputEnvelope = {
     data: HistorialTicketCreateManyTicketInput | HistorialTicketCreateManyTicketInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type Ticket_ImagenCreateWithoutTicketInput = {
-    imagen?: Uint8Array | null
-    url?: string | null
-  }
-
-  export type Ticket_ImagenUncheckedCreateWithoutTicketInput = {
-    id?: number
-    imagen?: Uint8Array | null
-    url?: string | null
-  }
-
-  export type Ticket_ImagenCreateOrConnectWithoutTicketInput = {
-    where: Ticket_ImagenWhereUniqueInput
-    create: XOR<Ticket_ImagenCreateWithoutTicketInput, Ticket_ImagenUncheckedCreateWithoutTicketInput>
-  }
-
-  export type Ticket_ImagenCreateManyTicketInputEnvelope = {
-    data: Ticket_ImagenCreateManyTicketInput | Ticket_ImagenCreateManyTicketInput[]
     skipDuplicates?: boolean
   }
 
@@ -20746,14 +20754,14 @@ export namespace Prisma {
   export type EtiquetaUpdateWithoutTicketInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     categoria?: CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput
-    autoTriage?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
+    regla?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateWithoutTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
     idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
-    autoTriage?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
+    regla?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type HistorialTicketUpsertWithWhereUniqueWithoutTicketInput = {
@@ -20770,32 +20778,6 @@ export namespace Prisma {
   export type HistorialTicketUpdateManyWithWhereWithoutTicketInput = {
     where: HistorialTicketScalarWhereInput
     data: XOR<HistorialTicketUpdateManyMutationInput, HistorialTicketUncheckedUpdateManyWithoutTicketInput>
-  }
-
-  export type Ticket_ImagenUpsertWithWhereUniqueWithoutTicketInput = {
-    where: Ticket_ImagenWhereUniqueInput
-    update: XOR<Ticket_ImagenUpdateWithoutTicketInput, Ticket_ImagenUncheckedUpdateWithoutTicketInput>
-    create: XOR<Ticket_ImagenCreateWithoutTicketInput, Ticket_ImagenUncheckedCreateWithoutTicketInput>
-  }
-
-  export type Ticket_ImagenUpdateWithWhereUniqueWithoutTicketInput = {
-    where: Ticket_ImagenWhereUniqueInput
-    data: XOR<Ticket_ImagenUpdateWithoutTicketInput, Ticket_ImagenUncheckedUpdateWithoutTicketInput>
-  }
-
-  export type Ticket_ImagenUpdateManyWithWhereWithoutTicketInput = {
-    where: Ticket_ImagenScalarWhereInput
-    data: XOR<Ticket_ImagenUpdateManyMutationInput, Ticket_ImagenUncheckedUpdateManyWithoutTicketInput>
-  }
-
-  export type Ticket_ImagenScalarWhereInput = {
-    AND?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
-    OR?: Ticket_ImagenScalarWhereInput[]
-    NOT?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
-    id?: IntFilter<"Ticket_Imagen"> | number
-    idTicket?: IntFilter<"Ticket_Imagen"> | number
-    imagen?: BytesNullableFilter<"Ticket_Imagen"> | Uint8Array | null
-    url?: StringNullableFilter<"Ticket_Imagen"> | string | null
   }
 
   export type AsignacionUpsertWithWhereUniqueWithoutTicketInput = {
@@ -20840,7 +20822,6 @@ export namespace Prisma {
     estado?: $Enums.EstadoTicket
     usuario: UsuarioCreateNestedOneWithoutTicketInput
     etiqueta: EtiquetaCreateNestedOneWithoutTicketInput
-    imagenes?: Ticket_ImagenCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionCreateNestedManyWithoutTicketInput
   }
@@ -20856,7 +20837,6 @@ export namespace Prisma {
     slaRespusta?: Date | string | null
     slaSolucion?: Date | string | null
     estado?: $Enums.EstadoTicket
-    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionUncheckedCreateNestedManyWithoutTicketInput
   }
@@ -20904,6 +20884,27 @@ export namespace Prisma {
     create: XOR<UsuarioCreateWithoutHistorialTicketInput, UsuarioUncheckedCreateWithoutHistorialTicketInput>
   }
 
+  export type Ticket_ImagenCreateWithoutHistorialInput = {
+    imagen?: Uint8Array | null
+    url?: string | null
+  }
+
+  export type Ticket_ImagenUncheckedCreateWithoutHistorialInput = {
+    id?: number
+    imagen?: Uint8Array | null
+    url?: string | null
+  }
+
+  export type Ticket_ImagenCreateOrConnectWithoutHistorialInput = {
+    where: Ticket_ImagenWhereUniqueInput
+    create: XOR<Ticket_ImagenCreateWithoutHistorialInput, Ticket_ImagenUncheckedCreateWithoutHistorialInput>
+  }
+
+  export type Ticket_ImagenCreateManyHistorialInputEnvelope = {
+    data: Ticket_ImagenCreateManyHistorialInput | Ticket_ImagenCreateManyHistorialInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TicketUpsertWithoutHistorialInput = {
     update: XOR<TicketUpdateWithoutHistorialInput, TicketUncheckedUpdateWithoutHistorialInput>
     create: XOR<TicketCreateWithoutHistorialInput, TicketUncheckedCreateWithoutHistorialInput>
@@ -20925,7 +20926,6 @@ export namespace Prisma {
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     usuario?: UsuarioUpdateOneRequiredWithoutTicketNestedInput
     etiqueta?: EtiquetaUpdateOneRequiredWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUpdateManyWithoutTicketNestedInput
   }
@@ -20941,7 +20941,6 @@ export namespace Prisma {
     slaRespusta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
-    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -20990,82 +20989,84 @@ export namespace Prisma {
     notificaciones?: NotificacionUncheckedUpdateManyWithoutDestinatarioNestedInput
   }
 
-  export type TicketCreateWithoutImagenesInput = {
-    titulo: string
-    descripcion: string
-    fechaCreacion?: Date | string
-    fechaCierre?: Date | string | null
-    slaRespusta?: Date | string | null
-    slaSolucion?: Date | string | null
-    estado?: $Enums.EstadoTicket
-    usuario: UsuarioCreateNestedOneWithoutTicketInput
-    etiqueta: EtiquetaCreateNestedOneWithoutTicketInput
-    historial?: HistorialTicketCreateNestedManyWithoutTicketInput
-    asignaciones?: AsignacionCreateNestedManyWithoutTicketInput
-    Valoracion?: ValoracionCreateNestedManyWithoutTicketInput
+  export type Ticket_ImagenUpsertWithWhereUniqueWithoutHistorialInput = {
+    where: Ticket_ImagenWhereUniqueInput
+    update: XOR<Ticket_ImagenUpdateWithoutHistorialInput, Ticket_ImagenUncheckedUpdateWithoutHistorialInput>
+    create: XOR<Ticket_ImagenCreateWithoutHistorialInput, Ticket_ImagenUncheckedCreateWithoutHistorialInput>
   }
 
-  export type TicketUncheckedCreateWithoutImagenesInput = {
+  export type Ticket_ImagenUpdateWithWhereUniqueWithoutHistorialInput = {
+    where: Ticket_ImagenWhereUniqueInput
+    data: XOR<Ticket_ImagenUpdateWithoutHistorialInput, Ticket_ImagenUncheckedUpdateWithoutHistorialInput>
+  }
+
+  export type Ticket_ImagenUpdateManyWithWhereWithoutHistorialInput = {
+    where: Ticket_ImagenScalarWhereInput
+    data: XOR<Ticket_ImagenUpdateManyMutationInput, Ticket_ImagenUncheckedUpdateManyWithoutHistorialInput>
+  }
+
+  export type Ticket_ImagenScalarWhereInput = {
+    AND?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
+    OR?: Ticket_ImagenScalarWhereInput[]
+    NOT?: Ticket_ImagenScalarWhereInput | Ticket_ImagenScalarWhereInput[]
+    id?: IntFilter<"Ticket_Imagen"> | number
+    idHistorial?: IntFilter<"Ticket_Imagen"> | number
+    imagen?: BytesNullableFilter<"Ticket_Imagen"> | Uint8Array | null
+    url?: StringNullableFilter<"Ticket_Imagen"> | string | null
+  }
+
+  export type HistorialTicketCreateWithoutImagenesInput = {
+    estadoAnterior: $Enums.EstadoTicket
+    estadoNuevo: $Enums.EstadoTicket
+    fecha?: Date | string
+    observacion?: string | null
+    ticket: TicketCreateNestedOneWithoutHistorialInput
+    usuario?: UsuarioCreateNestedOneWithoutHistorialTicketInput
+  }
+
+  export type HistorialTicketUncheckedCreateWithoutImagenesInput = {
     id?: number
+    idTicket: number
     idUsuario: number
-    idEtiqueta: number
-    titulo: string
-    descripcion: string
-    fechaCreacion?: Date | string
-    fechaCierre?: Date | string | null
-    slaRespusta?: Date | string | null
-    slaSolucion?: Date | string | null
-    estado?: $Enums.EstadoTicket
-    historial?: HistorialTicketUncheckedCreateNestedManyWithoutTicketInput
-    asignaciones?: AsignacionUncheckedCreateNestedManyWithoutTicketInput
-    Valoracion?: ValoracionUncheckedCreateNestedManyWithoutTicketInput
+    estadoAnterior: $Enums.EstadoTicket
+    estadoNuevo: $Enums.EstadoTicket
+    fecha?: Date | string
+    observacion?: string | null
   }
 
-  export type TicketCreateOrConnectWithoutImagenesInput = {
-    where: TicketWhereUniqueInput
-    create: XOR<TicketCreateWithoutImagenesInput, TicketUncheckedCreateWithoutImagenesInput>
+  export type HistorialTicketCreateOrConnectWithoutImagenesInput = {
+    where: HistorialTicketWhereUniqueInput
+    create: XOR<HistorialTicketCreateWithoutImagenesInput, HistorialTicketUncheckedCreateWithoutImagenesInput>
   }
 
-  export type TicketUpsertWithoutImagenesInput = {
-    update: XOR<TicketUpdateWithoutImagenesInput, TicketUncheckedUpdateWithoutImagenesInput>
-    create: XOR<TicketCreateWithoutImagenesInput, TicketUncheckedCreateWithoutImagenesInput>
-    where?: TicketWhereInput
+  export type HistorialTicketUpsertWithoutImagenesInput = {
+    update: XOR<HistorialTicketUpdateWithoutImagenesInput, HistorialTicketUncheckedUpdateWithoutImagenesInput>
+    create: XOR<HistorialTicketCreateWithoutImagenesInput, HistorialTicketUncheckedCreateWithoutImagenesInput>
+    where?: HistorialTicketWhereInput
   }
 
-  export type TicketUpdateToOneWithWhereWithoutImagenesInput = {
-    where?: TicketWhereInput
-    data: XOR<TicketUpdateWithoutImagenesInput, TicketUncheckedUpdateWithoutImagenesInput>
+  export type HistorialTicketUpdateToOneWithWhereWithoutImagenesInput = {
+    where?: HistorialTicketWhereInput
+    data: XOR<HistorialTicketUpdateWithoutImagenesInput, HistorialTicketUncheckedUpdateWithoutImagenesInput>
   }
 
-  export type TicketUpdateWithoutImagenesInput = {
-    titulo?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fechaCierre?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    slaRespusta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
-    usuario?: UsuarioUpdateOneRequiredWithoutTicketNestedInput
-    etiqueta?: EtiquetaUpdateOneRequiredWithoutTicketNestedInput
-    historial?: HistorialTicketUpdateManyWithoutTicketNestedInput
-    asignaciones?: AsignacionUpdateManyWithoutTicketNestedInput
-    Valoracion?: ValoracionUpdateManyWithoutTicketNestedInput
+  export type HistorialTicketUpdateWithoutImagenesInput = {
+    estadoAnterior?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
+    estadoNuevo?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    observacion?: NullableStringFieldUpdateOperationsInput | string | null
+    ticket?: TicketUpdateOneRequiredWithoutHistorialNestedInput
+    usuario?: UsuarioUpdateOneWithoutHistorialTicketNestedInput
   }
 
-  export type TicketUncheckedUpdateWithoutImagenesInput = {
+  export type HistorialTicketUncheckedUpdateWithoutImagenesInput = {
     id?: IntFieldUpdateOperationsInput | number
+    idTicket?: IntFieldUpdateOperationsInput | number
     idUsuario?: IntFieldUpdateOperationsInput | number
-    idEtiqueta?: IntFieldUpdateOperationsInput | number
-    titulo?: StringFieldUpdateOperationsInput | string
-    descripcion?: StringFieldUpdateOperationsInput | string
-    fechaCreacion?: DateTimeFieldUpdateOperationsInput | Date | string
-    fechaCierre?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    slaRespusta?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
-    historial?: HistorialTicketUncheckedUpdateManyWithoutTicketNestedInput
-    asignaciones?: AsignacionUncheckedUpdateManyWithoutTicketNestedInput
-    Valoracion?: ValoracionUncheckedUpdateManyWithoutTicketNestedInput
+    estadoAnterior?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
+    estadoNuevo?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    observacion?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type TicketCreateWithoutAsignacionesInput = {
@@ -21079,7 +21080,6 @@ export namespace Prisma {
     usuario: UsuarioCreateNestedOneWithoutTicketInput
     etiqueta: EtiquetaCreateNestedOneWithoutTicketInput
     historial?: HistorialTicketCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionCreateNestedManyWithoutTicketInput
   }
 
@@ -21095,7 +21095,6 @@ export namespace Prisma {
     slaSolucion?: Date | string | null
     estado?: $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput
     Valoracion?: ValoracionUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -21133,7 +21132,7 @@ export namespace Prisma {
     carga: number
     activa?: boolean
     categoria: CategoriaCreateNestedOneWithoutReglasInput
-    etiquetas?: EtiquetaCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaCreateNestedManyWithoutReglaInput
     especialidades?: EspecialidadCreateNestedManyWithoutReglasInput
   }
 
@@ -21144,7 +21143,7 @@ export namespace Prisma {
     prioridad: number
     carga: number
     activa?: boolean
-    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutAutoTriageInput
+    etiquetas?: EtiquetaUncheckedCreateNestedManyWithoutReglaInput
     especialidades?: EspecialidadUncheckedCreateNestedManyWithoutReglasInput
   }
 
@@ -21175,7 +21174,6 @@ export namespace Prisma {
     usuario?: UsuarioUpdateOneRequiredWithoutTicketNestedInput
     etiqueta?: EtiquetaUpdateOneRequiredWithoutTicketNestedInput
     historial?: HistorialTicketUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUpdateManyWithoutTicketNestedInput
   }
 
@@ -21191,7 +21189,6 @@ export namespace Prisma {
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -21241,7 +21238,7 @@ export namespace Prisma {
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
     categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
-    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutReglaNestedInput
     especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
   }
 
@@ -21252,7 +21249,7 @@ export namespace Prisma {
     prioridad?: IntFieldUpdateOperationsInput | number
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
-    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutReglaNestedInput
     especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
   }
 
@@ -21267,7 +21264,6 @@ export namespace Prisma {
     usuario: UsuarioCreateNestedOneWithoutTicketInput
     etiqueta: EtiquetaCreateNestedOneWithoutTicketInput
     historial?: HistorialTicketCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionCreateNestedManyWithoutTicketInput
   }
 
@@ -21283,7 +21279,6 @@ export namespace Prisma {
     slaSolucion?: Date | string | null
     estado?: $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedCreateNestedManyWithoutTicketInput
-    imagenes?: Ticket_ImagenUncheckedCreateNestedManyWithoutTicketInput
     asignaciones?: AsignacionUncheckedCreateNestedManyWithoutTicketInput
   }
 
@@ -21352,7 +21347,6 @@ export namespace Prisma {
     usuario?: UsuarioUpdateOneRequiredWithoutTicketNestedInput
     etiqueta?: EtiquetaUpdateOneRequiredWithoutTicketNestedInput
     historial?: HistorialTicketUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUpdateManyWithoutTicketNestedInput
   }
 
@@ -21368,7 +21362,6 @@ export namespace Prisma {
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutTicketNestedInput
   }
 
@@ -21442,22 +21435,22 @@ export namespace Prisma {
     create: XOR<CategoriaCreateWithoutReglasInput, CategoriaUncheckedCreateWithoutReglasInput>
   }
 
-  export type EtiquetaCreateWithoutAutoTriageInput = {
+  export type EtiquetaCreateWithoutReglaInput = {
     nombre: string
     categoria: CategoriaCreateNestedOneWithoutEtiquetasInput
     Ticket?: TicketCreateNestedManyWithoutEtiquetaInput
   }
 
-  export type EtiquetaUncheckedCreateWithoutAutoTriageInput = {
+  export type EtiquetaUncheckedCreateWithoutReglaInput = {
     id?: number
     idCategoria: number
     nombre: string
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
   }
 
-  export type EtiquetaCreateOrConnectWithoutAutoTriageInput = {
+  export type EtiquetaCreateOrConnectWithoutReglaInput = {
     where: EtiquetaWhereUniqueInput
-    create: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput>
+    create: XOR<EtiquetaCreateWithoutReglaInput, EtiquetaUncheckedCreateWithoutReglaInput>
   }
 
   export type EspecialidadCreateWithoutReglasInput = {
@@ -21543,20 +21536,20 @@ export namespace Prisma {
     etiquetas?: EtiquetaUncheckedUpdateManyWithoutCategoriaNestedInput
   }
 
-  export type EtiquetaUpsertWithWhereUniqueWithoutAutoTriageInput = {
+  export type EtiquetaUpsertWithWhereUniqueWithoutReglaInput = {
     where: EtiquetaWhereUniqueInput
-    update: XOR<EtiquetaUpdateWithoutAutoTriageInput, EtiquetaUncheckedUpdateWithoutAutoTriageInput>
-    create: XOR<EtiquetaCreateWithoutAutoTriageInput, EtiquetaUncheckedCreateWithoutAutoTriageInput>
+    update: XOR<EtiquetaUpdateWithoutReglaInput, EtiquetaUncheckedUpdateWithoutReglaInput>
+    create: XOR<EtiquetaCreateWithoutReglaInput, EtiquetaUncheckedCreateWithoutReglaInput>
   }
 
-  export type EtiquetaUpdateWithWhereUniqueWithoutAutoTriageInput = {
+  export type EtiquetaUpdateWithWhereUniqueWithoutReglaInput = {
     where: EtiquetaWhereUniqueInput
-    data: XOR<EtiquetaUpdateWithoutAutoTriageInput, EtiquetaUncheckedUpdateWithoutAutoTriageInput>
+    data: XOR<EtiquetaUpdateWithoutReglaInput, EtiquetaUncheckedUpdateWithoutReglaInput>
   }
 
-  export type EtiquetaUpdateManyWithWhereWithoutAutoTriageInput = {
+  export type EtiquetaUpdateManyWithWhereWithoutReglaInput = {
     where: EtiquetaScalarWhereInput
-    data: XOR<EtiquetaUpdateManyMutationInput, EtiquetaUncheckedUpdateManyWithoutAutoTriageInput>
+    data: XOR<EtiquetaUpdateManyMutationInput, EtiquetaUncheckedUpdateManyWithoutReglaInput>
   }
 
   export type EspecialidadUpsertWithWhereUniqueWithoutReglasInput = {
@@ -21680,7 +21673,6 @@ export namespace Prisma {
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     etiqueta?: EtiquetaUpdateOneRequiredWithoutTicketNestedInput
     historial?: HistorialTicketUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUpdateManyWithoutTicketNestedInput
   }
@@ -21696,7 +21688,6 @@ export namespace Prisma {
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -21719,6 +21710,7 @@ export namespace Prisma {
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
     ticket?: TicketUpdateOneRequiredWithoutHistorialNestedInput
+    imagenes?: Ticket_ImagenUpdateManyWithoutHistorialNestedInput
   }
 
   export type HistorialTicketUncheckedUpdateWithoutUsuarioInput = {
@@ -21728,6 +21720,7 @@ export namespace Prisma {
     estadoNuevo?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutHistorialNestedInput
   }
 
   export type HistorialTicketUncheckedUpdateManyWithoutUsuarioInput = {
@@ -21940,7 +21933,7 @@ export namespace Prisma {
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
     categoria?: CategoriaUpdateOneRequiredWithoutReglasNestedInput
-    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutReglaNestedInput
     asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
   }
 
@@ -21951,7 +21944,7 @@ export namespace Prisma {
     prioridad?: IntFieldUpdateOperationsInput | number
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
-    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutReglaNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
   }
 
@@ -22001,14 +21994,14 @@ export namespace Prisma {
   export type EtiquetaUpdateWithoutCategoriaInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUpdateManyWithoutEtiquetaNestedInput
-    autoTriage?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
+    regla?: Regla_AutotriageUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateWithoutCategoriaInput = {
     id?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
-    autoTriage?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
+    regla?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaUncheckedUpdateManyWithoutCategoriaInput = {
@@ -22021,7 +22014,7 @@ export namespace Prisma {
     prioridad?: IntFieldUpdateOperationsInput | number
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
-    etiquetas?: EtiquetaUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUpdateManyWithoutReglaNestedInput
     especialidades?: EspecialidadUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUpdateManyWithoutReglaNestedInput
   }
@@ -22032,7 +22025,7 @@ export namespace Prisma {
     prioridad?: IntFieldUpdateOperationsInput | number
     carga?: IntFieldUpdateOperationsInput | number
     activa?: BoolFieldUpdateOperationsInput | boolean
-    etiquetas?: EtiquetaUncheckedUpdateManyWithoutAutoTriageNestedInput
+    etiquetas?: EtiquetaUncheckedUpdateManyWithoutReglaNestedInput
     especialidades?: EspecialidadUncheckedUpdateManyWithoutReglasNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutReglaNestedInput
   }
@@ -22067,7 +22060,6 @@ export namespace Prisma {
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     usuario?: UsuarioUpdateOneRequiredWithoutTicketNestedInput
     historial?: HistorialTicketUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUpdateManyWithoutTicketNestedInput
   }
@@ -22083,7 +22075,6 @@ export namespace Prisma {
     slaSolucion?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estado?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     historial?: HistorialTicketUncheckedUpdateManyWithoutTicketNestedInput
-    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutTicketNestedInput
     asignaciones?: AsignacionUncheckedUpdateManyWithoutTicketNestedInput
     Valoracion?: ValoracionUncheckedUpdateManyWithoutTicketNestedInput
   }
@@ -22139,12 +22130,6 @@ export namespace Prisma {
     observacion?: string | null
   }
 
-  export type Ticket_ImagenCreateManyTicketInput = {
-    id?: number
-    imagen?: Uint8Array | null
-    url?: string | null
-  }
-
   export type AsignacionCreateManyTicketInput = {
     id?: number
     idTecnico: number
@@ -22170,6 +22155,7 @@ export namespace Prisma {
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
     usuario?: UsuarioUpdateOneWithoutHistorialTicketNestedInput
+    imagenes?: Ticket_ImagenUpdateManyWithoutHistorialNestedInput
   }
 
   export type HistorialTicketUncheckedUpdateWithoutTicketInput = {
@@ -22179,6 +22165,7 @@ export namespace Prisma {
     estadoNuevo?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagenes?: Ticket_ImagenUncheckedUpdateManyWithoutHistorialNestedInput
   }
 
   export type HistorialTicketUncheckedUpdateManyWithoutTicketInput = {
@@ -22188,23 +22175,6 @@ export namespace Prisma {
     estadoNuevo?: EnumEstadoTicketFieldUpdateOperationsInput | $Enums.EstadoTicket
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
     observacion?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type Ticket_ImagenUpdateWithoutTicketInput = {
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
-    url?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type Ticket_ImagenUncheckedUpdateWithoutTicketInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
-    url?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type Ticket_ImagenUncheckedUpdateManyWithoutTicketInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
-    url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AsignacionUpdateWithoutTicketInput = {
@@ -22262,6 +22232,29 @@ export namespace Prisma {
     fecha?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type Ticket_ImagenCreateManyHistorialInput = {
+    id?: number
+    imagen?: Uint8Array | null
+    url?: string | null
+  }
+
+  export type Ticket_ImagenUpdateWithoutHistorialInput = {
+    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Ticket_ImagenUncheckedUpdateWithoutHistorialInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type Ticket_ImagenUncheckedUpdateManyWithoutHistorialInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    imagen?: NullableBytesFieldUpdateOperationsInput | Uint8Array | null
+    url?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type AsignacionCreateManyReglaInput = {
     id?: number
     idTicket: number
@@ -22273,20 +22266,20 @@ export namespace Prisma {
     metodo?: $Enums.MetodoAsignacion | null
   }
 
-  export type EtiquetaUpdateWithoutAutoTriageInput = {
+  export type EtiquetaUpdateWithoutReglaInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     categoria?: CategoriaUpdateOneRequiredWithoutEtiquetasNestedInput
     Ticket?: TicketUpdateManyWithoutEtiquetaNestedInput
   }
 
-  export type EtiquetaUncheckedUpdateWithoutAutoTriageInput = {
+  export type EtiquetaUncheckedUpdateWithoutReglaInput = {
     id?: IntFieldUpdateOperationsInput | number
     idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
   }
 
-  export type EtiquetaUncheckedUpdateManyWithoutAutoTriageInput = {
+  export type EtiquetaUncheckedUpdateManyWithoutReglaInput = {
     id?: IntFieldUpdateOperationsInput | number
     idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string

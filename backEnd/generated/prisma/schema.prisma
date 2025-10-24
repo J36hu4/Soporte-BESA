@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -14,12 +8,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//////////  Usuario  //////////
-
 model Usuario {
   id                      Int               @id @default(autoincrement())
   nombre                  String?           @db.VarChar(30)
-  imagen                  String?           @db.VarChar(100)
+  imagen                  String?           @db.VarChar(500)
   correo                  String            @unique @db.VarChar(35)
   contrasenna             String            @db.VarChar(250)
   role                    Role              @default(USER)
@@ -70,7 +62,6 @@ enum TipoNotificacion {
 }
 
 //////////  Tecnico y Especialidad  //////////
-
 model Tecnico {
   usuario          Usuario          @relation(fields: [id], references: [id])
   id               Int              @id
@@ -91,15 +82,14 @@ enum MotivoDisponible {
 
 model Especialidad {
   id          Int                @id @default(autoincrement())
-  nombre      String             @db.VarChar(30)
-  descripcion String             @db.VarChar(100)
+  nombre      String             @db.VarChar(50)
+  descripcion String             @db.VarChar(200)
   tecnicos    Tecnico[]
   categorias  Categoria[]
   reglas      Regla_Autotriage[]
 }
 
 //////////  Categorias  //////////
-
 model Categoria {
   id                    Int                @id @default(autoincrement())
   nombre                String             @db.VarChar(30)
@@ -124,11 +114,10 @@ model Etiqueta {
   idCategoria Int
   nombre      String             @db.VarChar(50)
   Ticket      Ticket[]
-  autoTriage  Regla_Autotriage[]
+  regla       Regla_Autotriage[]
 }
 
 //////////  Tickets e Incidencias  //////////
-
 model Ticket {
   id            Int               @id @default(autoincrement())
   usuario       Usuario           @relation(fields: [idUsuario], references: [id])
@@ -143,7 +132,6 @@ model Ticket {
   slaSolucion   DateTime?
   estado        EstadoTicket      @default(pendiente)
   historial     HistorialTicket[]
-  imagenes      Ticket_Imagen[]
   asignaciones  Asignacion[]
   Valoracion    Valoracion[]
 }
@@ -157,23 +145,24 @@ enum EstadoTicket {
 }
 
 model HistorialTicket {
-  id             Int          @id @default(autoincrement())
-  ticket         Ticket       @relation(fields: [idTicket], references: [id])
+  id             Int             @id @default(autoincrement())
+  ticket         Ticket          @relation(fields: [idTicket], references: [id])
   idTicket       Int
-  usuario        Usuario?     @relation(fields: [idUsuario], references: [id])
+  usuario        Usuario?        @relation(fields: [idUsuario], references: [id])
   idUsuario      Int
   estadoAnterior EstadoTicket
   estadoNuevo    EstadoTicket
-  fecha          DateTime     @default(now())
-  observacion    String?      @db.VarChar(500)
+  fecha          DateTime        @default(now())
+  observacion    String?         @db.VarChar(500)
+  imagenes       Ticket_Imagen[]
 }
 
 model Ticket_Imagen {
-  id       Int     @id @default(autoincrement())
-  ticket   Ticket  @relation(fields: [idTicket], references: [id])
-  idTicket Int
-  imagen   Bytes?
-  url      String? @db.VarChar(200)
+  id          Int             @id @default(autoincrement())
+  historial   HistorialTicket @relation(fields: [idHistorial], references: [id])
+  idHistorial Int
+  imagen      Bytes?
+  url         String?         @db.VarChar(200)
 }
 
 model Asignacion {

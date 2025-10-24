@@ -153,11 +153,11 @@
   color: #2886DE;
   font-weight: 600;
   font-size: 1.1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.09);
   padding-left: 12px;
 
   span {
-    margin-left: 6px;
+    margin-left: 8px;
   }
 }
 

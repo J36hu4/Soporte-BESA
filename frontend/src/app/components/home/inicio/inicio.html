@@ -12,7 +12,7 @@
             <div class="header-ticket-info ">
                 <span>Tickets Activos
                 </span>
-                <p class="bg-gradient-primary ticket-num">{{ datos().length }}</p>
+                <p class="bg-gradient-primary ticket-num">{{ total() }}</p>
             </div>
         </div>
     </header>
@@ -31,9 +31,6 @@
                         </button>
                     </div>
                 </div>
-                <button matButton="outlined">
-                    <mat-icon>arrow_circle_right</mat-icon><span>Ver más tickets</span>
-                </button>
             </div>
 
             @if (tipo === 'list') {
@@ -48,9 +45,10 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if (datos().length > 0) {
                     @for (fila of datos(); track $index) {
                     <tr>
-                        <td class="codigo">{{ 'TK-' + (fila.id.toString().padStart(3, '0')) }}</td>
+                        <td class="codigo">{{ (fila.id.toString().padStart(3, '0')) }}</td>
                         <td class="content">
                             <p>{{ fila.titulo }}</p>
                             <span>{{ fila.etiqueta.categoria.nombre + " - " + fila.etiqueta.nombre }}</span>
@@ -59,14 +57,23 @@
                         </td>
                         <td class="prioridad">
                             <p
-                                [class]="'bg-' + (fila.etiqueta.categoria.prioridad === 'baja' ? 'success' : fila.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'error')">
+                                [class]="'bg-gradient-' + (fila.etiqueta.categoria.prioridad === 'baja' ? 'success' : fila.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'error')">
                                 {{ fila.etiqueta.categoria.prioridad | transformText }}</p>
                         </td>
                         <td class="acciones">
-                            <button matMiniFab matTooltip="Detalles" matTooltipPosition="right"
-                                aria-label="Example icon button with a menu icon">
+                            <button style="margin: auto;" class="btn-primary filled" matTooltip="Detalles"
+                                matTooltipPosition="right" aria-label="Example icon button with a menu icon"
+                                (click)="irDetalles(fila.id)">
                                 <mat-icon>info</mat-icon>
                             </button>
+                        </td>
+                    </tr>
+                    }
+                    }
+                    @else {
+                    <tr>
+                        <td colspan="5" style="text-align: center; padding: 20px;">
+                            No se encontraron tickets.
                         </td>
                     </tr>
                     }
@@ -74,28 +81,45 @@
             </table>
             } @else {
             <div class="grid-datos">
+                @if (datos().length > 0) {
                 @for (dato of datos(); track $index) {
-                <div class="card-grid"
-                    [style]="'border-left: 4px solid ' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'red' : dato.etiqueta.categoria.prioridad === 'media' ? 'orange' : 'green') + 
-                    '; border-bottom: 4px solid ' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'red' : dato.etiqueta.categoria.prioridad === 'media' ? 'orange' : 'green') + ';'">
+                <div
+                    [class]="'card-grid-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
                     <div class="card-grid-header">
-                        <p><span class="title-secondary">{{'TK-' + (dato.id.toString().padStart(3, '0'))}}</span> - {{dato.titulo}}</p>
+                        <p><span class="title-secondary">{{ (dato.id.toString().padStart(3, '0'))}}</span> -
+                            {{dato.titulo}}</p>
                         <p>{{dato.etiqueta.categoria.nombre}} - {{dato.etiqueta.nombre}}</p>
                     </div>
                     <div class="card-grid-info">
                         <div class="dato-info">
                             <p class="">Prioridad: <span
-                                    [class]="'title-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">{{dato.etiqueta.categoria.prioridad | transformText}}</span>
+                                    [class]="'title-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">{{dato.etiqueta.categoria.prioridad
+                                    | transformText}}</span>
                             </p>
                             <p>Estado: <span class="dato-estado">{{dato.estado | transformText}}</span></p>
                         </div>
-                        <button class="datos-btns btn-primary" >Ver Detalles</button>
+                        <button
+                            [class]="'filled btn-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')"
+                            matTooltip="Detalles" (click)="irDetalles(dato.id)">
+                            <mat-icon>info</mat-icon>
+                        </button>
                     </div>
 
                 </div>
                 }
+                } @else {
+                <p class="card-grid" style="text-align: center;">No se encontraron tickets.</p>
+                }
             </div>
             }
+
+            <footer style="display: flex; align-items: center; justify-content: center; padding: 20px 0 0; gap: 20px;">
+                <span style="font-size: .9rem;">¿Quieres ver todos tus tickets?</span>
+                <button class="btn-primary" (click)="this.router.navigate(['/mytickets'])">
+                    <mat-icon>arrow_circle_right</mat-icon><span>Ver más tickets</span>
+                </button>
+            </footer>
+
         </div>
 
         <div class="home-info"></div>

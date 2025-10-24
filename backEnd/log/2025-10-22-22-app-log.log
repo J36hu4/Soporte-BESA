@@ -1,0 +1,75 @@
+2025-10-22 22:09:43.669 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:70:36
+
+  67 };
+  68 
+  69 const [lista, total] = await Promise.all([
+→ 70     this.prisma.ticket.findMany({
+           where: {},
+           skip: 0,
+           take: 10,
+           orderBy: {
+             prioridad: "desc",
+             ~~~~~~~~~
+         ?   id?: SortOrder,
+         ?   idUsuario?: SortOrder,
+         ?   idEtiqueta?: SortOrder,
+         ?   titulo?: SortOrder,
+         ?   descripcion?: SortOrder,
+         ?   fechaCreacion?: SortOrder,
+         ?   fechaCierre?: SortOrder | SortOrderInput,
+         ?   slaRespusta?: SortOrder | SortOrderInput,
+         ?   slaSolucion?: SortOrder | SortOrderInput,
+         ?   estado?: SortOrder,
+         ?   usuario?: UsuarioOrderByWithRelationInput,
+         ?   etiqueta?: EtiquetaOrderByWithRelationInput,
+         ?   historial?: HistorialTicketOrderByRelationAggregateInput,
+         ?   asignaciones?: AsignacionOrderByRelationAggregateInput,
+         ?   Valoracion?: ValoracionOrderByRelationAggregateInput,
+         ?   _relevance?: TicketOrderByRelevanceInput
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Unknown argument `prioridad`. Available options are marked with ?.

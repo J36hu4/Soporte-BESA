@@ -1,76 +1,76 @@
 <!-- https://material.angular.dev/components/menu/overview -->
 <!-- https://fonts.google.com/icons -->
 <mat-toolbar id="sidebar" [class]="'sidebar-gradient ' + (menuClose ? 'menuClose' : '')">
-  <button class="sidebar-menu sidebar-buttons" matTooltip="Menú" (click)="menuClose = !menuClose">
+  <button class="sidebar-menu sidebar-buttons" matTooltip="Menú" (click)="expand()">
     <mat-icon>menu</mat-icon>
     <p>Menú</p>
   </button>
 
   <!-- Menú principal -->
   <div id="sidebar-group">
-    <button class="sidebar-buttons select" matTooltip="Inicio">
+    <button [class]="'sidebar-buttons ' + (rutaSelect === 1 ? 'select' : '')" matTooltip="Inicio" (click)="navigate('/inicio');">
       <mat-icon>home</mat-icon>
       <p>Inicio</p>
     </button>
 
-    <button class="sidebar-buttons" matTooltip="Mis tickets">
+    <button [class]="'sidebar-buttons ' + (rutaSelect === 12 ? 'select' : '')" matTooltip="Mis tickets" (click)="navigate('/mytickets/crear')">
+      <mat-icon>add_circle</mat-icon>
+      <p>Crear Ticket</p>
+    </button>
+
+    <button [class]="'sidebar-buttons ' + (rutaSelect === 2 ? 'select' : '')" matTooltip="Mis tickets" (click)="navigate('/mytickets')">
       <mat-icon>local_activity</mat-icon>
       <p>Mis tickets</p>
     </button>
 
-    <button class="sidebar-buttons" matTooltip="Historial">
-      <mat-icon>history</mat-icon>
-      <p>Historial</p>
-    </button>
-
-    <button class="sidebar-buttons" matTooltip="Notificaciones">
+    <button [class]="'sidebar-buttons ' + (rutaSelect === 3 ? 'select' : '')" matTooltip="Notificaciones" (click)="navigate('/notificaciones')">
       <mat-icon>notifications</mat-icon>
       <p>Notificaciones</p>
     </button>
 
-    <button class="sidebar-buttons" matTooltip="Mi cuenta">
+    <button [class]="'sidebar-buttons ' + (rutaSelect === 4 ? 'select' : '')" matTooltip="Mi cuenta" (click)="navigate('/cuenta')">
       <mat-icon>account_box</mat-icon>
       <p>Mi cuenta</p>
     </button>
 
-    <details open id="tecnico-group">
+    <details [hidden]="!(userService.getUser()?.role === 'TEC')" open id="tecnico-group">
       <summary>
         <span>Técnico</span>
       </summary>
-      <button class="sidebar-buttons" matTooltip="Mis asignaciones">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 5 ? 'select' : '')" matTooltip="Mis asignaciones" (click)="navigate('/asignaciones')">
         <mat-icon>assignment</mat-icon>
         <p>Mis asignaciones</p>
       </button>
     </details>
 
-    <details open id="admin-group">
+    <details [hidden]="!(userService.getUser()?.role === 'ADMIN')" open id="admin-group">
       <summary><span>Administración</span></summary>
-      <button class="sidebar-buttons" matTooltip="Dashboard">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 6 ? 'select' : '')" matTooltip="Dashboard" (click)="navigate('/dashboard')">
         <mat-icon>analytics</mat-icon>
         <p>Dashboard</p>
       </button>
 
-      <button class="sidebar-buttons" matTooltip="Gestión de técnicos">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 7 ? 'select' : '')" matTooltip="Gestión de técnicos" (click)="navigate('/tecnicos')">
         <mat-icon>manage_accounts</mat-icon>
         <p>Gestión de técnicos</p>
       </button>
 
-      <button class="sidebar-buttons" matTooltip="Gestión de categorías">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 8 ? 'select' : '')" matTooltip="Gestión de categorías" (click)="navigate('/categorias')">
         <mat-icon>category</mat-icon>
         <p>Gestión de categorías</p>
       </button>
 
-      <button class="sidebar-buttons" matTooltip="Tickets">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 9 ? 'select' : '')" matTooltip="Tickets" (click)="navigate('/tickets')">
         <mat-icon>local_activity</mat-icon>
         <p>Tickets</p>
       </button>
 
-      <button class="sidebar-buttons" matTooltip="Asignaciones">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 10 ? 'select' : '')" matTooltip="Asignaciones" (click)="navigate('/asignaciones')">
         <mat-icon>assignment</mat-icon>
         <p>Asignaciones</p>
       </button>
 
-      <button class="sidebar-buttons" matTooltip="Reportes">
+      <button [class]="'sidebar-buttons ' + (rutaSelect === 11 ? 'select' : '')" matTooltip="Reportes" (click)="navigate('/reportes')"> 
         <mat-icon>report</mat-icon>
         <p>Reportes</p>
       </button>

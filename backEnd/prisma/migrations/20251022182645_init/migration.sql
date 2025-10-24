@@ -2,7 +2,7 @@
 CREATE TABLE `Usuario` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nombre` VARCHAR(30) NULL,
-    `imagen` VARCHAR(100) NULL,
+    `imagen` VARCHAR(500) NULL,
     `correo` VARCHAR(35) NOT NULL,
     `contrasenna` VARCHAR(250) NOT NULL,
     `role` ENUM('USER', 'TEC', 'ADMIN') NOT NULL DEFAULT 'USER',
@@ -41,8 +41,8 @@ CREATE TABLE `Tecnico` (
 -- CreateTable
 CREATE TABLE `Especialidad` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `nombre` VARCHAR(30) NOT NULL,
-    `descripcion` VARCHAR(100) NOT NULL,
+    `nombre` VARCHAR(50) NOT NULL,
+    `descripcion` VARCHAR(200) NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -100,7 +100,7 @@ CREATE TABLE `HistorialTicket` (
 -- CreateTable
 CREATE TABLE `Ticket_Imagen` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `idTicket` INTEGER NOT NULL,
+    `idHistorial` INTEGER NOT NULL,
     `imagen` LONGBLOB NULL,
     `url` VARCHAR(200) NULL,
 
@@ -207,7 +207,7 @@ ALTER TABLE `HistorialTicket` ADD CONSTRAINT `HistorialTicket_idTicket_fkey` FOR
 ALTER TABLE `HistorialTicket` ADD CONSTRAINT `HistorialTicket_idUsuario_fkey` FOREIGN KEY (`idUsuario`) REFERENCES `Usuario`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `Ticket_Imagen` ADD CONSTRAINT `Ticket_Imagen_idTicket_fkey` FOREIGN KEY (`idTicket`) REFERENCES `Ticket`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Ticket_Imagen` ADD CONSTRAINT `Ticket_Imagen_idHistorial_fkey` FOREIGN KEY (`idHistorial`) REFERENCES `HistorialTicket`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Asignacion` ADD CONSTRAINT `Asignacion_idTicket_fkey` FOREIGN KEY (`idTicket`) REFERENCES `Ticket`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

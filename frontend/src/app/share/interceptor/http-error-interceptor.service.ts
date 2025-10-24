@@ -17,7 +17,6 @@ export class HttpErrorInterceptorService implements HttpInterceptor {
   constructor(private noti: NotificationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Request URL:', request.url);
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {

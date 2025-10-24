@@ -1,0 +1,20 @@
+Revisar version angular
+    ng version 
+
+De lo contrario si la versión NO es CORRECTA, ejecute el siguiente comando para actualizar la versión 
+    npm install -g @angular/cli 
+
+Crear proyecto angular
+    ng new [nombreProyecto] --no-standalone 
+
+intalar y agregar Material
+    ng add @angular/material 
+
+Crear modulo sin ruta
+    ng g module [path]/[nombreModulo] --m=app 
+
+crear modulo con ruta
+    ng generate module [path]/[nombreMódulo]  -m=app --routing 
+
+crear componentes en los modulos
+    ng generate component [ruta del modulo]/[nombreComponente] --export(Opcional) --skip-tests(opcional)

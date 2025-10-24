@@ -118,39 +118,35 @@ $_palettes: (
     99: #f9fff9,
     100: #ffffff),
   warning: (0: #000000,
-    10: #261900,
-    20: #422c00,
-    25: #503600,
-    30: #5e4000,
-    35: #6c4a00,
-    40: #7a5500,
-    50: #996d00,
-    60: #b98500,
-    70: #dba300,
-    80: #ffd426,
-    90: #ffecb3,
-    95: #fff5d6,
-    98: #fffaf0,
-    99: #fffdf7,
+    10: #2c1b00,
+    20: #4e2f00,
+    30: #704400,
+    40: #ff6f00, // naranja intenso
+    50: #ff9800, // naranja estándar
+    60: #ffc107, // ámbar
+    70: #ffe600, // amarillo puro
+    80: #fff176, // amarillo pastel
+    90: #fff8c6,
+    95: #fffbe5,
+    98: #fffdf2,
+    99: #fffef9,
     100: #ffffff),
 
   error: (0: #000000,
-    10: #410002,
-    20: #690005,
-    25: #7e0007,
-    30: #93000a,
-    35: #a80710,
-    40: #ba1a1a,
-    50: #de3730,
-    60: #ff5449,
-    70: #ff897d,
-    80: #ffb4ab,
-    90: #ffdad6,
-    95: #ffedea,
-    98: #fff8f7,
-    99: #fffbff,
-    100: #ffffff,
-  ),
+    10: #3a0000,
+    20: #5c0000,
+    30: #800000,
+    40: #d32f2f, // rojo vibrante
+    50: #e53935, // rojo coral
+    60: #f44336, // rojo estándar
+    70: #ff5252, // rojo claro
+    80: #ff867c, // rosado cálido
+    90: #ffc1c1,
+    95: #ffe5e5,
+    98: #fff5f5,
+    99: #fffafa,
+    100: #ffffff),
+
 );
 
 $_rest: (

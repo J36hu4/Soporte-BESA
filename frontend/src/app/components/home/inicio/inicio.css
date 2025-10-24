@@ -58,8 +58,6 @@
   }
 }
 
-.home-content {}
-
 .tabla-datos {
 
   td {
@@ -109,10 +107,6 @@
         width: fit-content;
         margin: auto;
       }
-    }
-
-    &.acciones {
-      text-align: center;
     }
   }
 }

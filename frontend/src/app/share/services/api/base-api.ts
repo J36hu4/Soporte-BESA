@@ -31,8 +31,12 @@ export class BaseAPI<T extends BaseEntity> {
    * Obtiene la lista completa de elementos del recurso
    * Ejemplo final: GET http://localhost:3000/productos
    */
-  get(): Observable<T[]> {
-    return this.http.get<T[]>(`${this.urlAPI}/${this.endpoint}`);
+  get(params: string = ''): Observable<{ lista: T[]; count: number }> {
+    return this.http.get<{ lista: T[]; count: number }>(`${this.urlAPI}/${this.endpoint}/search?${params}`);
+  }
+
+  count(params: string = ''): Observable<number> {
+    return this.http.get<number>(`${this.urlAPI}/${this.endpoint}/count/search?${params}`);
   }
   /**
   * Permite ejecutar un método GET personalizado, útil para endpoints con acciones específicas
