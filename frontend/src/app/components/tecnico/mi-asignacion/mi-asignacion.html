@@ -1,0 +1,208 @@
+<main class="container-xxl">
+    <header class="AsignacionDetail-header">
+        <button class="btn-atras" (click)="volver()">
+            <mat-icon>keyboard_backspace</mat-icon>Atrás
+        </button>
+        <p class="title-page">Mis Asignaciones - Detalle</p>
+    </header>
+
+    @if (!dato()) {
+    <p>No hay datos disponibles</p>
+    } @else {
+    <div class="asignacion-detalle">
+
+        <!-- 🧾 Información general -->
+        <div class="title">
+            <mat-icon class="bg-gradient-primary">local_activity</mat-icon>
+            <h2>{{ dato()?.titulo }}</h2>
+
+            <div class="content-group">
+                <span>Descripción</span>
+                <p>{{ (dato()?.descripcion ?? '') | transformText }}</p>
+            </div>
+
+            <div class="group">
+                <p>Estado: <span class="bg-gradient-secondary">{{ (dato()?.estado ?? '') | transformText }}</span></p>
+                <p>
+                    Prioridad:
+                    <span [class]="'bg-gradient-' + (
+              dato()?.etiqueta?.categoria?.prioridad === 'baja' ? 'success' :
+              dato()?.etiqueta?.categoria?.prioridad === 'media' ? 'warning' : 'error'
+            )">
+                        {{ (dato()?.etiqueta?.categoria?.prioridad ?? '') | transformText }}
+                    </span>
+                </p>
+            </div>
+        </div>
+
+        <div class="info-general">
+            <!-- 🧠 Categoría y etiqueta -->
+            <section class="categoria">
+                <header class="bg-gradient-primary">
+                    <mat-icon>info</mat-icon>
+                    <h3>Informacion</h3>
+                </header>
+
+                <div class="info-group">
+                    <div style="padding-bottom: 10px; border-bottom: 1.5px solid rgb(199, 199, 199);" class="group">
+                        <div class="content-group">
+                            <span>Solicitante</span>
+                            <p><i class="fi fi-rr-circle-user"></i>{{ dato()?.usuario?.nombre }}</p>
+                        </div>
+                        <div class="content-group">
+                            <span>Correo</span>
+                            <p><i class="fi fi-rr-envelope"></i>{{ dato()?.usuario?.correo}}</p>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="content-group">
+                            <span>Categoría</span>
+                            <p><i class="fi fi-rr-resources"></i>{{ dato()?.etiqueta?.categoria?.nombre }}</p>
+                        </div>
+                        <div class="content-group">
+                            <span>Problema</span>
+                            <p><i class="fi fi-rr-exclamation"></i>{{ dato()?.etiqueta?.nombre }}</p>
+                        </div>
+                    </div>
+
+                    <div class="content-group">
+                        <span>Descripción de la categoría</span>
+                        <p>{{ dato()?.etiqueta?.categoria?.descripcion }}</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ⏱️ SLA -->
+            <section class="info">
+                <header class="bg-gradient-primary">
+                    <mat-icon>calendar_today</mat-icon>
+                    <h3>Fechas y SLA</h3>
+                </header>
+
+                <div class="info-group">
+                    <div class="group">
+                        <div class="content-group">
+                            <span>Fecha de creación</span>
+                            <p><i class="fi fi-rr-calendar-plus"></i>{{ dato()?.fechaCreacion | date:'short' }}</p>
+                        </div>
+                        <div class="content-group">
+                            <span>Fecha de cierre</span>
+                            <p><i class="fi fi-rr-calendar-check"></i>{{ dato()?.fechaCierre | date:'short' }}</p>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="content-group">
+                            <span>Respuesta esperada</span>
+                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ dato()?.slaRespusta | date:'short' }}</p>
+                        </div>
+                        <div class="content-group">
+                            <span>Respuesta Obtenida</span>
+                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ fechaAsignacion | date:'short' }}</p>
+                        </div>
+                    </div>
+                    <div class="group">
+                        <div class="content-group">
+                            <span>Solución esperada</span>
+                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ dato()?.slaSolucion | date:'short' }}</p>
+                        </div>
+                        <div class="content-group">
+                            <span>Solución Obtenida</span>
+                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ fechaResuelto | date:'short' }}</p>
+                        </div>
+                    </div>
+                    <p [class]="cumplioSla('style')" style="margin: auto; text-align: center; font-size: .9em; width: fit-content; color: white; padding: 5px 15px; border-radius: 20px;">{{
+                        cumplioSla('text')
+                        }}</p>
+                </div>
+            </section>
+        </div>
+
+        <section class="asignacion">
+            <header class="bg-gradient-primary">
+                <mat-icon>work</mat-icon>
+                <h3>Asignacion</h3>
+            </header>
+            @if (tecnicoAsignado) {
+            <div class="info-group item">
+                <div class="group">
+                    <div class="group-2">
+                        <div class="content-group">
+                            <span>Puntaje de asignacion</span>
+                            <p><i class="fi fi-rr-hundred-points"></i>{{ tecnicoAsignado.puntajePrioridad ?? 0 }}</p>
+                        </div>
+                        <div class="content-group">
+                            <span>Regla aplicada</span>
+                            <p><i class="fi fi-rr-rules-alt"></i>{{ tecnicoAsignado.regla?.nombre ?? "N/A" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="group-2">
+                        <div class="content-group">
+                            <span>Método de asignación</span>
+                            <p>
+                                <i
+                                    [class]="tecnicoAsignado.metodo === 'manual' ? 'fi fi-rr-hand-paper' : 'fi fi-rr-user-robot'"></i>
+                                {{ tecnicoAsignado.metodo ?? ''| transformText }}
+                            </p>
+                        </div>
+                        <div class="content-group">
+                            <span>Motivo</span>
+                            <p><i class="fi fi-rr-comment-text"></i>{{ tecnicoAsignado.motivo }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </section>
+
+        <!-- ⭐ Valoración -->
+        @if (dato()?.Valoracion?.length) {
+        <section class="valoracion">
+            <header class="bg-gradient-primary">
+                <mat-icon>star</mat-icon>
+                <h3>Valoración</h3>
+            </header>
+
+            <div class="valoracion-card" *ngFor="let val of dato()?.Valoracion">
+                <div class="encabezado">
+                    <div class="estrellas">
+                        <ng-container *ngFor="let star of [1,2,3,4,5]">
+                            <mat-icon [ngClass]="{ 'filled': star <= val.puntaje }">star_rate</mat-icon>
+                        </ng-container>
+                    </div>
+                    <span class="fecha">{{ val.fecha | date:'d \'de\' MMMM \'del\' y \'a las\' h:mm a' }}</span>
+                </div>
+
+                <p class="comentario">“{{ val.comentario }}”</p>
+            </div>
+        </section>
+        }
+
+        <!-- 📜 Historial -->
+        <section class="historial">
+            <header class="bg-gradient-primary">
+                <mat-icon>history</mat-icon>
+                <h3>Historial</h3>
+            </header>
+
+            <div class="info-group">
+                @for (h of dato()?.historial; track $index) {
+                <div class="campo">
+                    <span>{{ h.fecha | date:'d \'de\' MMMM \'del\' y \'a las\' h:mm a' }}</span>
+                    <p>
+                        <strong>{{ (h.usuario?.nombre ) }}</strong> cambió de
+                        <em>{{ h.estadoAnterior | transformText }}</em> a <em>{{ h.estadoNuevo | transformText }}</em>
+                    </p>
+                    <div class="content-group">
+                        <span>Observación</span>
+                        <p>{{ h.observacion }}</p>
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+
+    </div>
+    }
+</main>

@@ -1,0 +1,375 @@
+.AsignacionDetail-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  gap: 15px;
+}
+
+.asignacion-detalle {
+  max-width: 1000px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  width: fit-content;
+  margin: auto;
+  background-color: white;
+  padding: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .content-group {
+    span {
+      font-size: .8rem;
+      color: rgb(92, 92, 92);
+    }
+
+    p {
+      display: flex;
+      gap: 8px;
+      margin: 0;
+
+      mat-icon,
+      i {
+        color: #0a79d1;
+        font-size: .98rem;
+        width: fit-content;
+        height: fit-content;
+      }
+    }
+  }
+
+  section {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    /* border: 2px solid #0060a8; */
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 0;
+    background-color: rgb(255, 255, 255);
+    flex-grow: 1;
+
+    header {
+      color: white;
+      padding: 10px 10px 7px 15px;
+      display: flex;
+      gap: 10px;
+
+      mat-icon {
+        font-size: 1.3rem;
+        width: fit-content;
+        height: fit-content;
+      }
+
+      h3 {
+        margin: 0;
+      }
+    }
+
+    .info-group {
+      padding: 10px 15px 15px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 12.5px;
+
+      h4 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    mat-icon {
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      color: white;
+      border-radius: 50%;
+      padding: 1.15rem;
+      font-size: 2.5rem;
+      width: fit-content;
+      height: fit-content;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .content-group {
+      border: none;
+    }
+
+    .group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      p {
+        font-size: .8rem;
+        color: rgb(54, 54, 54);
+
+        span {
+          letter-spacing: .8px;
+          color: white;
+          font-size: 1rem;
+          padding: 5px 10px;
+          border-radius: 20px;
+        }
+      }
+    }
+  }
+
+  .info-general {
+    display: flex;
+    gap: 20px;
+
+    .categoria {
+      max-width: 55%;
+
+      .group {
+        display: flex;
+
+        .content-group {
+          flex: 1;
+        }
+      }
+    }
+
+    .info {
+      .info-group {
+        justify-content: center;
+
+        .group {
+          display: flex;
+
+          .content-group {
+            flex: 1;
+          }
+
+        }
+      }
+    }
+  }
+
+  .asignacion {
+    .info-group {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      .group {
+        display: flex;
+        gap: 40px;
+
+        .group-2 {
+          .content-group {
+            margin-bottom: 5px;
+          }
+        }
+      }
+
+      &.item {
+        justify-content: start;
+        position: relative;
+      }
+    }
+  }
+
+  .valoracion {
+
+    .valoracion-card {
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .encabezado {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .estrellas {
+          display: flex;
+          gap: 0.05rem;
+
+          mat-icon {
+            font-size: 30px;
+            color: #e0e0e0;
+            height: fit-content;
+            width: fit-content;
+
+            &.filled {
+              color: #ffc107;
+            }
+          }
+        }
+
+        .fecha {
+          font-size: 0.85rem;
+          color: #666;
+        }
+      }
+
+      .comentario {
+        font-style: italic;
+        color: #444;
+        margin: 0;
+      }
+    }
+  }
+
+
+  .historial {
+    .info-group {
+      padding-bottom: 0;
+    }
+
+    .campo {
+      border-left: 4px solid #0a79d1;
+      border-radius: 8px;
+      padding: 5px 0 5px 10px;
+      margin-bottom: 5px;
+      background-color: #0886ec25;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span {
+        font-size: .8rem;
+        color: rgb(92, 92, 92);
+      }
+
+      p {
+        margin: 0;
+        letter-spacing: .5px;
+      }
+
+      .content-group {
+        border: none;
+        margin: 0;
+        margin-top: -5px;
+
+        span {
+          font-size: .6rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+          letter-spacing: .8px;
+        }
+      }
+    }
+
+  }
+}
+
+@media (max-width: 768px) {
+  .TicketDetail-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .ticket-detalle {
+    width: 100%;
+    padding: 1rem 0.8rem;
+    box-sizing: border-box;
+
+    .title {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      mat-icon {
+        font-size: 2rem;
+        padding: 0.8rem;
+      }
+
+      .group {
+        flex-direction: column;
+        gap: 0;
+
+        p {
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .info-general {
+      flex-direction: column;
+
+      .categoria,
+      .info {
+        max-width: 100%;
+      }
+
+      .group {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+
+    .asignacion {
+      .info-group {
+        flex-direction: column;
+        gap: 15px;
+
+        .group {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .group-2 {
+          width: 100%;
+        }
+
+        .group-3 {
+          mat-icon {
+            font-size: 3rem;
+          }
+        }
+      }
+    }
+
+    .valoracion {
+      .valoracion-card {
+        .encabezado {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .estrellas {
+          flex-wrap: wrap;
+        }
+      }
+    }
+
+    .historial {
+      .campo {
+        padding: 10px;
+        gap: 6px;
+
+        .content-group {
+          span {
+            font-size: 0.7rem;
+          }
+
+          p {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}

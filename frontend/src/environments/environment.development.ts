@@ -3,4 +3,5 @@ export const environment = {
     endPointUser:'usuario',
     endPointTicket:'ticket',
     endPointTecnico:'tecnico',
+    endPointCategoria:'categoria',
 };

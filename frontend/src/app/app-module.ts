@@ -1,4 +1,4 @@
-import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { LOCALE_ID, NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
@@ -10,10 +10,18 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 import { AuthModules } from './components/auth/auth-module';
 import { MainLayout } from './layout/main-layout/main-layout';
 import { CleanLayout } from './layout/clean-layout/clean-layout';
-import {  NgxSonnerToaster } from 'ngx-sonner' 
+import { NgxSonnerToaster } from 'ngx-sonner'
 import { HttpErrorInterceptorService } from './share/interceptor/http-error-interceptor.service';
 import { TicketModule } from './components/ticket/ticket-module';
 import { TecnicoModule } from './components/tecnico/tecnico-module';
+import { CategoriaModule } from './components/categoria/categoria-module'; import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import localeEn from '@angular/common/locales/en';
+import { LocaleService } from './share/services/app/date.service';
+
+registerLocaleData(localeEs);
+registerLocaleData(localeEn);
+
 
 
 @NgModule({
@@ -32,15 +40,21 @@ import { TecnicoModule } from './components/tecnico/tecnico-module';
     AuthModules,
     TicketModule,
     TecnicoModule,
+    CategoriaModule,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptorsFromDi()),
-     { 
-      provide: HTTP_INTERCEPTORS,  
-      useClass: HttpErrorInterceptorService,  
-      multi:true 
-    } 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true
+    },
+    {
+      provide: LOCALE_ID,
+      deps: [LocaleService],
+      useFactory: (localeService: LocaleService) => localeService.locale
+    }
   ],
   bootstrap: [App],
   exports: []

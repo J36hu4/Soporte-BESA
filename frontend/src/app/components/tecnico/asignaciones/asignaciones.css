@@ -1,0 +1,200 @@
+.Asignacion-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.calendario {
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .calendario-header {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+
+        h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+
+            span {
+                font-weight: 100;
+            }
+        }
+
+        input[type="date"] {
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        .page {
+            background: #d8edfd;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 4px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            mat-icon {
+                font-size: 1.5rem;
+                color: #0a79d1;
+            }
+
+            &:hover {
+                background: #aad7fa;
+                transition: all .3s ease;
+            }
+        }
+
+        .hoy {
+            background-color: white;
+            padding: 0.3rem 0.5rem;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #dddddd;
+                transition: all .3s ease;
+            }
+        }
+    }
+
+    .calendario-lista {
+        display: flex;
+        flex-direction: column;
+        overflow-x: auto;
+
+        .dia {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            border-bottom: 1px solid #62adeb;
+
+            .fecha {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                min-width: 160px;
+                background-color: #e6f4ff;
+                padding: 15px;
+                box-sizing: border-box;
+                flex-shrink: 0;
+                border-right: 1px solid #62adeb;
+
+                .dia-nombre {
+                    font-weight: 600;
+                    font-size: 1rem;
+                    color: #0a79d1;
+                    margin-bottom: 4px;
+                }
+
+                .dia-numero {
+                    font-size: 0.85rem;
+                    color: #555;
+                    font-weight: 100;
+                }
+            }
+
+            .tickets {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1rem;
+                flex: 1;
+                padding: 15px;
+                box-sizing: border-box;
+
+                .ticket-card {
+                    background: #fefefe;
+                    padding: 0.75rem;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                    min-width: 200px;
+                    max-width: 250px;
+                    transition: box-shadow 0.2s ease;
+                    cursor: pointer;
+
+                    &:hover {
+                        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+                    }
+
+                    h4 {
+                        margin: 0 0 0.3rem;
+                        font-size: 1rem;
+                        color: #0a79d1;
+                    }
+
+                    p {
+                        margin: 0.2rem 0;
+                        font-size: 0.85rem;
+                        color: #333;
+                    }
+
+                    &.error {
+                        border-left: 4px solid #d10a0a;
+                    }
+
+                    &.warning {
+                        border-left: 4px solid #eeba0f;
+                    }
+
+                    &.success {
+                        border-left: 4px solid #16bb31;
+                    }
+                }
+            }
+
+            &.select {
+                .fecha {
+                    background-color: #62adeb;
+
+                    .dia-nombre {
+                        color: white;
+                    }
+
+                    .dia-numero {
+                        color: #eeeeee;
+                    }
+                }
+
+                .tickets {
+                    background-color: #d8edfd;
+                }
+            }
+
+            &.today {
+                .fecha {
+                    background-color: #0a79d1;
+
+                    .dia-nombre {
+                        color: white;
+                    }
+
+                    .dia-numero {
+                        color: #eeeeee;
+                    }
+                }
+
+                .tickets {
+                    background-color: #d8edfd;
+                }
+            }
+        }
+    }
+}

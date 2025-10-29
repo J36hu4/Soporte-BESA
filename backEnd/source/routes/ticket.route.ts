@@ -7,6 +7,7 @@ export class TicketRoute {
         const controller = new TicketController();
         router.get('/search', controller.get);
         router.get('/count/search', controller.count);
+        router.get('/asignaciones/search', controller.getAsignaciones);
         router.get('/:id', controller.getById);
         return router;
       }

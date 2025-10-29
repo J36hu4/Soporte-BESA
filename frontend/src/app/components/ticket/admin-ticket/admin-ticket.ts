@@ -13,7 +13,7 @@ import { TicketService } from '../../../share/services/api/ticket.service';
   styleUrl: './admin-ticket.css'
 })
 export class AdminTicket {
-    constructor(
+  constructor(
     private ticketSvc: TicketService,
     private userService: UserService,
     private noti: NotificationService,
@@ -27,6 +27,10 @@ export class AdminTicket {
   datos = signal<Ticket[]>([]);
   total = signal<number>(0);
   user = signal<UserModel | null>(null);
+  selectDate = signal<Date>(new Date());
+  fechaInicio = signal<Date>(new Date());
+  fechasVisibles: Date[] = [];
+  readonly hoy = new Date();
 
   // ─────────────────────────────────────────────────────────────
   //  Paginación
@@ -68,7 +72,7 @@ export class AdminTicket {
   // ─────────────────────────────────────────────────────────────
   ngOnInit(): void {
     this.user.set(this.userService.getUser());
-
+    if (this.tipo === "calendar") this.generarFechas()
     this.lista();
   }
 
@@ -89,6 +93,10 @@ export class AdminTicket {
     if (estado) queryParts.push(`estado=${estado}`);
     if (prioridad) queryParts.push(`prioridad=${prioridad}`);
     if (ordenCampo) queryParts.push(`orderBy=${ordenCampo}&orderDir=${ordenDireccion}`);
+    if (this.tipo === "calendar") {
+      queryParts.push(`fechaInicio=${this.fechasVisibles[0].toDateString()}`);
+      queryParts.push(`fechaFin=${this.fechasVisibles[6].toDateString()}`);
+    }
 
     const query = queryParts.join('&');
 
@@ -100,9 +108,87 @@ export class AdminTicket {
     });
   }
 
-  tecnicoAsignado(lista: Asignacion[] | undefined): Tecnico | null{
+  tecnicoAsignado(lista: Asignacion[] | undefined): Tecnico | null {
     const tecnico = lista?.find((t: any) => t.activo)?.tecnico;
     return tecnico ?? null;
+  }
+
+  // ─────────────────────────────────────────────────────────────
+  //  Calendario
+  // ─────────────────────────────────────────────────────────────
+  generarFechas() {
+    const inicio = new Date(this.fechaInicio());
+    const diaSemana = inicio.getDay();
+    const offset = diaSemana === 0 ? -6 : 1 - diaSemana;
+
+    const lunes = new Date(inicio);
+    lunes.setDate(inicio.getDate() + offset);
+
+    this.fechasVisibles = Array.from({ length: 7 }, (_, i) => {
+      const fecha = new Date(lunes);
+      fecha.setDate(lunes.getDate() + i);
+      return fecha;
+    });
+
+    this.lista();
+  }
+
+  retrocederDias() {
+    const fechaActual = this.fechaInicio();
+    const nuevaFecha = new Date(fechaActual); // 👈 clonar
+    nuevaFecha.setDate(nuevaFecha.getDate() - 7);
+    this.fechaInicio.set(nuevaFecha);
+    this.selectDate.set(new Date);
+    this.generarFechas();
+  }
+
+  avanzarDias() {
+    const fechaActual = this.fechaInicio();
+    const nuevaFecha = new Date(fechaActual); // 👈 clonar
+    nuevaFecha.setDate(nuevaFecha.getDate() + 7);
+    this.fechaInicio.set(nuevaFecha);
+    this.selectDate.set(new Date);
+    this.generarFechas();
+  }
+
+
+  seleccionarFecha(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const nuevaFecha = new Date(input.value); // 👈 clonar
+    nuevaFecha.setDate(nuevaFecha.getDate() + 1);
+    this.fechaInicio.set(nuevaFecha);
+    this.selectDate.set(nuevaFecha);
+    this.generarFechas();
+  }
+
+  seleccionarHoy() {
+    this.fechaInicio.set(new Date)
+    this.generarFechas();
+  }
+
+  ticketsPorFecha(fecha: Date): Ticket[] {
+    return this.datos().filter(t =>
+      new Date(t.fechaCreacion).toDateString() === fecha.toDateString()
+    );
+  }
+
+  tiempoRestante(fecha: Date): string {
+    const fechaLimite = new Date(fecha);
+    const ahora = new Date();
+    const diferenciaMs = fechaLimite.getTime() - ahora.getTime();
+
+    if (diferenciaMs <= 0) return '0h 0m restantes';
+
+    const horas = Math.floor(diferenciaMs / (1000 * 60 * 60));
+    const minutos = Math.floor((diferenciaMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    return `${horas}h ${minutos}m restantes`;
+  }
+
+  botonDisable(): boolean {
+    return this.fechasVisibles.some(
+      fecha => fecha.toDateString() === this.hoy.toDateString()
+    );
   }
 
   // ─────────────────────────────────────────────────────────────
@@ -149,6 +235,7 @@ export class AdminTicket {
   cambiarTipo(t: string): void {
     this.tipo = t;
     sessionStorage.setItem("Ticket-datos", t);
+    if (this.tipo === "calendar") this.generarFechas()
   }
 
   // ─────────────────────────────────────────────────────────────

@@ -1,12 +1,11 @@
 import { Router } from 'express';
-import { TecnicoController } from '../controllers/tecnicoController.controller';
-export class TecnicoRoutes {
+import { CategoriaController } from '../controllers/categoriaController.controller';
+export class CategoriaRoutes {
   static get routes(): Router {
     const router = Router();
-    const controller = new TecnicoController();
+    const controller = new CategoriaController();
     //GET localhost:3000/usuario/
     router.get('/search', controller.get);
-    router.get('/asignaciones/count/:id', controller.countAsignaciones);
     router.get('/:id', controller.getById);
     return router;
   }

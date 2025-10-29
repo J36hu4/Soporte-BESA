@@ -1,22 +1,23 @@
 <main class="container-xxl">
-    <header class="Tecnicos-header">
+    <header class="Categorias-header">
         <!-- <button class="btn-atras"><mat-icon>keyboard_backspace</mat-icon>Atrás</button> -->
-        <p class="title-page">Lista de Tecnicos</p>
+        <p class="title-page">Lista Categorías</p>
     </header>
 
     <section class="filtros">
         <input type="text" [(ngModel)]="filtros.texto" placeholder="Buscar por código o nombre" />
 
-        <select [(ngModel)]="filtros.estado">
+        <!-- <select [(ngModel)]="filtros.estado">
             <option value="">Todos los estados</option>
-            <option value="disponible">Disponible</option>
-            <option value="almuerzo">Almuerzo</option>
-            <option value="descanso">Descanso</option>
-            <option value="ausente">Ausente</option>
-        </select>
+            <option value="pendiente">Pendiente</option>
+            <option value="asignado">Asignado</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="resuelto">Resuelto</option>
+            <option value="cerrado">Cerrado</option>
+        </select> -->
 
-        <select [(ngModel)]="filtros.carga">
-            <option value="">Todas las cargas</option>
+        <select [(ngModel)]="filtros.prioridad">
+            <option value="">Todas las prioridades</option>
             <option value="baja">Baja</option>
             <option value="media">Media</option>
             <option value="alta">Alta</option>
@@ -40,22 +41,20 @@
 
     <div class="lista-datos">
         <div class="header-datos">
-            <div class="header-datos-info" style="justify-content: space-between;">
+            <div class="header-datos-info">
                 <!-- <h2 class="title-primary">Tickets Recientes</h2> -->
-                <div [class]="'tipo-group-datos'">
-
+                <div [class]="(verTipos ? '' : 'hidden ') + 'tipo-group-datos'">
                 </div>
-                <button class="btn-primary gradient"><mat-icon>add_circle</mat-icon>Nuevo Tecnico</button>
             </div>
+            <button class="btn-primary gradient"><mat-icon>add_circle</mat-icon>Crear Categoría</button>
         </div>
 
         <table class="tabla-datos">
             <thead class="bg-gradient-primary">
                 <tr>
                     <th style="width: 80px;">Codigo</th>
-                    <th>Tecnico</th>
-                    <th style="width: 120px;">Estado</th>
-                    <th style="width: 120px;">Carga</th>
+                    <th>Nombre</th>
+                    <th style="width: 120px;">Prioridad</th>
                     <th style="width: 120px;">Acciones</th>
                 </tr>
             </thead>
@@ -64,16 +63,12 @@
                 @for (fila of datos(); track $index) {
                 <tr>
                     <td class="codigo">{{ (fila.id.toString().padStart(3, '0')) }}</td>
-                    <td class="content">
-                        <p>{{ fila.usuario.nombre }}</p>
-                        <span>{{ fila.usuario.correo }}</span>
-                    </td>
-                    <td class="estado">{{ fila.motivoDisponible | transformText}}
-                    </td>
-                    <td class="carga">
+                    <td class="content">{{ fila.nombre }}</td>
+                    <td class="prioridad">
                         <p
-                            [class]="'bg-gradient-' + (fila.carga <= 3 ? 'success' : fila.carga <= 6 ? 'warning' : 'error')">
-                            {{ fila.carga <= 3 ? 'Baja' : fila.carga <=6 ? 'Media' : 'Alta' }}</p>
+                            [class]="'bg-gradient-' + (fila?.prioridad === 'baja' ? 'success' : fila?.prioridad === 'media' ? 'warning' : 'error')">
+                            {{ fila.prioridad | transformText }}
+                        </p>
                     </td>
                     <td class="acciones">
                         <div>
@@ -81,12 +76,11 @@
                                 aria-label="" (click)="irDetalles(fila.id)">
                                 <mat-icon>info</mat-icon>
                             </button>
-                            <button class="btn-warning filled" matTooltip="Detalles" matTooltipPosition="right"
+                            <button class="btn-warning filled" matTooltip="Editar" matTooltipPosition="right"
                                 aria-label="" (click)="irDetalles(fila.id)">
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </div>
-
                     </td>
                 </tr>
                 }
@@ -100,6 +94,7 @@
                 }
             </tbody>
         </table>
+
 
         <footer style="display: flex; align-items: center; justify-content: center; padding: 20px 0 0; gap: 20px;">
             <app-paginador [paginaActual]="paginaActual" [totalItems]="totalItems" [itemsPorPagina]="itemsPorPagina"

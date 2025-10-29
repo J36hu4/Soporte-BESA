@@ -19,6 +19,8 @@ export class TicketController {
             const prioridad = request.query.prioridad as string || '';
             const orderBy = request.query.orderBy as string || 'fechaCreacion';
             const orderDir = (request.query.orderDir as string === 'asc') ? 'asc' : 'desc';
+            const fechaInicio = request.query.fechaInicio as string;
+            const fechaFin = request.query.fechaFin as string;
 
 
             const estadoTipo = (() => {
@@ -50,7 +52,15 @@ export class TicketController {
                         { id: searchId },
                         { titulo: { contains: search } }
                     ]
-                } : {})
+                } : {}),
+                ...(fechaInicio && fechaFin
+                    ? {
+                        fechaCreacion: {
+                            gte: new Date(fechaInicio),
+                            lte: new Date(fechaFin)
+                        }
+                    }
+                    : {})
             };
 
 
@@ -63,7 +73,15 @@ export class TicketController {
                         { id: searchId },
                         { titulo: { contains: search } }
                     ]
-                } : {})
+                } : {}),
+                ...(fechaInicio && fechaFin
+                    ? {
+                        fechaCreacion: {
+                            gte: new Date(fechaInicio),
+                            lte: new Date(fechaFin)
+                        }
+                    }
+                    : {})
             };
 
             const [lista, total] = await Promise.all([
@@ -76,6 +94,7 @@ export class TicketController {
                         id: true,
                         titulo: true,
                         fechaCreacion: true,
+                        slaSolucion: true,
                         estado: true,
                         usuario: { select: { nombre: true, correo: true } },
                         asignaciones: {
@@ -104,6 +123,56 @@ export class TicketController {
 
                 this.prisma.ticket.count({
                     where: whereClauseCount
+                })
+            ]);
+
+            response.status(200).json({ lista: lista, count: total });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    getAsignaciones = async (request: Request, response: Response, next: NextFunction) => {
+
+        try {
+            const idUser = parseInt(request.query.idUser as string) || 0;
+            const fechaInicio = request.query.fechaInicio as string;
+            const fechaFin = request.query.fechaFin as string;
+
+
+            const whereClause = {
+                ...(idUser !== 0 ? { asignaciones: { some: { AND: { activo: true, idTecnico: idUser } } } } : {}),
+                ...(fechaInicio && fechaFin
+                    ? {
+                        fechaCreacion: {
+                            gte: new Date(fechaInicio),
+                            lte: new Date(fechaFin)
+                        }
+                    }
+                    : {})
+            };
+
+            const [lista, total] = await Promise.all([
+                this.prisma.ticket.findMany({
+                    where: whereClause,
+                    orderBy: { slaSolucion: 'asc'},
+                    select: {
+                        id: true,
+                        titulo: true,
+                        fechaCreacion: true,
+                        slaSolucion: true,
+                        estado: true,
+                        etiqueta: {
+                            select: {
+                                nombre: true,
+                                categoria: { select: { nombre: true, prioridad: true } }
+                            }
+                        }
+                    }
+                }),
+
+                this.prisma.ticket.count({
+                    where: whereClause
                 })
             ]);
 

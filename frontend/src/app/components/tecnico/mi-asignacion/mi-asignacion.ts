@@ -1,17 +1,17 @@
-import { Location } from '@angular/common';
 import { Component, signal } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TicketService } from '../../../share/services/api/ticket.service';
-import { Asignacion, Ticket } from '../../../share/models/ticketModel';
 import { UserService } from '../../../share/services/api/user.service';
+import { Asignacion, Ticket } from '../../../share/models/ticketModel';
+import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-detalle',
+  selector: 'app-mi-asignacion',
   standalone: false,
-  templateUrl: './detalle.html',
-  styleUrl: './detalle.css'
+  templateUrl: './mi-asignacion.html',
+  styleUrl: './mi-asignacion.css'
 })
-export class TicketDetalle {
+export class MiAsignacion {
   constructor(
     protected router: Router,
     private route: ActivatedRoute,
@@ -25,7 +25,6 @@ export class TicketDetalle {
   // ─────────────────────────────────────────────────────────────
   cargando = signal<boolean>(true);
   dato = signal<Ticket | null>(null);
-  isAdmin: boolean | undefined
 
   ngOnInit(): void {
     this.route.fragment.subscribe(fragment => {
@@ -34,9 +33,6 @@ export class TicketDetalle {
         this.getItem(id);
       }
     });
-    const url = this.router.url;
-    const userRole = this.userService.getUser()?.role;
-    this.isAdmin = userRole === 'ADMIN' && url.startsWith('/tickets');
   }
 
   getItem(id: number): void {

@@ -1,0 +1,124 @@
+<main class="container-xxl">
+    <header class="CategoriaDetail-header">
+        <button class="btn-atras" (click)="volver()">
+            <mat-icon>keyboard_backspace</mat-icon>Atrás
+        </button>
+        <p class="title-page">Tecnicos - Detalle</p>
+    </header>
+
+    @if (!dato()) {
+    <p>No hay datos disponibles</p>
+    } @else {
+    <div class="categoria-detalle">
+        <div class="title">
+            <mat-icon class="bg-gradient-primary">category</mat-icon>
+            <span style="font-size: .8rem; margin-top: 5px;">{{ 'ID: ' + dato()?.id }}</span>
+            <h2>{{ dato()?.nombre }}</h2>
+
+            <div class="content-group">
+                <span>Descripción</span>
+                <p>{{ (dato()?.descripcion ?? '') | transformText }}</p>
+            </div>
+        </div>
+
+        <section class="Informacion">
+            <header class="bg-gradient-primary">
+                <mat-icon>info</mat-icon>
+                <h3>Información</h3>
+            </header>
+            <div class="info-group">
+                <div class="metric">
+                    <label>Prioridad</label>
+                    <span [ngClass]="{
+                        'bg-gradient-success': dato()?.prioridad === 'baja',
+                        'bg-gradient-warning': dato()?.prioridad === 'media',
+                        'bg-gradient-error': dato()?.prioridad === 'alta'
+                    }">{{ (dato()?.prioridad ?? '') | transformText }}</span>
+                </div>
+                <div class="metric">
+                    <label>Tiempo Máximo de Respuesta</label>
+                    <span class="bg-gradient-secondary">{{ (dato()?.tiempoMaximoRespuesta) }} horas</span>
+                </div>
+                <div class="metric">
+                    <label>Tiempo Máximo de Solucion</label>
+                    <span class="bg-gradient-secondary">{{ (dato()?.tiempoMaximoRespuesta) }} horas</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="Etiquetas">
+            <header class="bg-gradient-primary">
+                <mat-icon>label</mat-icon>
+                <h3>Etiquetas</h3>
+            </header>
+            <div class="info-group">
+                @for (etiqueta of dato()?.etiquetas; track $index) {
+                <div class="item">
+                    <p>{{ etiqueta.nombre }}</p>
+                </div>
+                }
+            </div>
+        </section>
+
+        <section class="especialidad">
+            <header class="bg-gradient-primary">
+                <mat-icon>work</mat-icon>
+                <h3>Especialidades</h3>
+            </header>
+            <div class="info-group">
+                @for (especialidad of dato()?.especialidades; track $index) {
+                <div class="item">
+                    <p>{{ especialidad.nombre }}</p>
+                    <span>{{ especialidad.descripcion }}</span>
+                </div>
+                }
+            </div>
+        </section>
+
+        <section class="reglas">
+            <header class="bg-gradient-primary">
+                <mat-icon>gavel</mat-icon>
+                <h3>Reglas de Autrotriage</h3>
+            </header>
+            <div class="info-group">
+                @for (regla of dato()?.reglas; track $index) {
+                <div class="item">
+                    <div class="item-header">
+                        <h4>{{ regla.nombre }}</h4>
+                        <span [class]="'estado bg-gradient-' + (regla.activa ? 'success' : 'error')">
+                            {{ regla.activa ? 'Activa' : 'Desactivada' }}
+                        </span>
+                    </div>
+
+                    <div class="item-info">
+                        <p><strong>Prioridad:</strong> {{ regla.prioridad === 3 ? 'Alta' : regla.prioridad === 2 ?
+                            'Media' : 'Baja' }}</p>
+                        <p><strong>Carga:</strong> {{ regla.carga <= 3 ? 'Baja' : regla.carga <=6 ? 'Media' : 'Alta'
+                                }}</p>
+                    </div>
+
+                    <div class="subgrupo">
+                        <label>Etiquetas asociadas:</label>
+                        <div class="pill-group">
+                            @for (etiqueta of regla.etiquetas; track $index) {
+                            <span class="pill">{{ etiqueta.nombre }}</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="subgrupo">
+                        <label>Especialidades requeridas:</label>
+                        <div class="pill-group">
+                            @for (esp of regla.especialidades; track $index) {
+                            <span class="pill">{{ esp.nombre }}</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+    </div>
+
+    }
+</main>

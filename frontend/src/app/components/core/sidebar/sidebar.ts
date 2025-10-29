@@ -22,8 +22,14 @@ export class Sidebar {
           this.rutaSelect = 1;
         } else if (url.startsWith('/mytickets')) {
           this.rutaSelect = 2;
+        } else if (url.startsWith('/asignaciones')) {
+          this.rutaSelect = 5;
         } else if (url.startsWith('/tickets')) {
           this.rutaSelect = 9;
+        } else if (url.startsWith('/tecnicos')) {
+          this.rutaSelect = 7;
+        } else if (url.startsWith('/categorias')) {
+          this.rutaSelect = 8;
         } else {
           this.rutaSelect = 0;
         }

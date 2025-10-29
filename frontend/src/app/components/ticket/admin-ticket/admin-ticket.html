@@ -109,7 +109,7 @@
                 }
                 @else {
                 <tr>
-                    <td colspan="5" style="text-align: center; padding: 20px;">
+                    <td colspan="7" style="text-align: center; padding: 20px;">
                         No se encontraron tickets.
                     </td>
                 </tr>
@@ -149,17 +149,57 @@
             }
         </div>
         } @else {
-        <div class="grid-datos">
-            <p>Proximamente</p>
-        </div>
+        <section class="calendario">
+            <header class="calendario-header bg-gradient-primary">
+                <button (click)="seleccionarHoy()" class="hoy">Hoy</button>
+                <button class="page" (click)="retrocederDias()"><mat-icon>chevron_left</mat-icon></button>
+                <h3><span>Desde el </span>{{ fechasVisibles[0] | date: 'dd/MMM/yyyy'}}<span> hasta el </span>{{
+                    fechasVisibles[6] | date: 'dd/MMM/yyyy'}}</h3>
+                <button class="page" [disabled]="botonDisable()"
+                    (click)="avanzarDias()"><mat-icon>chevron_right</mat-icon></button>
+                <input type="date" [value]="fechaInicio() | date:'yyyy-MM-dd'" (change)="seleccionarFecha($event)"
+                    [max]="hoy | date:'yyyy-MM-dd'" />
+            </header>
+
+            <div class="calendario-lista">
+                @for (fecha of fechasVisibles; track $index) {
+                <div
+                    [class]="'dia '  + ((fecha.toDateString() === hoy.toDateString()) ? 'today' : (fecha.toDateString() === selectDate().toDateString()) ? 'select' : '')">
+                    <div class="fecha">
+                        <span class="dia-nombre">{{ ((fecha | date:'EEEE') ?? '') | transformText }}<span
+                                [hidden]="!(fecha.toDateString() === hoy.toDateString())" class="dia-numero">
+                                (Hoy)</span></span>
+                        <span class="dia-numero">{{ fecha | date:'dd/MMM/yyyy' }}</span>
+                    </div>
+
+                    <div class="tickets">
+                        @for (ticket of ticketsPorFecha(fecha); track ticket.id) {
+                        <div (click)="irDetalles(ticket.id)"
+                            [class]="'ticket-card ' + (ticket.etiqueta.categoria.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                            <h4
+                                [class]="'title-' + (ticket.etiqueta.categoria.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                                {{ ticket.titulo }}</h4>
+                            <p><strong>Estado:</strong> {{ ticket.estado | transformText}}</p>
+                            @if (ticket.slaSolucion) {
+                            <p><strong>Tiempo Restante: </strong> {{ tiempoRestante(ticket.slaSolucion) }}</p>
+                            }
+                        </div>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
         }
 
-        <footer style="display: flex; align-items: center; justify-content: center; padding: 20px 0 0; gap: 20px;">
+        @if (tipo !== 'calendar') {
+        <footer [hidden]="tipo === 'calendar'"
+            style="display: flex; align-items: center; justify-content: center; padding: 20px 0 0; gap: 20px;">
             <app-paginador [paginaActual]="paginaActual" [totalItems]="totalItems" [itemsPorPagina]="itemsPorPagina"
                 (paginaCambiada)="cambiarPagina($event)" (itemsPorPaginaCambiado)="cambiarItemsPorPagina($event)">
             </app-paginador>
-
         </footer>
+        }
 
     </div>
 

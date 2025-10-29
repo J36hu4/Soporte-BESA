@@ -1,0 +1,139 @@
+<main class="container-xxl">
+    <header class="TecnicoDetail-header">
+        <button class="btn-atras" (click)="volver()">
+            <mat-icon>keyboard_backspace</mat-icon>Atrás
+        </button>
+        <p class="title-page">Tecnicos - Detalle</p>
+    </header>
+
+    @if (!dato()) {
+    <p>No hay datos disponibles</p>
+    } @else {
+    <div class="tecnico-detalle">
+
+        <!-- 🧾 Información general -->
+        <div class="title">
+            <img mat-card-image [src]="'http://localhost:3000/images/'+ dato()?.usuario?.imagen"
+                [alt]="dato()?.usuario?.nombre" />
+            <div class="content-group">
+                <span style="font-size: .8rem;">{{ 'ID: ' + dato()?.id }}</span>
+                <h2>{{ dato()?.usuario?.nombre }}</h2>
+                <span>{{ dato()?.usuario?.correo }}</span>
+            </div>
+            <span class="bg-gradient-primary chip">{{ (dato()?.motivoDisponible ?? '') | transformText }}</span>
+        </div>
+
+
+        <section class="panel-carga">
+            <header class="bg-gradient-primary">
+                <mat-icon>fitness_center</mat-icon>
+                <h3>Carga de Trabajo</h3>
+            </header>
+
+            <div class="panel-body">
+                <div class="metric carga">
+                    <label>Nivel de Carga actual</label>
+                    <span style="color: white;" [ngClass]="{
+                        'bg-gradient-success': (dato()?.carga ?? 0) <= 3,
+                        'bg-gradient-warning': (dato()?.carga ?? 0) > 3 && (dato()?.carga ?? 0) <= 6,
+                        'bg-gradient-error': (dato()?.carga ?? 0) > 6
+                    }">
+                        {{ (dato()?.carga ?? 0) <= 3 ? 'Baja' : (dato()?.carga ?? 0) <=6 ? 'Media' : 'Alta' }} </span>
+                </div>
+
+                <div class="metric total">
+                    <label>Total de Asignaciones</label>
+                    <span>{{ countAsignaciones()?.total }}</span>
+                </div>
+
+                <h4 class="subtitulo">Tickets por Prioridad</h4>
+                <div class="metric-group">
+                    <div class="metric prioridad baja">
+                        <label>Baja</label>
+                        <span>{{ countAsignaciones()?.bajos }}</span>
+                    </div>
+                    <div class="metric prioridad media">
+                        <label>Media</label>
+                        <span>{{ countAsignaciones()?.medios }}</span>
+                    </div>
+                    <div class="metric prioridad alta">
+                        <label>Alta</label>
+                        <span>{{ countAsignaciones()?.altos }}</span>
+                    </div>
+                </div>
+
+                <h4 class="subtitulo">Tickets por Estado</h4>
+                <div class="metric-group">
+                    <div class="metric estado">
+                        <label>Asignados</label>
+                        <span>{{ countAsignaciones()?.asignados }}</span>
+                    </div>
+                    <div class="metric estado">
+                        <label>En Proceso</label>
+                        <span>{{ countAsignaciones()?.proceso }}</span>
+                    </div>
+                    <div class="metric estado">
+                        <label>Resueltos</label>
+                        <span>{{ countAsignaciones()?.resueltos }}</span>
+                    </div>
+                    <div class="metric estado">
+                        <label>Cerrados</label>
+                        <span>{{ countAsignaciones()?.cerrados }}</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- 👨‍🔧 Técnico asignado -->
+        <section class="especialidad">
+            <header class="bg-gradient-primary">
+                <mat-icon>work</mat-icon>
+                <h3>Especialidades</h3>
+            </header>
+            <div class="info-group">
+                @for (especialidad of dato()?.especialidades; track $index) {
+                <div class="item">
+                    <p class="nombre">{{ especialidad.nombre }}</p>
+                    <span class="descripcion">{{ especialidad.descripcion }}</span>
+                </div>
+                }
+            </div>
+        </section>
+
+        <!-- 📜 Historial -->
+        <section class="historial">
+            <header class="bg-gradient-primary">
+                <mat-icon>history</mat-icon>
+                <h3>Historial</h3>
+            </header>
+            <div class="info-group">
+                @for (asignacion of dato()?.Asignacion; track $index) {
+                <div class="card-asignacion">
+                    <div class="card-header">
+                        <h3>{{ asignacion.ticket.titulo }}</h3>
+                        <span class="estado">{{ asignacion.ticket.estado | uppercase | transformText }}</span>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Problema:</strong> {{ asignacion.ticket.etiqueta.nombre }}</p>
+                        <p><strong>Categoría:</strong> {{ asignacion.ticket.etiqueta.categoria.nombre }}</p>
+                        <p><strong>Prioridad:</strong> {{ asignacion.ticket.etiqueta.categoria.prioridad | transformText
+                            }}
+                        </p>
+                        <p><strong>Motivo:</strong> {{ asignacion.motivo }}</p>
+                        <p><strong>Método:</strong> {{ asignacion.metodo | titlecase }}</p>
+                        <p><strong>Fecha:</strong> {{ asignacion.fecha | date:'short' }}</p>
+                    </div>
+                    <div class="card-footer" [class.activo]="asignacion.activo">
+                        <span>{{ asignacion.activo ? 'Asignación activa' : 'Asignación inactiva' }}</span>
+                        <span class="puntaje">Puntuación de Prioridad: {{ asignacion.puntajePrioridad }}</span>
+                    </div>
+                </div>
+                }
+            </div>
+        </section>
+
+    </div>
+    }
+</main>

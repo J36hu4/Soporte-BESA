@@ -1,0 +1,715 @@
+2025-10-29 17:14:57.003 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:03.399 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:03.961 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:04.738 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:04.931 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:05.096 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:05.553 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:12.319 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:13.442 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:15:14.056 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.
+2025-10-29 17:16:52.672 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.findMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:88:36
+
+  85 };
+  86 
+  87 const [lista, total] = await Promise.all([
+→ 88     this.prisma.ticket.findMany({
+           where: {
+             fechaCreacion: {
+               gte: new Date("Invalid Date"),
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+               lte: new Date("Invalid Date")
+             }
+           },
+           skip: 0,
+           take: 10,
+           orderBy: {
+             fechaCreacion: "desc"
+           },
+           select: {
+             id: true,
+             titulo: true,
+             fechaCreacion: true,
+             slaSolucion: true,
+             estado: true,
+             usuario: {
+               select: {
+                 nombre: true,
+                 correo: true
+               }
+             },
+             asignaciones: {
+               where: {
+                 activo: true
+               },
+               select: {
+                 activo: true,
+                 tecnico: {
+                   select: {
+                     usuario: {
+                       select: {
+                         nombre: true,
+                         correo: true
+                       }
+                     }
+                   }
+                 }
+               }
+             },
+             etiqueta: {
+               select: {
+                 nombre: true,
+                 categoria: {
+                   select: {
+                     nombre: true,
+                     prioridad: true
+                   }
+                 }
+               }
+             }
+           }
+         })
+
+Invalid value for argument `gte`: Provided Date object is invalid. Expected Date.

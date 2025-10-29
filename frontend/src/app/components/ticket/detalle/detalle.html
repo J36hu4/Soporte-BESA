@@ -114,8 +114,9 @@
               <p><i class="fi fi-rr-time-watch-calendar"></i>{{ fechaResuelto | date:'short' }}</p>
             </div>
           </div>
-          <p [class]="cumplioSla('style')" style="margin: 0; text-align: center; font-size: .9em;">{{ cumplioSla('text')
-            }}</p>
+          <p [class]="cumplioSla('style')" style="margin: auto; text-align: center; font-size: .9em; width: fit-content; color: white; padding: 5px 15px; border-radius: 20px;">{{
+                        cumplioSla('text')
+                        }}</p>
           } @else {
           <div class="group">
             <div class="content-group">

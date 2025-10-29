@@ -1,19 +1,20 @@
 import { Component, HostListener, signal } from '@angular/core';
-import { TecnicoService } from '../../../share/services/api/tecnico.service';
+import { CategoriaService } from '../../../share/services/api/categoria.service';
 import { UserService } from '../../../share/services/api/user.service';
 import { NotificationService } from '../../../share/services/app/notification.service';
 import { Router } from '@angular/router';
-import { Tecnico, UserModel } from '../../../share/models/UsuarioModel';
+import { Categoria } from '../../../share/models/CategoriaModel';
+import { UserModel } from '../../../share/models/UsuarioModel';
 
 @Component({
-  selector: 'app-tecnicos',
+  selector: 'app-categorias',
   standalone: false,
-  templateUrl: './tecnicos.html',
-  styleUrl: './tecnicos.css'
+  templateUrl: './categorias.html',
+  styleUrl: './categorias.css'
 })
-export class Tecnicos {
+export class Categorias {
   constructor(
-    private tecnicoSvc: TecnicoService,
+    private categoriaSvc: CategoriaService,
     private userService: UserService,
     private noti: NotificationService,
     protected router: Router
@@ -23,7 +24,7 @@ export class Tecnicos {
   //  Signals y propiedades reactivas
   // ─────────────────────────────────────────────────────────────
   cargando = signal<boolean>(true);
-  datos = signal<Tecnico[]>([]);
+  datos = signal<Categoria[]>([]);
   total = signal<number>(0);
   user = signal<UserModel | null>(null);
 
@@ -39,22 +40,21 @@ export class Tecnicos {
   // ─────────────────────────────────────────────────────────────
   select: number = -1;
   verTipos: boolean = false;
-  tipo: string = 'lista';
+  tipo: string = 'list';
 
   // ─────────────────────────────────────────────────────────────
   //  Filtros
   // ─────────────────────────────────────────────────────────────
   filtros = {
     texto: '',
-    estado: '',
-    carga: '',
+    prioridad: '',
     ordenCampo: '',
     ordenDireccion: 'desc'
   };
   camposOrdenables = [
     { value: 'id', label: 'Código' },
-    { value: 'carga', label: 'Carga' },
     { value: 'nombre', label: 'Nombre' },
+    { value: 'prioridad', label: 'Prioridad' }
   ];
   direccionesOrden = [
     { value: 'asc', label: 'Acendente (A-Z)' },
@@ -66,7 +66,6 @@ export class Tecnicos {
   // ─────────────────────────────────────────────────────────────
   ngOnInit(): void {
     this.user.set(this.userService.getUser());
-
     this.lista();
   }
 
@@ -77,20 +76,19 @@ export class Tecnicos {
     this.cargando.set(true);
     const skip = (this.paginaActual - 1) * this.itemsPorPagina;
     const take = this.itemsPorPagina;
-    const { texto, estado, carga, ordenCampo, ordenDireccion } = this.filtros;
+    const { texto, prioridad, ordenCampo, ordenDireccion } = this.filtros;
 
     const queryParts = [];
 
     if (take) queryParts.push(`take=${take}`);
     if (skip) queryParts.push(`skip=${skip}`);
     if (texto) queryParts.push(`search=${texto}`);
-    if (estado) queryParts.push(`estado=${estado}`);
-    if (carga) queryParts.push(`carga=${carga}`);
+    if (prioridad) queryParts.push(`prio=${prioridad}`);
     if (ordenCampo) queryParts.push(`orderBy=${ordenCampo}&orderDir=${ordenDireccion}`);
 
     const query = queryParts.join('&');
 
-    this.tecnicoSvc.get(query).subscribe((res: { lista: Tecnico[], count: number }) => {
+    this.categoriaSvc.get(query).subscribe((res: { lista: Categoria[], count: number }) => {
       this.datos.set(res.lista);
       this.total.set(res.count);
       this.totalItems = res.count;
@@ -118,8 +116,7 @@ export class Tecnicos {
   quitarFiltros(): void {
     this.filtros = {
       texto: '',
-      estado: '',
-      carga: '',
+      prioridad: '',
       ordenCampo: '',
       ordenDireccion: 'desc' // 'asc' o 'desc'
     };
@@ -131,8 +128,8 @@ export class Tecnicos {
   //  Acciones de botones
   // ─────────────────────────────────────────────────────────────
   irDetalles(id: number): void {
-    this.router.navigate(['tecnicos/detalle'], {
-      fragment: btoa(id.toString()) // opcionalmente encriptado como base64
+    this.router.navigate(['categorias/detalle'], {
+      fragment: btoa(id.toString()) 
     })
   }
 }
