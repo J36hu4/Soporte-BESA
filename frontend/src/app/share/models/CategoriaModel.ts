@@ -15,14 +15,14 @@ export interface Categoria {
 
 export interface Etiqueta {
   id: number;
-  categoria: Categoria;
+  categoria?: Categoria;
   nombre: string;
 }
 
 export interface ReglaAutotriage {
   id: number;
   nombre: string;
-  categoria: Categoria;
+  categoria?: Categoria;
   prioridad: number;
   carga: number;
   etiquetas?: Etiqueta[];

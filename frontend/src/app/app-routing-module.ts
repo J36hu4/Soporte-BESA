@@ -15,6 +15,8 @@ import { Categorias } from './components/categoria/categorias/categorias';
 import { CategoriaDetalle } from './components/categoria/detalle/detalle';
 import { Asignaciones } from './components/tecnico/asignaciones/asignaciones';
 import { MiAsignacion } from './components/tecnico/mi-asignacion/mi-asignacion';
+import { TecnicoFormulario } from './components/tecnico/formulario/formulario';
+import { CategoriaFormulario } from './components/categoria/formulario/formulario';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,8 +33,12 @@ const routes: Routes = [
       { path: 'tickets/detalle', component: TicketDetalle, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
       { path: 'tecnicos', component: Tecnicos, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
       { path: 'tecnicos/detalle', component: TecnicoDetalle, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
+      { path: 'tecnicos/crear', component: TecnicoFormulario, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
+      { path: 'tecnicos/editar', component: TecnicoFormulario, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
       { path: 'categorias', component: Categorias, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
       { path: 'categorias/detalle', component: CategoriaDetalle, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
+      { path: 'categorias/crear', component: CategoriaFormulario, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
+      { path: 'categorias/editar', component: CategoriaFormulario, canActivate: [RoleGuard], data: { roles: ['ADMIN'] } },
 
       // ─────────────────────────────────────────────────────────────
       //  Modulos de tecnico

@@ -1,0 +1,334 @@
+.CategoriaForm-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+form {
+    .form-body {
+
+        .form-perfil-group {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            padding: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid #007bff;
+            box-sizing: border-box;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .upload-btn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 2rem;
+                width: 100%;
+                height: 100%;
+                color: transparent;
+                transition: all 0.1s ease;
+
+                mat-icon {
+                    font-size: 3rem;
+                    padding: 0;
+                    margin: 0;
+                    width: fit-content;
+                    height: fit-content;
+                }
+
+                &:hover {
+                    background-color: #0886ec25;
+                    color: #007bff;
+                }
+            }
+
+        }
+
+        .imagenNombre {
+            font-size: .8rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+
+            button {
+                color: red;
+                background-color: transparent;
+                padding: 0;
+                border: none;
+                cursor: pointer;
+                box-sizing: border-box;
+                margin: 0;
+
+                mat-icon {
+                    margin: 0;
+                    font-size: 20px;
+                    padding: 0;
+                    height: fit-content;
+                    width: fit-content;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 0, 0, 0.199);
+                    border-radius: 5px;
+                }
+            }
+        }
+
+        .form-carga-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+            background: #0886ec25;
+            border: none;
+            border-bottom: 3px solid #007bff;
+            padding: .2rem .8rem .5rem;
+            border-radius: 6px;
+            gap: 5px;
+
+            label {
+                font-size: 1rem;
+                color: #666;
+
+                span {
+                    font-size: 0.8rem;
+                    color: #999;
+                }
+            }
+
+            input {
+                font-size: 1rem;
+                padding: .2rem 0 .2rem .5rem;
+                color: #333;
+
+                &::placeholder {
+                    color: #bbb;
+                }
+            }
+        }
+
+    }
+
+}
+
+.popMenus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-height: 100%;
+    width: 100%;
+    min-width: 100%;
+    background-color: #0000002c;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.hidden {
+        display: none;
+    }
+
+    button.close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: none;
+        background-color: transparent;
+        color: #ff0000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        cursor: pointer;
+
+        mat-icon {
+            font-size: 2.5rem;
+            padding: 0;
+            margin: 0;
+            height: fit-content;
+            width: fit-content;
+        }
+
+        &:hover {
+            color: #c70000
+        }
+    }
+
+    .popEtiquetas {
+        width: 400px;
+        min-height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+
+        h2 {
+            margin: 0;
+            padding: 5px;
+            margin-bottom: 0.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .popContent {
+            padding: .6rem 1rem 1rem;
+
+            .btn-primary {
+                margin-left: auto;
+                margin-top: 10px;
+            }
+
+            .input-group {
+                display: flex;
+                gap: 10px;
+
+                input {
+                    flex-grow: 1;
+                }
+
+                button {
+                    background-color: #0886ec25;
+                    border: 1px solid #007bff;
+                    border-radius: 8px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #53acf5;
+                    }
+                }
+
+            }
+
+            .sugerencias {
+                margin-top: 5px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+
+                button {
+                    background-color: transparent;
+                    border: 1px solid #007bff;
+                    border-radius: 6px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #0886ec25;
+                    }
+                }
+            }
+
+            .lista-etiquetas {
+                border: 3px solid #007bff;
+                padding: .8rem .8rem .5rem;
+                border-radius: 6px;
+                position: relative;
+                margin-top: 20px;
+
+                h2 {
+                    position: absolute;
+                    top: -12px;
+                    background-color: white;
+                    padding: 0 10px;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    color: #666;
+                }
+
+                .lista {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 10px;
+
+                    span {
+                        background: #0886ec25;
+                        padding: 4px 8px;
+                        border-bottom: 3px solid #007bff;
+                        border-radius: 6px;
+                        font-size: 0.875rem;
+                        display: flex;
+                        align-items: center;
+
+                        button {
+                            color: #ff0000;
+                            background-color: transparent;
+                            border: none;
+                            height: fit-content;
+                            width: fit-content;
+                            cursor: pointer;
+
+                            mat-icon {
+                                font-size: 1.3rem;
+                                height: fit-content;
+                                width: fit-content;
+                            }
+
+                            &:hover {
+                                color: #c70000;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .popReglas {
+        width: 600px;
+        min-height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+
+        h2 {
+            margin: 0;
+            padding: 5px;
+            margin-bottom: 0.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .popContent {
+            padding: .6rem 1rem 1rem;
+            box-shadow: none;
+            border: none;
+
+            .btn-primary {
+                margin-left: auto;
+                margin-top: 10px;
+            }
+
+            .form-body {
+                .row {
+                    margin: 0;
+                    margin-bottom: 0;
+                }
+
+                .row.lista-section {
+                    .lista-header {
+
+                        h2 {
+                            font-size: 1rem;
+                            color: #333; 
+                            margin-bottom: 20px;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

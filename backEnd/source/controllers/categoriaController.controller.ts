@@ -137,4 +137,21 @@ export class CategoriaController {
         }
     };
 
+    etiquetasLista = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+
+            const lista = await this.prisma.etiqueta.findMany({
+                select: {
+                    id: true,
+                    nombre: true,
+                }
+            })
+
+            return res.status(200).json(lista);
+        } catch (error: any) {
+            console.error('Error al obtener técnicos:', error.message);
+            next(AppError.internalServer('Error interno del servidor'));
+        }
+    }
+
 }

@@ -13,6 +13,7 @@ export const usuarios = [
     correo: "admin@admin.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.ADMIN,
+    imagen: 'notImage.png'
   },
 
   // Usuarios
@@ -55,6 +56,7 @@ export const usuarios = [
     correo: "jorge.castillo@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
+    imagen: 'notImage.png'
   },
   {
     nombre: "Andrea Mora",

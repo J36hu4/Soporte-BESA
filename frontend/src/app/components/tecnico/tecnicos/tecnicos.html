@@ -8,7 +8,7 @@
         <input type="text" [(ngModel)]="filtros.texto" placeholder="Buscar por código o nombre" />
 
         <select [(ngModel)]="filtros.estado">
-            <option value="">Todos los estados</option>
+            <option value="">Todas las Disponibilidades</option>
             <option value="disponible">Disponible</option>
             <option value="almuerzo">Almuerzo</option>
             <option value="descanso">Descanso</option>
@@ -45,7 +45,7 @@
                 <div [class]="'tipo-group-datos'">
 
                 </div>
-                <button class="btn-primary gradient"><mat-icon>add_circle</mat-icon>Nuevo Tecnico</button>
+                <button class="btn-primary gradient" (click)="router.navigate(['tecnicos/crear'])"><mat-icon>add_circle</mat-icon>Nuevo Tecnico</button>
             </div>
         </div>
 
@@ -54,8 +54,9 @@
                 <tr>
                     <th style="width: 80px;">Codigo</th>
                     <th>Tecnico</th>
-                    <th style="width: 120px;">Estado</th>
+                    <th style="width: 120px;">Disponibilidad</th>
                     <th style="width: 120px;">Carga</th>
+                    <th style="width: 80px;">Estado</th>
                     <th style="width: 120px;">Acciones</th>
                 </tr>
             </thead>
@@ -75,6 +76,7 @@
                             [class]="'bg-gradient-' + (fila.carga <= 3 ? 'success' : fila.carga <= 6 ? 'warning' : 'error')">
                             {{ fila.carga <= 3 ? 'Baja' : fila.carga <=6 ? 'Media' : 'Alta' }}</p>
                     </td>
+                    <td class="estado">{{ fila.usuario.estado ? 'Activo' : 'Inactivo'}}
                     <td class="acciones">
                         <div>
                             <button class="btn-primary filled" matTooltip="Detalles" matTooltipPosition="right"
@@ -82,7 +84,7 @@
                                 <mat-icon>info</mat-icon>
                             </button>
                             <button class="btn-warning filled" matTooltip="Detalles" matTooltipPosition="right"
-                                aria-label="" (click)="irDetalles(fila.id)">
+                                aria-label="" (click)="irEditar(fila.id)">
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </div>

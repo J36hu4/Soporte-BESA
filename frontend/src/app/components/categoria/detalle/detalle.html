@@ -10,15 +10,12 @@
     <p>No hay datos disponibles</p>
     } @else {
     <div class="categoria-detalle">
-        <div class="title">
-            <mat-icon class="bg-gradient-primary">category</mat-icon>
-            <span style="font-size: .8rem; margin-top: 5px;">{{ 'ID: ' + dato()?.id }}</span>
-            <h2>{{ dato()?.nombre }}</h2>
-
-            <div class="content-group">
-                <span>Descripción</span>
-                <p>{{ (dato()?.descripcion ?? '') | transformText }}</p>
+        <div class="bg-gradient-primary title">
+            <div class="title-content">
+                <mat-icon class="icon ">category</mat-icon>
+                <h2>{{ dato()?.nombre }}</h2>
             </div>
+            <p>{{ (dato()?.descripcion ?? '') | transformText }}</p>
         </div>
 
         <section class="Informacion">

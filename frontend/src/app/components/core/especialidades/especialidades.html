@@ -1,0 +1,20 @@
+@if (!hidden) {
+<div [hidden]="hidden" class="selector-bg">
+    <div class="selector-pop">
+        <h2>Especialidades</h2>
+        <input [(ngModel)]="filtro" (ngModelChange)="onFiltroChange()" placeholder="Buscar especialidad..." />
+
+        <div class="especialidades-lista">
+            @for (e of visibles; track e) {
+            <label [class.checked]="estaSeleccionada(e)">
+                <input type="checkbox" [checked]="estaSeleccionada(e)" (change)="toggle(e)" />
+                {{ e.nombre }}
+            </label>
+            }
+        </div>
+
+        <button class="btn-primary filled" (click)="confirmar()">Aceptar</button>
+
+    </div>
+</div>
+}

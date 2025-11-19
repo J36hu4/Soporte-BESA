@@ -17,24 +17,40 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  overflow: hidden;
 
   .content-group {
-    span {
-      font-size: .8rem;
-      color: rgb(92, 92, 92);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #0886ec25;
+    border-radius: 12px;
+    padding: 3px 12px 8px;
+
+    mat-icon,
+    i {
+      color: #0a79d1;
+      font-size: 1.3rem;
+      width: fit-content;
+      height: fit-content;
+      margin: 0;
+      padding: 0;
+      margin-bottom: -8px;
     }
 
-    p {
-      display: flex;
-      gap: 8px;
+    .content-text {
       margin: 0;
 
-      mat-icon,
-      i {
-        color: #0a79d1;
-        font-size: .98rem;
-        width: fit-content;
-        height: fit-content;
+      span {
+        margin: 0;
+        font-size: .8rem;
+        color: rgb(92, 92, 92);
+      }
+
+      p {
+        display: flex;
+        gap: 8px;
+        margin: 0;
       }
     }
   }
@@ -83,37 +99,40 @@
   .title {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    align-items: center;
+    margin: -1rem;
+    margin-bottom: 0;
+    padding: 15px 20px;
+    gap: 0;
 
-    mat-icon {
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      color: white;
-      border-radius: 50%;
-      padding: 1.15rem;
-      font-size: 2.5rem;
-      width: fit-content;
-      height: fit-content;
-      margin-bottom: 5px;
-    }
 
-    h2 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    .content-group {
-      border: none;
-    }
-
-    .group {
+    .title-content {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 12px;
 
-      p {
-        font-size: .8rem;
-        color: rgb(54, 54, 54);
+      .icon {
+        grid-row: 1 / span 2;
+        font-size: 2.2rem;
+        padding: 0.5rem;
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        height: fit-content;
+        width: fit-content;
+        background-color: white;
+        color: #0a79d1;
+      }
+
+      h2 {
+        flex-grow: 1;
+        color: white;
+        margin: 0;
+        font-size: 2.2rem;
+      }
+
+      .title-info {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
 
         span {
           letter-spacing: .8px;
@@ -121,8 +140,15 @@
           font-size: 1rem;
           padding: 5px 10px;
           border-radius: 20px;
+          text-align: center;
         }
       }
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      color: white;
     }
   }
 
@@ -135,6 +161,7 @@
 
       .group {
         display: flex;
+        gap: 15px;
 
         .content-group {
           flex: 1;
@@ -148,6 +175,7 @@
 
         .group {
           display: flex;
+          gap: 15px;
 
           .content-group {
             flex: 1;
@@ -167,11 +195,15 @@
 
       .group {
         display: flex;
-        gap: 40px;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        width: 100%;
 
         .group-2 {
           .content-group {
             margin-bottom: 5px;
+            min-width: 220px;
           }
         }
       }
@@ -228,6 +260,38 @@
     }
   }
 
+  .imagenes {
+    padding-bottom: 10px;
+
+    .imagen-card {
+      margin: 15px 15px 0;
+      border-left: 4px solid #0a79d1;
+      border-radius: 8px;
+      padding: 5px 0 5px 10px;
+      margin-bottom: 5px;
+      background-color: #0886ec25;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      span {
+        font-size: .8rem;
+        color: rgb(92, 92, 92);
+      }
+
+      .lista-imagenes {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+
+        img {
+          height: 100px;
+          width: 120px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
 
   .historial {
     .info-group {
@@ -252,12 +316,34 @@
       p {
         margin: 0;
         letter-spacing: .5px;
+
+        em {
+          &.anterior {
+            font-style: normal;
+            background-color: #f3641205;
+            color: #f36412;
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid #f36412;
+          }
+
+          &.nuevo {
+            font-style: normal;
+            background-color: #27ae5f05;
+            color: #27ae60;
+            padding: 2px 6px;
+            border: 1px solid #27ae60;
+            border-radius: 4px;
+          }
+        }
       }
 
       .content-group {
         border: none;
         margin: 0;
         margin-top: -5px;
+        padding: 0;
+        background-color: transparent;
 
         span {
           font-size: .6rem;

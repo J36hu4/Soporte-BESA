@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { AppError } from '../errors/custom.error';
 import { EstadoTicket, MotivoDisponible, Prioridad, Prisma, PrismaClient } from '../../generated/prisma';
+import { especialidades } from '../../prisma/seeds/especialidades';
 
 export class TecnicoController {
     prisma = new PrismaClient();
@@ -14,7 +15,7 @@ export class TecnicoController {
             const search = (req.query.search as string)?.trim() || '';
             const searchId = isNaN(parseInt(search)) ? 0 : parseInt(search);
             const estado = req.query.estado as string || 'all';
-            const carga = req.query.carga as string || 'all'; 
+            const carga = req.query.carga as string || 'all';
             const orderBy = req.query.orderBy as string || 'nombre';
             const orderDir: Prisma.SortOrder = req.query.orderDir === 'desc' ? 'desc' : 'asc';
 
@@ -79,6 +80,7 @@ export class TecnicoController {
                         carga: true,
                         usuario: {
                             select: {
+                                estado: true,
                                 nombre: true,
                                 correo: true
                             }
@@ -139,6 +141,7 @@ export class TecnicoController {
                     },
                     especialidades: {
                         select: {
+                            id: true,
                             nombre: true,
                             descripcion: true
                         }
@@ -147,7 +150,8 @@ export class TecnicoController {
                         select: {
                             nombre: true,
                             correo: true,
-                            imagen: true
+                            imagen: true,
+                            estado: true
                         }
                     }
                 }
@@ -156,6 +160,17 @@ export class TecnicoController {
             return res.status(200).json(objeto);
         } catch (error: any) {
             console.error('Error al obtener técnicos:', error.message);
+            next(AppError.internalServer('Error interno del servidor'));
+        }
+    };
+
+    getEspecialidadades = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const especialidades = await this.prisma.especialidad.findMany();
+
+            return res.status(200).json(especialidades);
+        } catch (error: any) {
+            console.error('Error al obtener especialidades:', error.message);
             next(AppError.internalServer('Error interno del servidor'));
         }
     };
@@ -199,4 +214,84 @@ export class TecnicoController {
             next(AppError.internalServer('Error interno del servidor'));
         }
     };
+
+    create = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const body = req.body;
+            const U = body.usuario
+            const contrasenna = U.contrasenna
+            const Especialidades = body.especialidades.map((id: any) => ({ id: id.id })) ?? [];
+
+            const newUsuario = await this.prisma.usuario.create({
+                data: {
+                    nombre: U.nombre,
+                    contrasenna: contrasenna,
+                    correo: U.correo,
+                    imagen: U.imagen,
+                    role: U.role,
+                }
+            });
+
+            const newTecnico = await this.prisma.tecnico.create({
+                data: {
+                    id: newUsuario.id,
+                    disponible: false,
+                    motivoDisponible: MotivoDisponible.ausente,
+                    especialidades: {
+                        connect: Especialidades
+                    }
+                }
+            })
+
+            res.status(201).json(newTecnico);
+        } catch (error) {
+            console.error("Error creando videojuego:", error);
+            next(error);
+        }
+    }
+
+    update = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = parseInt(req.params.id);
+            const body = req.body;
+            const U = body.usuario
+            const contrasenna = U.contrasenna
+            const Especialidades = body.especialidades.map((id: any) => ({ id: id.id })) ?? [];
+
+            const tecnicoEs = await this.prisma.tecnico.findFirst({
+                where: { id: id },
+                select: {
+                    especialidades: { select: { id: true } },
+                }
+            })
+
+            const oldEspecialidades = tecnicoEs?.especialidades.map((es: any) => ({ id: es.id })) ?? [];
+
+
+            const Usuario = await this.prisma.usuario.update({
+                where: { id: id },
+                data: {
+                    nombre: U.nombre,
+                    correo: U.correo,
+                    imagen: U.imagen,
+                    estado: U.estado
+                }
+            });
+
+            const Tecnico = await this.prisma.tecnico.update({
+                where: { id: id },
+                data: {
+                    especialidades: {
+                        disconnect: oldEspecialidades,
+                        connect: Especialidades
+                    }
+                }
+            })
+
+            res.status(201).json(Tecnico);
+        } catch (error) {
+            console.error("Error creando videojuego:", error);
+            next(error);
+        }
+    }
 }

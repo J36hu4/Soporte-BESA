@@ -135,4 +135,10 @@ export class Tecnicos {
       fragment: btoa(id.toString()) // opcionalmente encriptado como base64
     })
   }
+
+  irEditar(id: number): void {
+    this.router.navigate(['tecnicos/editar'], {
+      fragment: btoa(id.toString()) // opcionalmente encriptado como base64
+    })
+  }
 }

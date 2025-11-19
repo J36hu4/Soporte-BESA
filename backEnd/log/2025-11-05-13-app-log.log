@@ -1,0 +1,461 @@
+2025-11-05 13:20:32.730 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.tecnico.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\tecnicoController.controller.ts:280:55
+
+  277     }
+  278 });
+  279 
+→ 280 const Tecnico = await this.prisma.tecnico.update({
+        where: {
+          id: 10
+        },
+        data: {
+          especialidades: {
+            disconnect: [
+              {
+                id: 12
+              },
+              {
+                id: 13
+              },
+              {
+                id: 14
+              },
+              {
+                id: 15
+              },
+              {
+                id: 16
+              },
+              {
+                id: 17
+              }
+            ],
+            connect: [
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EspecialidadWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object).
+2025-11-05 13:21:20.361 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.tecnico.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\tecnicoController.controller.ts:280:55
+
+  277     }
+  278 });
+  279 
+→ 280 const Tecnico = await this.prisma.tecnico.update({
+        where: {
+          id: 10
+        },
+        data: {
+          especialidades: {
+            disconnect: [
+              {
+                id: 12
+              },
+              {
+                id: 13
+              },
+              {
+                id: 14
+              },
+              {
+                id: 15
+              },
+              {
+                id: 16
+              },
+              {
+                id: 17
+              }
+            ],
+            connect: [
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EspecialidadWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object).
+2025-11-05 13:23:34.278 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.tecnico.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\tecnicoController.controller.ts:280:55
+
+  277     }
+  278 });
+  279 
+→ 280 const Tecnico = await this.prisma.tecnico.update({
+        where: {
+          id: 10
+        },
+        data: {
+          especialidades: {
+            disconnect: [
+              {
+                id: 12
+              },
+              {
+                id: 13
+              },
+              {
+                id: 14
+              },
+              {
+                id: 15
+              },
+              {
+                id: 16
+              },
+              {
+                id: 17
+              }
+            ],
+            connect: [
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EspecialidadWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object).
+2025-11-05 13:25:06.967 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.tecnico.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\tecnicoController.controller.ts:280:55
+
+  277     }
+  278 });
+  279 
+→ 280 const Tecnico = await this.prisma.tecnico.update({
+        where: {
+          id: 10
+        },
+        data: {
+          especialidades: {
+            disconnect: [
+              {
+                id: 12
+              },
+              {
+                id: 13
+              },
+              {
+                id: 14
+              },
+              {
+                id: 15
+              },
+              {
+                id: 16
+              },
+              {
+                id: 17
+              }
+            ],
+            connect: [
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EspecialidadWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object).
+2025-11-05 13:26:49.914 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.tecnico.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\tecnicoController.controller.ts:286:55
+
+  283     }
+  284 });
+  285 
+→ 286 const Tecnico = await this.prisma.tecnico.update({
+        where: {
+          id: 10
+        },
+        data: {
+          especialidades: {
+            disconnect: [
+              {
+                id: 12
+              },
+              {
+                id: 13
+              },
+              {
+                id: 14
+              },
+              {
+                id: 15
+              },
+              {
+                id: 16
+              },
+              {
+                id: 17
+              }
+            ],
+            connect: [
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              },
+              {
+                id: undefined
+              }
+            ]
+            ~~~~~~~~~~~~~~~~~
+          }
+        }
+      })
+
+Argument `connect`: Invalid value provided. Expected EspecialidadWhereUniqueInput, provided (Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object, Object).
+2025-11-05 13:33:52.405 error: 	File too large

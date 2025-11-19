@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BaseAPI } from "./base-api";
-import { Tecnico } from "../../models/UsuarioModel";
+import { Especialidad, Tecnico } from "../../models/UsuarioModel";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment.development";
 import { Observable } from "rxjs";
@@ -38,6 +38,10 @@ export class TecnicoService extends BaseAPI<Tecnico> {
 
   getAsignaciones(query: string): Observable<{ lista: Ticket[]; count: number }> {
     return this.http.get<{ lista: Ticket[]; count: number }>(`${this.urlAPI}/ticket/asignaciones/search?${query}`)
+  }
+
+  getEspecialidades(): Observable<Especialidad[]> {
+    return this.http.get<Especialidad[]>(`${this.urlAPI}/${this.urlTecnico}/especialidades`);
   }
 
 }

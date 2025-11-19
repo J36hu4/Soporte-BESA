@@ -1,0 +1,162 @@
+.TecnicoForm-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+form {
+    .form-body {
+
+        .form-perfil-group {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            padding: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+            border: 2px solid #007bff;
+            box-sizing: border-box;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .upload-btn {
+                position: absolute;
+                top: 0;
+                left: 0;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 2rem;
+                width: 100%;
+                height: 100%;
+                color: transparent;
+                transition: all 0.1s ease;
+
+                mat-icon {
+                    font-size: 3rem;
+                    padding: 0;
+                    margin: 0;
+                    width: fit-content;
+                    height: fit-content;
+                }
+
+                &:hover {
+                    background-color: #0886ec25;
+                    color: #007bff;
+                }
+            }
+
+        }
+
+        .imagenNombre {
+                font-size: .8rem;
+                color: #666;
+                display: flex;
+                justify-content: space-between;
+
+                button {
+                    color: red;
+                    background-color: transparent;
+                    padding: 0;
+                    border: none;
+                    cursor: pointer;
+                    box-sizing: border-box;
+                    margin: 0;
+                    mat-icon {
+                        margin: 0;
+                        font-size: 20px;
+                        padding: 0;
+                        height: fit-content;
+                        width: fit-content;
+                    }
+                    &:hover {
+                        background-color: rgba(255, 0, 0, 0.199);
+                        border-radius: 5px;
+                    }
+                }
+        }
+
+        .form-carga-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+            background: #0886ec25;
+            border: none;
+            border-bottom: 3px solid #007bff;
+            padding: .2rem .8rem .5rem;
+            border-radius: 6px;
+            gap: 5px;
+
+            label {
+                font-size: 1rem;
+                color: #666;
+
+                span {
+                    font-size: 0.8rem;
+                    color: #999;
+                }
+            }
+
+            input {
+                font-size: 1rem;
+                padding: .2rem 0 .2rem .5rem;
+                color: #333;
+
+                &::placeholder {
+                    color: #bbb;
+                }
+            }
+        }
+
+        .especialidades-section {
+            background: #0886ec25;
+            border: none;
+            border-bottom: 3px solid #007bff;
+            padding: .2rem .8rem .5rem;
+            border-radius: 6px;
+
+            .especialidades-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: .5rem 0 0;
+
+                h2 {
+                    margin: 0;
+                    font-weight: 500;
+                    font-size: 1rem;
+                    color: #666;
+                }
+            }
+
+            .especialidades-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: .5rem 0 0;
+
+                span {
+                    background: #007bff;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 8px;
+                    font-size: 0.875rem;
+                    display: flex;
+                    align-items: center;
+
+                    &.no-especialidades {
+                        background: transparent;
+                        color: #666;
+                        padding: 0;
+                    }
+                }
+            }
+        }
+    }
+}

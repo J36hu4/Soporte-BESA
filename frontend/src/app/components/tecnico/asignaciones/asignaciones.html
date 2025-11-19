@@ -29,9 +29,9 @@
                 <div class="tickets">
                     @for (ticket of ticketsPorFecha(fecha); track ticket.id) {
                     <div (click)="irDetalles(ticket.id)"
-                        [class]="'ticket-card ' + (ticket.etiqueta.categoria.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                        [class]="'ticket-card ' + (ticket.etiqueta.categoria?.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')">
                         <h4
-                            [class]="'title-' + (ticket.etiqueta.categoria.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                            [class]="'title-' + (ticket.etiqueta.categoria?.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')">
                             {{ ticket.titulo }}</h4>
                         <p><strong>Estado:</strong> {{ ticket.estado | transformText}}</p>
                         @if (ticket.slaSolucion) {

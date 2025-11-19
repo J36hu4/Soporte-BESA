@@ -46,7 +46,7 @@
                 <div [class]="(verTipos ? '' : 'hidden ') + 'tipo-group-datos'">
                 </div>
             </div>
-            <button class="btn-primary gradient"><mat-icon>add_circle</mat-icon>Crear Categoría</button>
+            <button class="btn-primary gradient" (click)="irCrear()"><mat-icon>add_circle</mat-icon>Crear Categoría</button>
         </div>
 
         <table class="tabla-datos">
@@ -77,7 +77,7 @@
                                 <mat-icon>info</mat-icon>
                             </button>
                             <button class="btn-warning filled" matTooltip="Editar" matTooltipPosition="right"
-                                aria-label="" (click)="irDetalles(fila.id)">
+                                aria-label="" (click)="irEditar(fila.id)">
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </div>

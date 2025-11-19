@@ -1,0 +1,165 @@
+<main class="container-xxl">
+    <app-lista-especialidades [seleccionadas]="tecnicoForm.controls['especialidades'].value"
+        (aceptar)="onEspecialidadesConfirmadas($event)" [cargar]="!verEspecialidades">
+    </app-lista-especialidades>
+    <header class="TecnicoForm-header">
+        <button class="btn-atras" (click)="volver()">
+            <mat-icon>keyboard_backspace</mat-icon>Atrás
+        </button>
+        <p class="title-page">Tecnicos - Formulario</p>
+    </header>
+    <form [formGroup]="tecnicoForm" (ngSubmit)="submit()" novalidate>
+        <input type="hidden" formControlName="id" />
+        <header class="bg-gradient-primary form-header">
+            <h2>{{ titleForm }}</h2>
+        </header>
+
+        <div class="form-body">
+
+            <!-- INFORMACION PERSONAL -->
+            <section class="row">
+                <div class="col">
+                    <!-- SUBIR IMAGEN -->
+                    <div class="form-perfil-group">
+                        <input hidden type="file" accept="image/*" (change)="selectFile($event)" #fileUpload
+                            class="file-input" />
+                        @if(preview) {
+                        <img mat-card-image height="200px" [src]="preview" alt="Imagen Tecnico">
+                        } @else if (previousImage) {
+                        <img mat-card-image height="200px" [src]="'http://localhost:3000/images/' + nameImage"
+                            alt="Imagen Tecnico">
+                        } @else {
+                        <img mat-card-image height="200px" src="http://localhost:3000/images/notImage.png"
+                            alt="Imagen Tecnico">
+                        }
+                        <button type="button" matMiniFab class="upload-btn" (click)="fileUpload.click()">
+                            <mat-icon>attach_file</mat-icon>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <!-- Input NOMBRE -->
+                            <div class="form-input-group">
+                                <input id="nombre" formControlName="nombre" [ngClass]="{ 
+                            'has-value': tecnicoForm.controls['nombre'].value,
+                            'error': tecnicoForm.controls['nombre'].invalid && tecnicoForm.controls['nombre'].touched
+                            }" />
+                                <label for="nombre">Nombre*</label>
+                                <!-- Errores NOMBRE -->
+                                @if (tecnicoForm.controls['nombre'].invalid && tecnicoForm.controls['nombre'].touched) {
+                                <div class="form-error">
+                                    @if(tecnicoForm.controls['nombre'].errors?.['required']) {El nombre es requerido}
+                                    @if(tecnicoForm.controls['nombre'].errors?.['minlength']) {Debe tener minimo 2
+                                    caracteres}
+                                </div>
+                                }
+                            </div>
+                            <!-- Input APELLIDO 1 -->
+                            <div class="form-input-group">
+                                <input id="apellido1" formControlName="apellido1" [ngClass]="{ 
+                            'has-value': tecnicoForm.controls['apellido1'].value,
+                            'error': tecnicoForm.controls['apellido1'].invalid && tecnicoForm.controls['apellido1'].touched
+                            }" />
+                                <label for="apellido1">Primer apellido*</label>
+                                <!-- Errores APELLIDO 1 -->
+                                @if (tecnicoForm.controls['apellido1'].invalid &&
+                                tecnicoForm.controls['apellido1'].touched) {
+                                <div class="form-error">
+                                    @if(tecnicoForm.controls['apellido1'].errors?.['required']) {El primer apellido es
+                                    requerido}
+                                    @if(tecnicoForm.controls['apellido1'].errors?.['minlength']) {Debe tener minimo 2
+                                    caracteres}
+                                </div>
+                                }
+                            </div>
+                            <!-- Input APELLIDO 2 -->
+                            <div class="form-input-group">
+                                <input id="apellido2" formControlName="apellido2" [ngClass]="{ 
+                            'has-value': tecnicoForm.controls['apellido2'].value,
+                            'error': tecnicoForm.controls['apellido2'].invalid && tecnicoForm.controls['apellido2'].touched
+                            }" />
+                                <label for="apellido2">Segundo apellido</label>
+                                <!-- Errores APELLIDO 2 -->
+                                @if (tecnicoForm.controls['apellido2'].invalid &&
+                                tecnicoForm.controls['apellido2'].touched) {
+                                <div class="form-error">
+                                    @if(tecnicoForm.controls['apellido2'].errors?.['minlength']) {Debe tener minimo 2
+                                    caracteres}
+                                </div>
+                                }
+                            </div>
+                        </div>
+                        <!-- Input CORREO -->
+                        <div class="form-input-group">
+                            <input id="correo" formControlName="correo" [ngClass]="{ 
+                            'has-value': tecnicoForm.controls['correo'].value,
+                            'error': tecnicoForm.controls['correo'].invalid && tecnicoForm.controls['correo'].touched
+                            }" />
+                            <label for="correo">Correo*</label>
+                            <!-- Errores CORREO -->
+                            @if (tecnicoForm.controls['correo'].invalid && tecnicoForm.controls['correo'].touched) {
+                            <div class="form-error">
+                                @if(tecnicoForm.controls['correo'].errors?.['required']) {El correo es requerido}
+                                @if(tecnicoForm.controls['correo'].errors?.['email']) {El correo debe ser un email
+                                válido}
+                            </div>
+                            }
+                        </div>
+                        <span class="imagenNombre">
+                            {{ nameImage === 'notImage.png' ? "Sin imagen de perfil" : nameImage }}
+                            <button type="button" (click)="fileDelete()"><mat-icon>delete</mat-icon></button>
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row">
+                <div class="col">
+                    <!-- SELECT ESTADO -->
+                    <div class="form-switch-group" style="width: 140px;">
+                        <label for="estado">Estado <span>{{isCreate ? ' (solo lectura)' : ''}}</span></label>
+                        <div class="switch-content">
+                            <label class="switch">
+                                <input type="checkbox" formControlName="estado" id="estado" />
+                                <span class="slider"></span>
+                            </label>
+                            <span [ngClass]="{'estado-label': true, 'activo': tecnicoForm.controls['estado'].value}">{{
+                                tecnicoForm.controls['estado'].value ? 'Activo' : 'Inactivo' }}</span>
+                        </div>
+                    </div>
+                    <div class="form-carga-group" style="width: 140px;">
+                        <label for="carga">Carga <span>(solo lectura)</span></label>
+                        <input [disabled]="isCreate" type="number" formControlName="carga" id="carga" />
+
+                        <!-- Errores CARGA -->
+                        @if(tecnicoForm.controls['carga'].invalid && tecnicoForm.controls['carga'].touched) {
+                        <div class="form-error">La carga es obligatoria</div>
+                        }
+                    </div>
+                </div>
+                <div class="row especialidades-section">
+                    <div class="especialidades-header">
+                        <h2>Especialidades*</h2>
+                    </div>
+                    <div class="especialidades-list">
+                        @if (tecnicoForm.controls['especialidades'].value?.length > 0) {
+                        @for (esp of tecnicoForm.controls['especialidades'].value; track esp.id) {
+                        <span class="especialidad-item">{{ esp.nombre }}</span>
+                        }
+                        }<button (click)="verEspecialidades = !verEspecialidades" type="button"
+                            class="btn-secondary filled">
+                            <mat-icon>add_circle</mat-icon> Agregar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <section class="button-row">
+            <button class="btn-primary" type="button" (click)="onReset()">Reiniciar</button>
+            <!-- <button matButton class="btn-secondary" type="button" (click)="onBack()">Regresar</button> -->
+            <button class="btn-primary filled save" type="submit">Guardar</button>
+        </section>
+    </form>
+</main>

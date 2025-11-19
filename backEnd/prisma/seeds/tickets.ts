@@ -458,3 +458,14 @@ export const valoraciones = [
     fecha: newFecha(0, 7, 0, 0, 0, 0)
   }
 ]
+
+export const imagenes = [
+    {
+        idHistorial: 4,
+        url: 'monitor.png'
+    },
+    {
+        idHistorial: 2,
+        url: 'impresora.png'
+    }
+]

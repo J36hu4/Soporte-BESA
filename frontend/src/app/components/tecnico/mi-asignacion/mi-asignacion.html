@@ -11,32 +11,26 @@
     } @else {
     <div class="asignacion-detalle">
 
-        <!-- 🧾 Información general -->
-        <div class="title">
-            <mat-icon class="bg-gradient-primary">local_activity</mat-icon>
-            <h2>{{ dato()?.titulo }}</h2>
-
-            <div class="content-group">
-                <span>Descripción</span>
-                <p>{{ (dato()?.descripcion ?? '') | transformText }}</p>
-            </div>
-
-            <div class="group">
-                <p>Estado: <span class="bg-gradient-secondary">{{ (dato()?.estado ?? '') | transformText }}</span></p>
-                <p>
-                    Prioridad:
+        <!-- Información general -->
+        <div class="bg-gradient-primary title ">
+            <div class="title-content">
+                <mat-icon class="icon ">local_activity</mat-icon>
+                <h2>{{ dato()?.titulo }}</h2>
+                <div class="title-info">
+                    <span class="bg-gradient-secondary">{{ (dato()?.estado ?? '') | transformText }}</span>
                     <span [class]="'bg-gradient-' + (
-              dato()?.etiqueta?.categoria?.prioridad === 'baja' ? 'success' :
-              dato()?.etiqueta?.categoria?.prioridad === 'media' ? 'warning' : 'error'
-            )">
+                        dato()?.etiqueta?.categoria?.prioridad === 'baja' ? 'success' :
+                        dato()?.etiqueta?.categoria?.prioridad === 'media' ? 'warning' : 'error'
+                        )">
                         {{ (dato()?.etiqueta?.categoria?.prioridad ?? '') | transformText }}
                     </span>
-                </p>
+                </div>
             </div>
+            <p>{{ (dato()?.descripcion ?? '') | transformText }}</p>
         </div>
 
         <div class="info-general">
-            <!-- 🧠 Categoría y etiqueta -->
+            <!-- Categoría y etiqueta -->
             <section class="categoria">
                 <header class="bg-gradient-primary">
                     <mat-icon>info</mat-icon>
@@ -46,34 +40,50 @@
                 <div class="info-group">
                     <div style="padding-bottom: 10px; border-bottom: 1.5px solid rgb(199, 199, 199);" class="group">
                         <div class="content-group">
-                            <span>Solicitante</span>
-                            <p><i class="fi fi-rr-circle-user"></i>{{ dato()?.usuario?.nombre }}</p>
+                            <i class="fi fi-rr-circle-user"></i>
+                            <div class="content-text">
+                                <span>Solicitante</span>
+                                <p>{{ dato()?.usuario?.nombre }}</p>
+                            </div>
+
                         </div>
                         <div class="content-group">
-                            <span>Correo</span>
-                            <p><i class="fi fi-rr-envelope"></i>{{ dato()?.usuario?.correo}}</p>
+                            <i class="fi fi-rr-envelope"></i>
+                            <div class="content-text">
+                                <span>Correo</span>
+                                <p>{{ dato()?.usuario?.correo}}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="group">
                         <div class="content-group">
-                            <span>Categoría</span>
-                            <p><i class="fi fi-rr-resources"></i>{{ dato()?.etiqueta?.categoria?.nombre }}</p>
+                            <i class="fi fi-rr-resources"></i>
+                            <div class="content-text">
+                                <span>Categoría</span>
+                                <p>{{ dato()?.etiqueta?.categoria?.nombre }}</p>
+                            </div>
+
                         </div>
                         <div class="content-group">
-                            <span>Problema</span>
-                            <p><i class="fi fi-rr-exclamation"></i>{{ dato()?.etiqueta?.nombre }}</p>
+                            <i class="fi fi-rr-exclamation"></i>
+                            <div class="content-text">
+                                <span>Problema</span>
+                                <p>{{ dato()?.etiqueta?.nombre }}</p>
+                            </div>
                         </div>
                     </div>
-
                     <div class="content-group">
-                        <span>Descripción de la categoría</span>
-                        <p>{{ dato()?.etiqueta?.categoria?.descripcion }}</p>
+                        <div class="content-text">
+                            <span>Descripción de la categoría</span>
+                            <p>{{ dato()?.etiqueta?.categoria?.descripcion }}</p>
+                        </div>
+
                     </div>
 
                 </div>
             </section>
 
-            <!-- ⏱️ SLA -->
+            <!-- SLA -->
             <section class="info">
                 <header class="bg-gradient-primary">
                     <mat-icon>calendar_today</mat-icon>
@@ -83,41 +93,62 @@
                 <div class="info-group">
                     <div class="group">
                         <div class="content-group">
-                            <span>Fecha de creación</span>
-                            <p><i class="fi fi-rr-calendar-plus"></i>{{ dato()?.fechaCreacion | date:'short' }}</p>
+                            <i class="fi fi-rr-calendar-plus"></i>
+                            <div class="content-text">
+                                <span>Fecha de creación</span>
+                                <p>{{ dato()?.fechaCreacion | date:'short' }}</p>
+                            </div>
                         </div>
                         <div class="content-group">
-                            <span>Fecha de cierre</span>
-                            <p><i class="fi fi-rr-calendar-check"></i>{{ dato()?.fechaCierre | date:'short' }}</p>
+                            <i class="fi fi-rr-calendar-check"></i>
+                            <div class="content-text">
+                                <span>Fecha de cierre</span>
+                                <p>{{ dato()?.fechaCierre | date:'short' }}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="group">
                         <div class="content-group">
-                            <span>Respuesta esperada</span>
-                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ dato()?.slaRespusta | date:'short' }}</p>
+                            <i class="fi fi-rr-time-watch-calendar"></i>
+                            <div class="content-text">
+                                <span>Respuesta esperada</span>
+                                <p>{{ dato()?.slaRespusta | date:'short' }}</p>
+                            </div>
                         </div>
                         <div class="content-group">
-                            <span>Respuesta Obtenida</span>
-                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ fechaAsignacion | date:'short' }}</p>
+                            <i class="fi fi-rr-time-watch-calendar"></i>
+                            <div class="content-text">
+                                <span>Respuesta Obtenida</span>
+                                <p>{{ fechaAsignacion | date:'short' }}</p>
+                            </div>
                         </div>
                     </div>
                     <div class="group">
                         <div class="content-group">
-                            <span>Solución esperada</span>
-                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ dato()?.slaSolucion | date:'short' }}</p>
+                            <i class="fi fi-rr-time-watch-calendar"></i>
+                            <div class="content-text">
+                                <span>Solución esperada</span>
+                                <p>{{ dato()?.slaSolucion | date:'short' }}</p>
+                            </div>
                         </div>
                         <div class="content-group">
-                            <span>Solución Obtenida</span>
-                            <p><i class="fi fi-rr-time-watch-calendar"></i>{{ fechaResuelto | date:'short' }}</p>
+                            <i class="fi fi-rr-time-watch-calendar"></i>
+                            <div class="content-text">
+                                <span>Solución Obtenida</span>
+                                <p>{{ fechaResuelto | date:'short' }}</p>
+                            </div>
                         </div>
                     </div>
-                    <p [class]="cumplioSla('style')" style="margin: auto; text-align: center; font-size: .9em; width: fit-content; color: white; padding: 5px 15px; border-radius: 20px;">{{
+                    <p [class]="cumplioSla('style')"
+                        style="margin: auto; text-align: center; font-size: .9em; width: fit-content; color: white; padding: 5px 15px; border-radius: 20px;">
+                        {{
                         cumplioSla('text')
                         }}</p>
                 </div>
             </section>
         </div>
 
+        <!-- Asignación -->
         <section class="asignacion">
             <header class="bg-gradient-primary">
                 <mat-icon>work</mat-icon>
@@ -128,27 +159,36 @@
                 <div class="group">
                     <div class="group-2">
                         <div class="content-group">
-                            <span>Puntaje de asignacion</span>
-                            <p><i class="fi fi-rr-hundred-points"></i>{{ tecnicoAsignado.puntajePrioridad ?? 0 }}</p>
+                            <i class="fi fi-rr-hundred-points"></i>
+                            <div class="content-text">
+                                <span>Puntaje de asignacion</span>
+                                <p>{{ tecnicoAsignado.puntajePrioridad }}</p>
+                            </div>
                         </div>
                         <div class="content-group">
-                            <span>Regla aplicada</span>
-                            <p><i class="fi fi-rr-rules-alt"></i>{{ tecnicoAsignado.regla?.nombre ?? "N/A" }}</p>
+                            <i class="fi fi-rr-rules-alt"></i>
+                            <div class="content-text">
+                                <span>Regla aplicada</span>
+                                <p>{{ tecnicoAsignado.regla?.nombre ?? "N/A" }}</p>
+                            </div>
                         </div>
                     </div>
 
                     <div class="group-2">
                         <div class="content-group">
-                            <span>Método de asignación</span>
-                            <p>
-                                <i
-                                    [class]="tecnicoAsignado.metodo === 'manual' ? 'fi fi-rr-hand-paper' : 'fi fi-rr-user-robot'"></i>
-                                {{ tecnicoAsignado.metodo ?? ''| transformText }}
-                            </p>
+                            <i
+                                [class]="tecnicoAsignado.metodo === 'manual' ? 'fi fi-rr-hand-paper' : 'fi fi-rr-user-robot'"></i>
+                            <div class="content-text">
+                                <span>Método de asignación</span>
+                                <p>{{ tecnicoAsignado.metodo ?? '' | transformText }}</p>
+                            </div>
                         </div>
                         <div class="content-group">
-                            <span>Motivo</span>
-                            <p><i class="fi fi-rr-comment-text"></i>{{ tecnicoAsignado.motivo }}</p>
+                            <i class="fi fi-rr-comment-text"></i>
+                            <div class="content-text">
+                                <span>Motivo</span>
+                                <p>{{ tecnicoAsignado.motivo }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -156,7 +196,7 @@
             }
         </section>
 
-        <!-- ⭐ Valoración -->
+        <!-- Valoración -->
         @if (dato()?.Valoracion?.length) {
         <section class="valoracion">
             <header class="bg-gradient-primary">
@@ -179,7 +219,28 @@
         </section>
         }
 
-        <!-- 📜 Historial -->
+        <!-- Imagenes -->
+        <section class="imagenes">
+            <header class="bg-gradient-primary">
+                <mat-icon>image</mat-icon>
+                <h3>Imagenes</h3>
+            </header>
+
+            @for (h of dato()?.historial; track $index) {
+            @if ((h.imagenes?.length ?? 0) > 0) {
+            <div class="imagen-card">
+                <span>{{ h.fecha | date:'d \'de\' MMMM \'del\' y \'a las\' h:mm a' }}</span>
+                <div class="lista-imagenes">
+                    @for (imagen of h.imagenes; track $index) {
+                    <img [src]="'http://localhost:3000/images/'+ imagen.url" [alt]="imagen.url">
+                    }
+                </div>
+            </div>
+            }
+            }
+        </section>
+
+        <!-- Historial -->
         <section class="historial">
             <header class="bg-gradient-primary">
                 <mat-icon>history</mat-icon>
@@ -190,14 +251,22 @@
                 @for (h of dato()?.historial; track $index) {
                 <div class="campo">
                     <span>{{ h.fecha | date:'d \'de\' MMMM \'del\' y \'a las\' h:mm a' }}</span>
+                    @if (h.estadoAnterior === h.estadoNuevo) {
+                    <p><strong>{{ (h.usuario?.nombre ) }}</strong>{{' '}}<em class="nuevo">creó el ticket</em></p>
+                    } @else {
                     <p>
                         <strong>{{ (h.usuario?.nombre ) }}</strong> cambió de
-                        <em>{{ h.estadoAnterior | transformText }}</em> a <em>{{ h.estadoNuevo | transformText }}</em>
+                        <em class="anterior">{{ h.estadoAnterior | transformText }}</em> a <em class="nuevo">{{
+                            h.estadoNuevo |
+                            transformText }}</em>
                     </p>
                     <div class="content-group">
-                        <span>Observación</span>
-                        <p>{{ h.observacion }}</p>
+                        <div class="content-text">
+                            <span>Observación</span>
+                            <p>{{ h.observacion }}</p>
+                        </div>
                     </div>
+                    }
                 </div>
                 }
             </div>

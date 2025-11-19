@@ -10,9 +10,12 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { Sidebar } from './sidebar/sidebar'
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { Tabla } from './tabla/tabla';
+import { UpButton } from './upButton/upButton';
+import { ListaEspecialidades } from './especialidades/especialidades';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [Header, Footer, Sidebar, Tabla],
+  declarations: [Header, Footer, Sidebar, Tabla, UpButton, ListaEspecialidades],
   imports: [
     CommonModule,
     RouterModule,
@@ -21,8 +24,10 @@ import { Tabla } from './tabla/tabla';
     MatToolbarModule,
     MatMenuModule,
     MatBadgeModule,
+    ReactiveFormsModule,
+    FormsModule,
     CdkAccordionModule
   ],
-  exports: [Header, Footer, Sidebar, Tabla],
+  exports: [Header, Footer, Sidebar, Tabla, UpButton, ListaEspecialidades],
 })
 export class CoreModule { } 

@@ -77,7 +77,7 @@
                     <td class="codigo">{{ (fila.id.toString().padStart(3, '0')) }}</td>
                     <td class="content">
                         <p>{{ fila.titulo }}</p>
-                        <span>{{ fila.etiqueta.categoria.nombre + " - " + fila.etiqueta.nombre }}</span>
+                        <span>{{ fila.etiqueta.categoria?.nombre + " - " + fila.etiqueta.nombre }}</span>
                     </td>
                     <td class="content">
                         <p>{{ fila.usuario.nombre }}</p>
@@ -95,8 +95,8 @@
                     </td>
                     <td class="prioridad">
                         <p
-                            [class]="'bg-gradient-' + (fila.etiqueta.categoria.prioridad === 'baja' ? 'success' : fila.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'error')">
-                            {{ fila.etiqueta.categoria.prioridad | transformText }}</p>
+                            [class]="'bg-gradient-' + (fila.etiqueta.categoria?.prioridad === 'baja' ? 'success' : fila.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'error')">
+                            {{ (fila.etiqueta.categoria?.prioridad || '') | transformText }}</p>
                     </td>
                     <td class="acciones">
                         <button style="margin: auto;" class="btn-primary filled" matTooltip="Detalles"
@@ -121,22 +121,22 @@
             @if (datos().length > 0) {
             @for (dato of datos(); track $index) {
             <div
-                [class]="'card-grid-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                [class]="'card-grid-' + (dato.etiqueta.categoria?.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')">
                 <div class="card-grid-header">
                     <p><span class="title-secondary">{{ (dato.id.toString().padStart(3, '0'))}}</span> -
                         {{dato.titulo}}</p>
-                    <p>{{dato.etiqueta.categoria.nombre}} - {{dato.etiqueta.nombre}}</p>
+                    <p>{{dato.etiqueta.categoria?.nombre}} - {{dato.etiqueta.nombre}}</p>
                 </div>
                 <div class="card-grid-info">
                     <div class="dato-info">
                         <p class="">Prioridad: <span
-                                [class]="'title-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">{{dato.etiqueta.categoria.prioridad
+                                [class]="'title-' + (dato.etiqueta.categoria?.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')">{{(dato.etiqueta.categoria?.prioridad || '')
                                 | transformText}}</span>
                         </p>
                         <p>Estado: <span class="dato-estado">{{dato.estado | transformText}}</span></p>
                     </div>
                     <button
-                        [class]="'filled btn-' + (dato.etiqueta.categoria.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')"
+                        [class]="'filled btn-' + (dato.etiqueta.categoria?.prioridad === 'alta' ? 'error' : dato.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')"
                         matTooltip="Detalles" (click)="irDetalles(dato.id)">
                         <mat-icon>info</mat-icon>
                     </button>
@@ -175,9 +175,9 @@
                     <div class="tickets">
                         @for (ticket of ticketsPorFecha(fecha); track ticket.id) {
                         <div (click)="irDetalles(ticket.id)"
-                            [class]="'ticket-card ' + (ticket.etiqueta.categoria.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                            [class]="'ticket-card ' + (ticket.etiqueta.categoria?.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')">
                             <h4
-                                [class]="'title-' + (ticket.etiqueta.categoria.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria.prioridad === 'media' ? 'warning' : 'success')">
+                                [class]="'title-' + (ticket.etiqueta.categoria?.prioridad === 'alta' ? 'error' : ticket.etiqueta.categoria?.prioridad === 'media' ? 'warning' : 'success')">
                                 {{ ticket.titulo }}</h4>
                             <p><strong>Estado:</strong> {{ ticket.estado | transformText}}</p>
                             @if (ticket.slaSolucion) {

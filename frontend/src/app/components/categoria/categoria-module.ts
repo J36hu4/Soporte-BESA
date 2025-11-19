@@ -6,14 +6,20 @@ import { Categorias } from './categorias/categorias';
 import { CategoriaDetalle } from './detalle/detalle';
 import { CapitalizarPipe } from '../../app';
 import { MatIconModule } from '@angular/material/icon';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ShareModule } from '../../share/share-module';
+import { CoreModule } from '../core/core-module';
+import { CategoriaFormulario } from './formulario/formulario';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
     Categorias,
-    CategoriaDetalle
+    CategoriaDetalle,
+    CategoriaFormulario
   ],
   imports: [
     CommonModule,
@@ -21,11 +27,16 @@ import { ShareModule } from '../../share/share-module';
     MatIconModule,
     ShareModule,
     CategoriaRoutingModule,
-    FormsModule
-],
+    CoreModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatOptionModule,
+    MatSelectModule
+  ],
   exports: [
     Categorias,
-    CategoriaDetalle
+    CategoriaDetalle,
+    CategoriaFormulario
   ]
 })
 export class CategoriaModule { }

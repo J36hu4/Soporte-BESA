@@ -1,0 +1,339 @@
+<main class="container-xxl">
+    <app-lista-especialidades [seleccionadas]="categoriaForm.controls['especialidades'].value"
+        (aceptar)="onEspecialidadesConfirmadas($event)" [cargar]="!verEspecialidades">
+    </app-lista-especialidades>
+    <header class="CategoriaForm-header">
+        <button class="btn-atras" (click)="volver()">
+            <mat-icon>keyboard_backspace</mat-icon>Atrás
+        </button>
+        <p class="title-page">Categorias - Formulario</p>
+    </header>
+    <form [formGroup]="categoriaForm" (ngSubmit)="submit()" novalidate>
+        <input type="hidden" formControlName="id" />
+        <header class="bg-gradient-primary form-header">
+            <h2>{{ titleForm }}</h2>
+        </header>
+
+        <div class="form-body">
+
+            <!-- INFORMACION PERSONAL -->
+            <section class="row">
+                <!-- Input NOMBRE -->
+                <div class="form-input-group">
+                    <input id="nombre" formControlName="nombre" [ngClass]="{ 
+                            'has-value': categoriaForm.controls['nombre'].value,
+                            'error': categoriaForm.controls['nombre'].invalid && categoriaForm.controls['nombre'].touched
+                            }" />
+                    <label for="nombre">Nombre*</label>
+                    <!-- Errores NOMBRE -->
+                    @if (categoriaForm.controls['nombre'].invalid && categoriaForm.controls['nombre'].touched) {
+                    <div class="form-error">
+                        @if(categoriaForm.controls['nombre'].errors?.['required']) {El nombre es requerido}
+                        @if(categoriaForm.controls['nombre'].errors?.['minlength']) {Debe tener minimo 2
+                        caracteres}
+                    </div>
+                    }
+                </div>
+                <!-- Input DESCRIPCION -->
+                <div class="form-input-group">
+                    <textarea id="descripcion" formControlName="descripcion" [ngClass]="{ 
+                            'has-value': categoriaForm.controls['descripcion'].value,
+                            'error': categoriaForm.controls['descripcion'].invalid && categoriaForm.controls['descripcion'].touched
+                            }"></textarea>
+                    <label for="descripcion">Descripción*</label>
+                    <!-- Errores DESCRIPCION -->
+                    @if (categoriaForm.controls['descripcion'].invalid && categoriaForm.controls['descripcion'].touched)
+                    {
+                    <div class="form-error">
+                        @if(categoriaForm.controls['descripcion'].errors?.['required']) {La descripción es requerida}
+                        @if(categoriaForm.controls['descripcion'].errors?.['minlength']) {Debe tener minimo 2
+                        caracteres}
+                    </div>
+                    }
+                </div>
+            </section>
+
+            <section class="row">
+                <div class="col">
+                    <div class="form-input-group">
+                        <input type="number" id="tiempoRespuesta" formControlName="tiempoRespuesta" [ngClass]="{ 
+                            'has-value': categoriaForm.controls['tiempoRespuesta'].value,
+                            'error': categoriaForm.controls['tiempoRespuesta'].invalid && categoriaForm.controls['tiempoRespuesta'].touched
+                            }" />
+                        <label for="tiempoRespuesta">Tiempo Respuesta (Horas)*</label>
+                        <!-- Errores NOMBRE -->
+                        @if (categoriaForm.controls['tiempoRespuesta'].invalid &&
+                        categoriaForm.controls['tiempoRespuesta'].touched) {
+                        <div class="form-error">
+                            @if(categoriaForm.controls['tiempoRespuesta'].errors?.['required']) {El tiempo de respuesta
+                            es requerido}
+                            @if(categoriaForm.controls['tiempoRespuesta'].errors?.['numberValidator']) {El valor
+                            digitado debe ser mayor a 0}
+                        </div>
+                        }
+                    </div>
+                    <div class="form-input-group">
+                        <input type="number" id="tiempoSolcion" formControlName="tiempoSolcion" [ngClass]="{ 
+                            'has-value': categoriaForm.controls['tiempoSolcion'].value,
+                            'error': categoriaForm.controls['tiempoSolcion'].invalid && categoriaForm.controls['tiempoSolcion'].touched
+                            }" />
+                        <label for="tiempoSolcion">Tiempo Solucion (Horas)*</label>
+                        <!-- Errores NOMBRE -->
+                        @if (categoriaForm.controls['tiempoSolcion'].invalid &&
+                        categoriaForm.controls['tiempoSolcion'].touched) {
+                        <div class="form-error">
+                            @if(categoriaForm.controls['tiempoSolcion'].errors?.['required']) {El tiempo de solucion
+                            es requerido}
+                            @if(categoriaForm.controls['tiempoSolcion'].errors?.['numberValidator']) {El valor digitado
+                            debe ser mayor a 0}
+                        </div>
+                        }
+                    </div>
+                    <div class="form-input-group">
+                        <select id="prioridad" formControlName="prioridad" [ngClass]="{ 
+                            'has-value': categoriaForm.controls['prioridad'].value,
+                            'error': categoriaForm.controls['prioridad'].invalid && categoriaForm.controls['prioridad'].touched
+                            }">
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
+                        </select>
+                        <label for="prioridad">Prioridad*</label>
+                        <!-- Errores NOMBRE -->
+                        @if (categoriaForm.controls['prioridad'].invalid &&
+                        categoriaForm.controls['prioridad'].touched) {
+                        <div class="form-error">
+                            @if(categoriaForm.controls['prioridad'].errors?.['required']) {El tiempo de solucion
+                            es requerido}
+                            @if(categoriaForm.controls['prioridad'].errors?.['minlength']) {Debe tener minimo 2
+                            caracteres}
+                        </div>
+                        }
+                    </div>
+                </div>
+            </section>
+
+            <section class="row">
+
+                <div class="row lista-section">
+                    <div class="lista-header">
+                        <h2>Etiquetas*</h2>
+                    </div>
+                    <div class="lista-items">
+                        @if (categoriaForm.controls['etiquetas'].value?.length > 0) {
+                        @for (esp of categoriaForm.controls['etiquetas'].value; track esp.id) {
+                        <span class="lista-item">{{ esp.nombre }}</span>
+                        }
+                        }<button (click)="onVerEtiquetas()" type="button" class="btn-secondary filled">
+                            <mat-icon>add_circle</mat-icon> Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row lista-section">
+                    <div class="lista-header">
+                        <h2>Especialidades*</h2>
+                    </div>
+                    <div class="lista-items">
+                        @if (categoriaForm.controls['especialidades'].value?.length > 0) {
+                        @for (esp of categoriaForm.controls['especialidades'].value; track esp.id) {
+                        <span class="lista-item">{{ esp.nombre }}</span>
+                        }
+                        }<button (click)="verEspecialidades = !verEspecialidades" type="button"
+                            class="btn-secondary filled">
+                            <mat-icon>add_circle</mat-icon> Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row lista-section">
+                    <div class="lista-header">
+                        <h2>Reglas AutoTriage</h2>
+                    </div>
+                    <div class="lista-items">
+                        @if (categoriaForm.controls['reglas'].value?.length > 0) {
+                        @for (esp of categoriaForm.controls['reglas'].value; track esp.id) {
+                        <span class="lista-item">{{ esp.nombre }}</span>
+                        }
+                        }<button (click)="verReglas = !verReglas" type="button" class="btn-secondary filled">
+                            <mat-icon>add_circle</mat-icon> Agregar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <section class="button-row">
+            <button class="btn-primary" type="button" (click)="onReset()">Reiniciar</button>
+            <!-- <button matButton class="btn-secondary" type="button" (click)="onBack()">Regresar</button> -->
+            <button class="btn-primary filled save" type="submit">Guardar</button>
+        </section>
+    </form>
+
+
+    <section class="popMenus" [class.hidden]="!verEtiquetas && !verReglas">
+        <button class="close" (click)="closePops()"><mat-icon>close</mat-icon></button>
+
+        <div class="popEtiquetas" [class.hidden]="!verEtiquetas">
+            <h2 class="bg-gradient-primary">Crear Etiqueta</h2>
+            <div class="popContent">
+                <div>
+                    <div class="input-group">
+                        <input type="text" [(ngModel)]="nuevoNombreEtiqueta" (input)="onInputEtiqueta($event)"
+                            placeholder="Nombre de nueva etiqueta" />
+                        <button (click)="agregarEtiqueta()">Agregar</button>
+                    </div>
+                    <div class="sugerencias">
+                        @for (sug of sugerencias; track $index) {
+                        <button (click)="seleccionarEtiqueta(sug)">{{ sug.nombre }}</button>
+                        }
+                    </div>
+                </div>
+                <div class="lista-etiquetas">
+                    <h2>Lista de etiquetas</h2>
+                    <div class="lista">
+                        @for (etq of etiquetasSeleccionadas; track $index) {
+                        <span class="lista-item">{{ etq.nombre }} <button
+                                (click)="eliminarEtiqueta(etq)"><mat-icon>delete</mat-icon></button></span>
+                        }
+                    </div>
+                </div>
+                <button (click)="guardarEtiquetas()" class="btn-primary filled">Guardar</button>
+            </div>
+        </div>
+
+
+        <div class="popReglas" [class.hidden]="!verReglas">
+            <h2 class="bg-gradient-primary">Crear Regla</h2>
+            <form class="popContent" [formGroup]="reglaForm" (ngSubmit)="guardarRegla()">
+                <div class="form-body">
+
+                    <!-- INFORMACION PERSONAL -->
+                    <section class="row">
+                        <!-- Input NOMBRE -->
+                        <div class="form-input-group">
+                            <input id="nombre" formControlName="nombre" [ngClass]="{ 
+                            'has-value': categoriaForm.controls['nombre'].value,
+                            'error': categoriaForm.controls['nombre'].invalid && categoriaForm.controls['nombre'].touched
+                            }" />
+                            <label for="nombre">Nombre*</label>
+                            <!-- Errores NOMBRE -->
+                            @if (categoriaForm.controls['nombre'].invalid && categoriaForm.controls['nombre'].touched) {
+                            <div class="form-error">
+                                @if(categoriaForm.controls['nombre'].errors?.['required']) {El nombre es requerido}
+                                @if(categoriaForm.controls['nombre'].errors?.['minlength']) {Debe tener minimo 2
+                                caracteres}
+                            </div>
+                            }
+                        </div>
+                    </section>
+
+                    <section class="row">
+                        <div class="col">
+                            <div class="form-input-group">
+                                <select id="reglaPrioridad" formControlName="reglaPrioridad" [ngClass]="{ 
+                                'has-value': reglaForm.controls['reglaPrioridad'].value,
+                                'error': reglaForm.controls['reglaPrioridad'].invalid && reglaForm.controls['reglaPrioridad'].touched
+                                }">
+                                    <option value="baja">Baja</option>
+                                    <option value="media">Media</option>
+                                    <option value="alta">Alta</option>
+                                </select>
+                                <label for="reglaPrioridad">Prioridad*</label>
+                                @if (reglaForm.controls['reglaPrioridad'].invalid &&
+                                reglaForm.controls['reglaPrioridad'].touched) {
+                                <div class="form-error">
+                                    @if(reglaForm.controls['reglaPrioridad'].errors?.['required']) {El tiempo de
+                                    solucion es
+                                    requerido}
+                                    @if(reglaForm.controls['reglaPrioridad'].errors?.['minlength']) {Debe tener minimo 2
+                                    caracteres}
+                                </div>
+                                }
+                            </div>
+                            <div class="form-input-group">
+                                <select id="carga" formControlName="carga" [ngClass]="{ 
+                                'has-value': reglaForm.controls['carga'].value,
+                                'error': reglaForm.controls['carga'].invalid && reglaForm.controls['carga'].touched
+                                }">
+                                    <option value="baja">Baja</option>
+                                    <option value="media">Media</option>
+                                    <option value="alta">Alta</option>
+                                </select>
+                                <label for="carga">Carga de trabajo*</label>
+                                <!-- Errores NOMBRE -->
+                                @if (reglaForm.controls['carga'].invalid &&
+                                reglaForm.controls['carga'].touched) {
+                                <div class="form-error">
+                                    @if(reglaForm.controls['carga'].errors?.['required']) {El tiempo de
+                                    solucion
+                                    es requerido}
+                                    @if(reglaForm.controls['carga'].errors?.['numberValidator']) {El valor
+                                    digitado
+                                    debe ser mayor a 0}
+                                </div>
+                                }
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section class="row">
+                        <div class="form-input-group">
+                            <mat-select multiple id="especialidades" formControlName="especialidades" [ngClass]="{ 
+                                'has-value': reglaForm.controls['especialidades'].value,
+                                'error': reglaForm.controls['especialidades'].invalid && reglaForm.controls['especialidades'].touched
+                                }">
+                                @if (listEtiquetas.length > 0) {
+                                @for (etq of listEspecialidades; track $index) {
+                                <mat-option [value]="etq.nombre">{{etq.nombre}}</mat-option>
+                                }
+                            } @else { <mat-option>Sin opciones</mat-option>}
+                            </mat-select>
+                            <label for="especialidades">Seleccionar Especialidades*</label>
+                            <!-- Errores NOMBRE -->
+                            @if (reglaForm.controls['especialidades'].invalid &&
+                            reglaForm.controls['especialidades'].touched) {
+                            <div class="form-error">
+                                @if(reglaForm.controls['especialidades'].errors?.['required']) {Debe seleccionar al menos una especialidadad}
+                                @if(reglaForm.controls['especialidades'].errors?.['numberValidator']) {El valor
+                                digitado
+                                debe ser mayor a 0}
+                            </div>
+                            }
+                        </div>
+                        <div class="form-input-group">
+                            <mat-select multiple id="etiquetas" formControlName="etiquetas" [ngClass]="{ 
+                                'has-value': reglaForm.controls['etiquetas'].value,
+                                'error': reglaForm.controls['etiquetas'].invalid && reglaForm.controls['etiquetas'].touched
+                                }">
+                                @if (listEtiquetas.length > 0) {
+                                @for (etq of listEtiquetas; track $index) {
+                                <mat-option [value]="etq.nombre">{{etq.nombre}}</mat-option>
+                                }
+                            } @else { <mat-option>Sin opciones</mat-option>}
+                            </mat-select>
+                            <label for="etiquetas">Seleccionar Etiquetas*</label>
+                            <!-- Errores NOMBRE -->
+                            @if (reglaForm.controls['etiquetas'].invalid &&
+                            reglaForm.controls['etiquetas'].touched) {
+                            <div class="form-error">
+                                @if(reglaForm.controls['etiquetas'].errors?.['required']) {Debe seleccionar al menos una etiqueta}
+                                @if(reglaForm.controls['etiquetas'].errors?.['numberValidator']) {El valor
+                                digitado
+                                debe ser mayor a 0}
+                            </div>
+                            }
+                        </div>
+                    </section>
+                </div>
+
+                <button class="btn-primary filled">Guardar</button>
+            </form>
+        </div>
+    </section>
+
+
+
+</main>

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Component, Injectable, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { toast } from 'ngx-sonner';
 

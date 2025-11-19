@@ -1,0 +1,49 @@
+2025-11-04 14:55:12.724 error: 	File too large
+2025-11-04 14:57:19.861 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.tecnico.create()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\tecnicoController.controller.ts:231:58
+
+  228     }
+  229 });
+  230 
+→ 231 const newTecnico = await this.prisma.tecnico.create({
+        data: {
+          id: 11,
+          disponible: false,
+          motivoDisponible: "ausente",
+          especialidades: {
+            connect: [
+              {
+                id: {
+                  id: 1,
+                  nombre: "Técnico en reparación de equipos",
+                  descripcion: "Encargado de diagnosticar y reparar fallos físicos en dispositivos tecnológicos."
+                }
+              },
+              {
+                id: {
+                  id: 2,
+                  nombre: "Electrónica básica",
+                  descripcion: "Especialista en componentes eléctricos simples y circuitos de bajo nivel."
+                }
+              },
+              {
+                id: {
+                  id: 3,
+                  nombre: "Mantenimiento preventivo/correctivo",
+                  descripcion: "Realiza limpieza, ajustes y correcciones físicas para prolongar la vida útil de los equipos."
+                }
+              },
+              {
+                id: {
+                  id: 4,
+                  nombre: "Administración de directorios activos (AD)",
+                  descripcion: "Gestiona usuarios, grupos y políticas de acceso en entornos corporativos."
+                }
+              }
+            ]
+          }
+        }
+      })
+
+Argument `id`: Invalid value provided. Expected Int, provided Object.

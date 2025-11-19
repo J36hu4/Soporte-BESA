@@ -82,7 +82,7 @@ export class AdminTicket {
   lista(): void {
     this.cargando.set(true);
     const skip = (this.paginaActual - 1) * this.itemsPorPagina;
-    const take = this.itemsPorPagina;
+    const take = this.tipo === "calendar" ? 200 : this.itemsPorPagina;
     const { texto, estado, prioridad, ordenCampo, ordenDireccion } = this.filtros;
 
     const queryParts = [];
@@ -233,9 +233,15 @@ export class AdminTicket {
   //  Tipo de visualización
   // ─────────────────────────────────────────────────────────────
   cambiarTipo(t: string): void {
-    this.tipo = t;
-    sessionStorage.setItem("Ticket-datos", t);
-    if (this.tipo === "calendar") this.generarFechas()
+    if (this.tipo === "calendar") {
+      this.tipo = t;
+      sessionStorage.setItem("Ticket-datos", t);
+      this.generarFechas()
+    } else {
+      this.tipo = t;
+      sessionStorage.setItem("Ticket-datos", t);
+      if (this.tipo === "calendar") this.generarFechas()
+    }
   }
 
   // ─────────────────────────────────────────────────────────────

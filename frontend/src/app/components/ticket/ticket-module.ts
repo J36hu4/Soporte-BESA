@@ -11,6 +11,7 @@ import { ShareModule } from "../../share/share-module";
 import { TicketDetalle } from './detalle/detalle';
 import { A11yModule } from "@angular/cdk/a11y";
 import { AdminTicket } from './admin-ticket/admin-ticket';
+import { CoreModule } from "../core/core-module";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { AdminTicket } from './admin-ticket/admin-ticket';
     TicketRoutingModule,
     FormsModule,
     ShareModule,
-    A11yModule
+    A11yModule,
+    CoreModule
 ],
   exports: [
     MyTickets,

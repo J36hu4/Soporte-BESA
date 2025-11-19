@@ -129,7 +129,17 @@ export class Categorias {
   // ─────────────────────────────────────────────────────────────
   irDetalles(id: number): void {
     this.router.navigate(['categorias/detalle'], {
-      fragment: btoa(id.toString()) 
+      fragment: btoa(id.toString())
     })
+  }
+
+  irEditar(id: number): void {
+    this.router.navigate(['categorias/editar'], {
+      fragment: btoa(id.toString())
+    })
+  }
+
+  irCrear(): void {
+    this.router.navigate(['categorias/crear'])
   }
 }

@@ -3,6 +3,7 @@ import { UsuarioRoutes } from './usuario.route';
 import { TicketRoute } from './ticket.route';
 import { TecnicoRoutes } from './tecnico.route';
 import { CategoriaRoutes } from './categoria.route';
+import { ImageRoutes } from './image.routes';
 export class AppRoutes {
     static get routes(): Router {
         const router = Router();
@@ -11,6 +12,7 @@ export class AppRoutes {
         router.use('/usuario', UsuarioRoutes.routes);
         router.use('/ticket', TicketRoute.routes);
         router.use('/tecnico', TecnicoRoutes.routes);
+        router.use("/file/", ImageRoutes.routes);
         router.use('/categoria', CategoriaRoutes.routes);
 
         return router;

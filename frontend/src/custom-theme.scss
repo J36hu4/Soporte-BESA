@@ -67,6 +67,8 @@ html {
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
+
+
   }
 
   .primary-gradient {
@@ -82,6 +84,10 @@ html {
     }
 
   }
+
+
+  // toats 
+
 
   .sidebar-gradient {
     background: linear-gradient(-45deg, #{c(colors.$primary-palette, 50)}, #{c(colors.$primary-palette, 10)});
@@ -148,6 +154,294 @@ html {
   @each $type, $palette in (primary: colors.$primary-palette, secondary: colors.$secondary-palette, tertiary: colors.$tertiary-palette) {
     .ico-#{$type} {
       @include mat.icon-overrides((color: c($palette, 70)));
+    }
+  }
+
+  //inputs y forms 
+  @each $type, $palette in (primary: colors.$primary-palette, secondary: colors.$secondary-palette, tertiary: colors.$tertiary-palette, error: colors.$error-palette,
+    success: colors.$success-palette, warning: colors.$warning-palette) {
+    form {
+      max-width: 1000px;
+      box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+      border-radius: 20px;
+      margin: auto;
+      background-color: white;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+
+      .form-header {
+        margin: 0;
+        padding: .5rem;
+        text-align: center;
+        border-radius: 12px;
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.4);
+        margin-bottom: 15px;
+
+        h2 {
+          margin: 0;
+          color: white;
+        }
+
+      }
+
+      .form-body {
+        section {
+          margin-bottom: 20px;
+        }
+
+        .row {
+          width: 100%;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        .col {
+          width: 100%;
+          padding: 0;
+          display: flex;
+          gap: 20px;
+          box-sizing: border-box;
+        }
+
+        .form-error {
+          color: red;
+          font-size: 0.75rem;
+          margin-top: 0.25rem;
+        }
+
+        .form-input-group {
+          position: relative;
+          flex: 1 0 auto;
+          margin-bottom: 12px;
+
+          input,
+          textarea,
+          select,
+          mat-select {
+            width: 100%;
+            max-width: 100%;
+            min-width: 100%;
+            box-sizing: border-box;
+            padding: 1.2rem 0.5rem 0.2rem;
+            font-size: 1rem;
+            border-radius: 6px;
+            background: #0886ec25;
+            border: none;
+            border-bottom: 3px solid #007bff;
+          }
+
+          input:focus,
+          textarea:focus,
+          mat-select.mat-focused {
+            outline: none;
+            border: 1px solid #007bff;
+            border-bottom: 2px solid #007bff;
+          }
+
+          input.error,
+          textarea.error,
+          select.error,
+          mat-select.error {
+            background: #ec080825;
+            border-bottom: 3px solid #ff0000;
+          }
+
+          input.error:focus,
+          textarea.error:focus,
+          mat-select.error.mat-focused {
+            outline: none;
+            border: 1px solid #ff0000;
+            border-bottom: 2px solid #ff0000;
+          }
+
+          label {
+            position: absolute;
+            top: .8rem;
+            left: 0.5rem;
+            font-size: 1rem;
+            color: #666;
+            pointer-events: none;
+            transition: all 0.2s ease;
+          }
+
+          input:focus+label,
+          input.has-value+label,
+          textarea:focus+label,
+          textarea.has-value+label,
+          select.has-value+label,
+          mat-select.has-value+label,
+          mat-select.mat-focused+label {
+            top: 0.3rem;
+            font-size: 0.75rem;
+            color: #007bff;
+          }
+
+          input.error:focus+label,
+          input.has-value.error+label,
+          textarea.error:focus+label,
+          textarea.has-value.error+label,
+          select.has-value.error+label,
+          mat-select.has-value.error+label,
+          mat-select.error.mat-focused+label {
+            color: #ff0000;
+          }
+
+          /* Opciones dentro del dropdown de Angular Material */
+          mat-option {
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+          }
+
+          /* Opciones seleccionadas */
+          mat-option.mat-selected {
+            background-color: #007bff20 !important;
+            color: #007bff;
+          }
+        }
+
+
+        .form-switch-group {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 12px;
+          background: #0886ec25;
+          border: none;
+          border-bottom: 3px solid #007bff;
+          padding: .2rem .8rem .5rem;
+          border-radius: 6px;
+          gap: 5px;
+
+          label {
+            font-size: 1rem;
+            color: #666;
+
+            span {
+              font-size: 0.8rem;
+              color: #999;
+            }
+          }
+
+          .switch-content {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+          }
+
+          .estado-label {
+            font-weight: bold;
+            color: #007bff;
+          }
+
+          .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+          }
+
+          .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+
+          .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 26px;
+          }
+
+          .slider::before {
+            position: absolute;
+            content: '';
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+          }
+
+          .switch input:checked+.slider {
+            background-color: #007bff;
+          }
+
+          .switch input:checked+.slider::before {
+            transform: translateX(24px);
+          }
+
+        }
+
+        .lista-section {
+          border: 3px solid #007bff;
+          padding: .5rem .8rem .8rem;
+          border-radius: 6px;
+          margin-bottom: 25px;
+
+          .lista-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            h2 {
+              position: absolute;
+              background-color: white;
+              margin: 0;
+              margin-bottom: 18px;
+              padding: 0 10px;
+              font-weight: 500;
+              font-size: 1rem;
+              color: #666;
+            }
+          }
+
+          .lista-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: .5rem 0 0;
+
+            span {
+              background: #0886ec25;
+              padding: 4px 8px;
+              border-bottom: 3px solid #007bff;
+              border-radius: 6px;
+              font-size: 0.875rem;
+              display: flex;
+              align-items: center;
+
+              &.no-item {
+                background: transparent;
+                color: #666;
+                padding: 0;
+              }
+            }
+          }
+        }
+
+      }
+
+      .button-row {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 10px;
+
+        .save {
+          width: 140px;
+          font-size: 1.1rem;
+          padding: 5px;
+        }
+      }
     }
   }
 
@@ -278,7 +572,8 @@ html {
       cursor: pointer;
       transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
 
-      mat-icon {
+      mat-icon,
+      i {
         font-size: 1.35rem;
         height: fit-content;
         width: fit-content;
@@ -390,12 +685,12 @@ html {
       padding: 8px;
     }
 
-     input {
+    input {
       background-color: white;
       border-radius: 8px;
       border: 1px solid #1976d2;
       padding: 8px;
-     }
+    }
 
     .input-group-#{$type} {
       display: flex;

@@ -12,13 +12,15 @@
     <div class="tecnico-detalle">
 
         <!-- 🧾 Información general -->
-        <div class="title">
-            <img mat-card-image [src]="'http://localhost:3000/images/'+ dato()?.usuario?.imagen"
-                [alt]="dato()?.usuario?.nombre" />
-            <div class="content-group">
-                <span style="font-size: .8rem;">{{ 'ID: ' + dato()?.id }}</span>
-                <h2>{{ dato()?.usuario?.nombre }}</h2>
-                <span>{{ dato()?.usuario?.correo }}</span>
+        <div class="bg-gradient-primary  title">
+            <div class="title-content">
+                <img mat-card-image [src]="'http://localhost:3000/images/'+ dato()?.usuario?.imagen"
+                    [alt]="dato()?.usuario?.nombre" />
+                <div class="title-info">
+                    <span style="font-size: .8rem;">{{ 'ID: ' + dato()?.id }}</span>
+                    <h2>{{ dato()?.usuario?.nombre }}</h2>
+                    <span>{{ dato()?.usuario?.correo }}</span>
+                </div>
             </div>
             <span class="bg-gradient-primary chip">{{ (dato()?.motivoDisponible ?? '') | transformText }}</span>
         </div>
@@ -117,8 +119,8 @@
                     </div>
                     <div class="card-body">
                         <p><strong>Problema:</strong> {{ asignacion.ticket.etiqueta.nombre }}</p>
-                        <p><strong>Categoría:</strong> {{ asignacion.ticket.etiqueta.categoria.nombre }}</p>
-                        <p><strong>Prioridad:</strong> {{ asignacion.ticket.etiqueta.categoria.prioridad | transformText
+                        <p><strong>Categoría:</strong> {{ asignacion.ticket.etiqueta.categoria?.nombre }}</p>
+                        <p><strong>Prioridad:</strong> {{ (asignacion.ticket.etiqueta.categoria?.prioridad || '') | transformText
                             }}
                         </p>
                         <p><strong>Motivo:</strong> {{ asignacion.motivo }}</p>

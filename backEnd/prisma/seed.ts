@@ -1,7 +1,7 @@
 import { PrismaClient } from "../generated/prisma";
 import { categorias, etiquetas, autotriage } from "./seeds/categorias";
 import { especialidades } from "./seeds/especialidades";
-import { asignaciones, historialTickets, tickets, valoraciones } from "./seeds/tickets";
+import { asignaciones, historialTickets, imagenes, tickets, valoraciones } from "./seeds/tickets";
 import { tecnicos, usuarios } from "./seeds/usuarios";
 
 const prisma = new PrismaClient();
@@ -23,6 +23,7 @@ const main = async () => {
         await prisma.asignacion.createMany({ data: asignaciones });
         await prisma.historialTicket.createMany({ data: historialTickets });
         await prisma.valoracion.createMany({ data: valoraciones });
+        await prisma.ticket_Imagen.createMany({ data: imagenes});
         
     } catch (error) {
         console.error("Error al sembrar la base de datos:", error);
