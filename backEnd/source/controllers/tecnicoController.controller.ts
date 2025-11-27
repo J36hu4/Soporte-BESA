@@ -81,7 +81,7 @@ export class TecnicoController {
                         usuario: {
                             select: {
                                 estado: true,
-                                nombre: true,
+                                nombre_completo: true,
                                 correo: true
                             }
                         }
@@ -148,7 +148,9 @@ export class TecnicoController {
                     },
                     usuario: {
                         select: {
+                            nombre_completo: true,
                             nombre: true,
+                            apellidos: true,
                             correo: true,
                             imagen: true,
                             estado: true
@@ -225,6 +227,8 @@ export class TecnicoController {
             const newUsuario = await this.prisma.usuario.create({
                 data: {
                     nombre: U.nombre,
+                    apellidos: U.apellidos,
+                    nombre_completo: U.nombre_completo,
                     contrasenna: contrasenna,
                     correo: U.correo,
                     imagen: U.imagen,
@@ -272,6 +276,8 @@ export class TecnicoController {
                 where: { id: id },
                 data: {
                     nombre: U.nombre,
+                    apellidos: U.apellidos,
+                    nombre_completo: U.nombre_completo,
                     correo: U.correo,
                     imagen: U.imagen,
                     estado: U.estado

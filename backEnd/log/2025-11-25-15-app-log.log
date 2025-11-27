@@ -1,0 +1,35 @@
+2025-11-25 15:01:11.419 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.regla_Autotriage.create()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:206:56
+
+  203     return etiqueta ? { id: etiqueta.id } : null;
+  204 }).filter((e: any) => e !== null) ?? [];
+  205 
+→ 206 await this.prisma.regla_Autotriage.create({
+        data: {
+          nombre: "gd",
+          idCategoria: 8,
+          prioridad: "2",
+                     ~~~
+          carga: "2",
+          especialidades: {
+            connect: [
+              {
+                id: 2
+              },
+              {
+                id: 4
+              }
+            ]
+          },
+          etiquetas: {
+            connect: [
+              {
+                id: 9
+              }
+            ]
+          }
+        }
+      })
+
+Argument `prioridad`: Invalid value provided. Expected Int, provided String.

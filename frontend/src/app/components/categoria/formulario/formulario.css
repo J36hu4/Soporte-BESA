@@ -116,6 +116,78 @@ form {
             }
         }
 
+        .itemregla {
+            background: #0886ec25;
+            box-shadow: 0 0px 12px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #0a79d1;
+            padding: .5rem 1rem .8rem;
+            border-radius: 12px;
+            max-width: 400px;
+            flex: 1 1 350px;
+            font-family: 'Segoe UI', sans-serif;
+
+            .item-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid #d0d0d0;
+                padding-bottom: 0.5rem;
+
+                h4 {
+                    margin: 0;
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    color: #0a79d1;
+                }
+
+                .estado {
+                    padding: 0.3rem 0.8rem;
+                    border-radius: 12px;
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: white;
+                }
+            }
+
+            .item-info {
+                margin-top: 0.75rem;
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.9rem;
+
+                p {
+                    margin: 0;
+                    color: #333;
+                }
+            }
+
+            .subgrupo {
+                margin-top: 1rem;
+
+                label {
+                    font-weight: 600;
+                    font-size: 0.85rem;
+                    color: #444;
+                    display: block;
+                    margin-bottom: 0.3rem;
+                }
+
+                .pill-group {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+
+                    .pill {
+                        background-color: #0a79d1;
+                        color: white;
+                        padding: 0.3rem 0.7rem;
+                        border-radius: 20px;
+                        font-size: 0.8rem;
+                        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+                    }
+                }
+            }
+        }
     }
 
 }
@@ -185,9 +257,17 @@ form {
         .popContent {
             padding: .6rem 1rem 1rem;
 
-            .btn-primary {
-                margin-left: auto;
+            .button-row {
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
                 margin-top: 10px;
+
+                .save {
+                    width: 140px;
+                    font-size: 1.1rem;
+                    padding: 5px;
+                }
             }
 
             .input-group {
@@ -284,6 +364,107 @@ form {
         }
     }
 
+
+    .popEspecialidades {
+        width: 400px;
+        min-height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        background: white;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+
+        h2 {
+            margin: 0;
+            padding: 5px;
+            margin-bottom: 0.2rem;
+            font-size: 1.5rem;
+            text-align: center;
+            color: white;
+        }
+
+        .popContent {
+            padding: .6rem 1rem 1rem;
+            box-sizing: border-box;
+
+            .button-row {
+                display: flex;
+                justify-content: flex-end;
+                gap: 10px;
+                margin-top: 10px;
+
+                .save {
+                    width: 140px;
+                    font-size: 1.1rem;
+                    padding: 5px;
+                }
+            }
+
+            .input-group {
+                display: flex;
+                gap: 10px;
+                margin-bottom: 15px;
+
+                input {
+                    flex-grow: 1;
+                }
+
+                button {
+                    background-color: #0886ec25;
+                    border: 1px solid #007bff;
+                    border-radius: 8px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #53acf5;
+                    }
+                }
+
+            }
+
+            .especialidades-lista {
+                max-height: 280px;
+                min-height: 280px;
+                flex-grow: 1;
+                overflow-y: auto;
+                border-radius: 10px;
+                border: 2px solid #007bff;
+
+
+                label {
+                    display: flex;
+                    align-items: center;
+                    border-bottom: 2px solid #007bff;
+                    box-sizing: border-box;
+                    cursor: pointer;
+                    background: #0886ec25;
+
+                    &:hover {
+                        background-color: #0886ec25;
+                    }
+
+                    &.checked span{
+                        background-color: #0886ec25;
+                    }
+                    
+
+                    input[type='checkbox'] {
+                        width: 30px;
+                        height: 15px;
+                    }
+
+                    span {
+                        background-color: white;
+                        padding: 0.5rem 0.5rem;
+                        width: 100%;
+                        border-left: 1px solid gray;
+                    }
+                }
+            }
+
+        }
+    }
+
+
     .popReglas {
         width: 600px;
         min-height: 200px;
@@ -306,11 +487,6 @@ form {
             box-shadow: none;
             border: none;
 
-            .btn-primary {
-                margin-left: auto;
-                margin-top: 10px;
-            }
-
             .form-body {
                 .row {
                     margin: 0;
@@ -322,7 +498,7 @@ form {
 
                         h2 {
                             font-size: 1rem;
-                            color: #333; 
+                            color: #333;
                             margin-bottom: 20px;
                         }
                     }

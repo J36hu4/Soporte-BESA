@@ -10,7 +10,9 @@ datasource db {
 
 model Usuario {
   id                      Int               @id @default(autoincrement())
-  nombre                  String?           @db.VarChar(30)
+  nombre_completo         String?           @db.VarChar(50)
+  nombre                  String?           @db.VarChar(20)
+  apellidos               String?           @db.VarChar(30)
   imagen                  String?           @db.VarChar(500)
   correo                  String            @unique @db.VarChar(35)
   contrasenna             String            @db.VarChar(250)
@@ -110,9 +112,9 @@ enum Prioridad {
 
 model Etiqueta {
   id          Int                @id @default(autoincrement())
+  nombre      String             @db.VarChar(50)
   categoria   Categoria          @relation(fields: [idCategoria], references: [id])
   idCategoria Int
-  nombre      String             @db.VarChar(50)
   Ticket      Ticket[]
   regla       Regla_Autotriage[]
 }

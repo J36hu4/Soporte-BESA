@@ -296,7 +296,7 @@ html {
 
           /* Opciones seleccionadas */
           mat-option.mat-selected {
-            background-color: #007bff20 !important;
+            background-color: #007bff !important;
             color: #007bff;
           }
         }
@@ -386,6 +386,10 @@ html {
           padding: .5rem .8rem .8rem;
           border-radius: 6px;
           margin-bottom: 25px;
+
+          &.error {
+            border: 3px solid #ff0000;
+          }
 
           .lista-header {
             display: flex;

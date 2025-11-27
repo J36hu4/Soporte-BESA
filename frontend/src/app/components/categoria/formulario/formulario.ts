@@ -12,7 +12,7 @@ import { TecnicoService } from '../../../share/services/api/tecnico.service';
 import { Idioma, MotivoDisponible, Prioridad, Roles } from '../../../share/models/Enums';
 import { CategoriaService } from '../../../share/services/api/categoria.service';
 import { Categoria, Etiqueta, ReglaAutotriage } from '../../../share/models/CategoriaModel';
-import { numberValidator } from '../../../share/validators/number-validator';
+import { numberValidator, numberValidatorManual } from '../../../share/validators/number-validator';
 import Fuse from 'fuse.js';
 
 @Component({
@@ -29,7 +29,8 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private uploadService: FileUploadService,
     private noti: NotificationService,
-    private categoriaSv: CategoriaService
+    private categoriaSv: CategoriaService,
+    private especialidadSvc: TecnicoService
   ) { }
 
   // Subject para controlar la destrucción de suscripciones y evitar memory leaks
@@ -59,6 +60,14 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
   //Variebales Regla autotriage
   Regla: ReglaAutotriage | null = null;
   reglaForm!: FormGroup;
+  newRegla = true
+
+  //Variables Especialidades
+  especialidades: Especialidad[] = []
+  seleccionadas: Especialidad[] = []
+  filtroEspecialidad = '';
+  visibles: Especialidad[] = [];
+  seleccion: Set<number> = new Set();
 
 
   /**
@@ -84,12 +93,17 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
       this.Etiquetas.set(lista)
       const options = {
         keys: ['nombre'],       // campo a buscar
-        threshold: 0.5,         // tolerancia a errores (0 exacto, 1 muy permisivo)
-        distance: 100           // distancia máxima de coincidencia
+        threshold: 0.4,         // tolerancia a errores (0 exacto, 1 muy permisivo)
+        distance: 100          // distancia máxima de coincidencia
       };
       this.fuse = new Fuse(lista, options);
 
     })
+
+    this.especialidadSvc.getEspecialidades().subscribe(e => {
+      this.especialidades = e;
+      this.actualizarEspecialidades()
+    });
   }
 
   /**
@@ -97,31 +111,45 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
    */
   private initForm(): void {
     this.categoriaForm = this.fb.group({
-      id: [null],
+      id: [0],
       nombre: [null, [Validators.required, Validators.minLength(2)]],
       descripcion: [null, [Validators.required, Validators.minLength(2)]],
-      tiempoRespuesta: [null, [Validators.required, numberValidator(0)]],
-      tiempoSolcion: [null, [Validators.required, numberValidator(0)]],
+      tiempoRespuesta: [null, [Validators.required, numberValidator]],
+      tiempoSolcion: [null, [Validators.required, numberValidator]],
       prioridad: [null, Validators.required],
-      etiquetas: [this.fb.array([]), [Validators.required]],
-      reglas: [this.fb.array([]), [Validators.required]],
-      especialidades: [this.fb.array([]), [Validators.required]],
+      etiquetas: [this.fb.array([])],
+      reglas: [this.fb.array([])],
+      especialidades: [this.fb.array([])],
     });
 
     this.reglaForm = this.fb.group({
-      id: [null],
+      id: [0],
       nombre: [null, [Validators.required, Validators.minLength(2)]],
-      carga: ['baja', [Validators.required]],
-      reglaPrioridad: ['baja', Validators.required],
-      etiquetas: [this.fb.array([]), [Validators.required]],
-      especialidades: [this.fb.array([]), [Validators.required]],
+      carga: [0, [Validators.required]],
+      reglaPrioridad: [0, Validators.required],
+      etiquetas: [[], [Validators.required]],
+      especialidades: [[], [Validators.required]],
       activa: [true]
     });
   }
 
   private patchFormValues(data: Categoria) {
     this.categoria = data
+    this.categoriaForm.patchValue({
+      id: this.categoria.id,
+      nombre: this.categoria.nombre,
+      descripcion: this.categoria.descripcion,
+      tiempoRespuesta: this.categoria.tiempoMaximoRespuesta,
+      tiempoSolcion: this.categoria.tiempoMaximoSolucion,
+      prioridad: this.categoria.prioridad,
+      etiquetas: [],
+      reglas: [],
+      especialidades: [],
+    });
 
+    this.categoriaForm.controls['especialidades'].setValue(data.especialidades);
+    this.categoriaForm.controls['reglas'].setValue(data.reglas);
+    this.categoriaForm.controls['etiquetas'].setValue(data.etiquetas);
   }
 
   submit() {
@@ -132,20 +160,63 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
       return;
     }
 
-    // const save = () => {
-    //   const request$ = this.isCreate
-    //     ? this.categoriaSv.create()
-    //     : this.categoriaSv.update();
+    const cat = this.categoriaForm.value;
 
-    //   request$.pipe(takeUntil(this.destroy$)).subscribe(data => {
-    //     this.noti.success(
-    //       this.isCreate ? 'Crear Tecnico' : 'Actualizar Tecnico',
-    //       this.isCreate ? 'Nuevo tecnico creado exitosamente' : 'Tecnico actualizado exitosamente',
-    //       5000
-    //     );
-    //     this.router.navigate(['tecnicos'])
-    //   });
-    // };
+    if (cat.tiempoRespuesta >= cat.tiempoSolcion) {
+      this.categoriaForm.controls['tiempoRespuesta'].setErrors({ greaterOrEqual: true });
+      this.noti.error('Formulario Inválido', 'El tiempo respuesta no puede ser mayor o igual al tiempo de solucion', 5000);
+      return;
+    }
+
+    if (numberValidatorManual(cat.tiempoRespuesta)) {
+      this.categoriaForm.controls['tiempoRespuesta'].setErrors({ invalidNumber: true });
+      this.noti.error('Formulario Inválido', 'Debe ser un numero', 5000);
+      return;
+    }
+
+    if (cat.etiquetas.length <= 0) {
+
+      this.categoriaForm.controls['etiquetas'].setErrors({ invalid: true });
+      this.noti.error('Formulario Inválido', 'Debe agregar al menos una etiqueta', 5000);
+      return;
+    }
+
+    if (cat.especialidades.length <= 0) {
+
+      this.categoriaForm.controls['especialidades'].setErrors({ invalid: true });
+      this.noti.error('Formulario Inválido', 'Debe agregar al menos una especialidad', 5000);
+      return;
+    }
+
+
+    const newCategoria: Categoria = {
+      id: cat.id,
+      nombre: cat.nombre,
+      descripcion: cat.descripcion,
+      tiempoMaximoRespuesta: cat.tiempoRespuesta,
+      tiempoMaximoSolucion: cat.tiempoSolcion,
+      prioridad: cat.prioridad,
+      especialidades: cat.especialidades,
+      etiquetas: cat.etiquetas,
+      reglas: Array.isArray(cat.reglas) ? cat.reglas : []
+    }
+
+    console.log(newCategoria)
+
+
+    const request$ = this.isCreate
+      ? this.categoriaSv.create(newCategoria)
+      : this.categoriaSv.update(newCategoria);
+
+    request$.pipe(takeUntil(this.destroy$)).subscribe(data => {
+      this.noti.success(
+        this.isCreate ? 'Crear Categoria' : 'Actualizar Categoria',
+        this.isCreate ? 'Nueva categoria creada exitosamente' : 'Categoria actualizada exitosamente',
+        5000
+      );
+      this.router.navigate(['categorias'])
+    });
+
 
   }
 
@@ -160,7 +231,7 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
   onReset(): void {
     this.categoriaForm.reset();
     this.categoriaForm.patchValue({
-      id: null,
+      id: 0,
       nombre: '',
       descripcion: '',
       tiempoRespuesta: null,
@@ -179,21 +250,76 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
     this.router.navigate(['/categorias']);
   }
 
-  onEspecialidadesConfirmadas(lista: Especialidad[]) {
-    this.verEspecialidades = false;
-    this.categoriaForm.controls['especialidades'].setValue(lista);
-  }
-
   closePops(): void {
     this.verEspecialidades = false;
     this.verReglas = false;
+    this.reglaForm.reset();
+    this.reglaForm.patchValue({
+      id: null,
+      nombre: null,
+      carga: 'baja',
+      reglaPrioridad: 'baja',
+      etiquetas: [],
+      especialidades: [],
+      activa: true
+    });
     this.verEtiquetas = false;
     this.etiquetasSeleccionadas = [];
     this.nuevoNombreEtiqueta = '';
     this.sugerencias = [];
+    console.log()
   }
 
+  onVerEspecialidades() {
+    this.verEspecialidades = true;
+    this.categoriaForm.controls['especialidades'].setErrors(null);
+    this.filtroEspecialidad = ''
+    this.actualizarEspecialidades()
+  }
+
+  actualizarEspecialidades() {
+    this.visibles = this.especialidades;
+    const especialidadesSelect = this.categoriaForm.controls['especialidades'].value;
+    this.seleccionadas = Array.isArray(especialidadesSelect) ? especialidadesSelect : [];
+    if (this.seleccionadas && this.seleccionadas.length > 0) {
+      for (const esp of this.seleccionadas) {
+        this.seleccion.add(esp.id);
+      }
+    }
+  }
+
+  onFiltroEspecialidad() {
+    const removeAccents = (str: string): string => {
+      return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    const v = removeAccents(this.filtroEspecialidad.toLowerCase()); this.visibles = this.especialidades.filter(e =>
+      removeAccents(e.nombre.toLowerCase()).includes(v)
+    );
+  }
+
+  estaSeleccionada(e: Especialidad): boolean {
+    return this.seleccion.has(e.id);
+  }
+
+  chechEspecialidad(especialidad: Especialidad) {
+    this.seleccion.has(especialidad.id)
+      ? this.seleccion.delete(especialidad.id)
+      : this.seleccion.add(especialidad.id);
+  }
+
+  onEspecialidadesConfirmadas() {
+    const lista = this.especialidades.filter(e => this.seleccion.has(e.id));
+    this.categoriaForm.controls['especialidades'].setValue(lista);
+    this.verEspecialidades = false;
+    this.seleccion.clear()
+    this.seleccionadas = []
+    this.filtroEspecialidad = ''
+  }
+
+
   onVerEtiquetas() {
+    this.categoriaForm.controls['etiquetas'].setErrors(null);
     if (this.verEtiquetas) {
       this.verEtiquetas = false;
       this.etiquetasSeleccionadas = [];
@@ -262,31 +388,104 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
   }
 
   eliminarEtiqueta(eti: Etiqueta) {
-    this.etiquetasSeleccionadas = this.etiquetasSeleccionadas.filter(etq => etq.id !== eti.id && etq.nombre !== eti.nombre)
+    this.etiquetasSeleccionadas = this.etiquetasSeleccionadas.filter(etq => etq.nombre !== eti.nombre)
   }
 
 
-  onVerRegla() {
+  onVerRegla(id: number | null, nombre: number | null) {
     if (this.verReglas) {
       this.verReglas = false
       this.reglaForm.reset();
     } else {
       this.verReglas = true;
       this.reglaForm.reset();
-      this.reglaForm.patchValue({
-        id: null,
-        nombre: null,
-        carga: 'baja',
-        reglaPrioridad: 'baja',
-        etiquetas: [],
-        especialidades: [],
-        activa: true
-      });
+      this.Regla = this.listReglas.find((r: any) => r.id === id && r.nombre === nombre)
+      if (this.Regla) {
+        this.newRegla = false
+        this.reglaForm.patchValue({
+          id: this.Regla.id,
+          nombre: this.Regla.nombre,
+          carga: this.Regla.carga,
+          reglaPrioridad: this.Regla.prioridad,
+          etiquetas: [],
+          especialidades: [],
+          activa: this.Regla.activa
+        });
+        this.reglaForm.controls['etiquetas'].setValue(this.Regla.etiquetas?.map((e: any) => e.nombre));
+        this.reglaForm.controls['especialidades'].setValue(this.Regla.especialidades?.map((e: any) => e.nombre))
+      } else {
+        this.newRegla = true
+        this.reglaForm.patchValue({
+          id: null,
+          nombre: null,
+          carga: 0,
+          reglaPrioridad: 0,
+          etiquetas: [],
+          especialidades: [],
+          activa: true
+        });
+      }
     }
   }
 
   guardarRegla() {
+    if (this.reglaForm.invalid) {
+      this.noti.error('Formulario Inválido', 'Revise los campos marcados.', 5000);
+      return;
+    }
 
+    const reglaValue = this.reglaForm.value;
+
+    let especialidades: Especialidad[] = [];
+    if (reglaValue.especialidades?.length > 0) {
+      this.listEspecialidades.forEach((es: Especialidad) => {
+        if (reglaValue.especialidades.includes(es.nombre)) {
+          especialidades.push({
+            id: es.id,
+            nombre: es.nombre,
+            descripcion: es.descripcion
+          });
+        }
+      });
+    }
+
+    let etiquetas: Etiqueta[] = [];
+    if (reglaValue.etiquetas?.length > 0) {
+      this.listEtiquetas.forEach((etq: Etiqueta) => {
+        if (reglaValue.etiquetas.includes(etq.nombre)) {
+          etiquetas.push({
+            id: etq.id,
+            nombre: etq.nombre
+          });
+        }
+      });
+    }
+
+    const nuevaRegla: ReglaAutotriage = {
+      id: reglaValue.id ?? 0,
+      nombre: reglaValue.nombre,
+      carga: parseInt(reglaValue.carga),
+      prioridad: parseInt(reglaValue.reglaPrioridad),
+      etiquetas: etiquetas,
+      especialidades: especialidades,
+      activa: reglaValue.activa
+    }
+
+
+    let reglas = (this.listReglas.length || []) > 0 ? this.listReglas : [];
+    let nuevasReglas = [];
+    if (this.newRegla) {
+      nuevasReglas = [...reglas, nuevaRegla];
+    } else {
+      reglas = reglas.filter((r: any) => r.id !== this.Regla?.id && r.nombre !== this.Regla?.nombre);
+      nuevasReglas = [...reglas, nuevaRegla];
+    }
+
+
+
+    this.categoriaForm.controls['reglas'].setValue(nuevasReglas);
+
+    this.closePops();
   }
 
   get listEtiquetas() {
@@ -296,5 +495,26 @@ export class CategoriaFormulario implements OnInit, OnDestroy {
   get listEspecialidades() {
     return this.categoriaForm.controls['especialidades'].value
   }
+  get listReglas() {
+    return this.categoriaForm.controls['reglas'].value
+  }
+
+
+
+
+
+
+
+  blockInvalidKeys(event: KeyboardEvent) {
+    const allowedKeys = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
+    const controlKeys = ["Backspace", "Tab", "ArrowLeft", "ArrowRight", "Delete", "Enter"];
+
+    if (![...allowedKeys, ...controlKeys].includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
+
+
 
 }

@@ -1,0 +1,18 @@
+2025-11-27 01:20:08.005 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.etiqueta.deleteMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:249:40
+
+  246 const EspecialidadesOld = categoriaOld?.especialidades.map((es: any) => ({ id: es.id })) ?? [];
+  247 const EtiquetasOld = categoriaOld?.etiquetas.map((es: any) => ({ id: es.id })) ?? [];
+  248 
+→ 249 await this.prisma.etiqueta.deleteMany(
+Foreign key constraint violated on the fields: (`idEtiqueta`)
+2025-11-27 01:22:48.748 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.etiqueta.deleteMany()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:249:40
+
+  246 const EspecialidadesOld = categoriaOld?.especialidades.map((es: any) => ({ id: es.id })) ?? [];
+  247 const EtiquetasOld = categoriaOld?.etiquetas.map((es: any) => es.id) ?? [];
+  248 
+→ 249 await this.prisma.etiqueta.deleteMany(
+Foreign key constraint violated on the fields: (`idEtiqueta`)

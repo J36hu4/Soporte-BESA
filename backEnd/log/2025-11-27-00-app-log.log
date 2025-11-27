@@ -1,0 +1,36 @@
+2025-11-27 00:18:37.748 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:252:62
+
+  249 const EspecialidadesOld = categoriaOld?.especialidades.map((es: any) => ({ id: es.id })) ?? [];
+  250 const EtiquetasOld = categoriaOld?.etiquetas.map((es: any) => ({ id: es.id })) ?? [];
+  251 
+→ 252 const newCategoria = await this.prisma.categoria.update(
+The change you are trying to make would violate the required relation 'CategoriaToEtiqueta' between the `Etiqueta` and `Categoria` models.
+2025-11-27 00:20:51.617 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:252:62
+
+  249 const EspecialidadesOld = categoriaOld?.especialidades.map((es: any) => ({ id: es.id })) ?? [];
+  250 const EtiquetasOld = categoriaOld?.etiquetas.map((es: any) => ({ id: es.id })) ?? [];
+  251 
+→ 252 const newCategoria = await this.prisma.categoria.update(
+The change you are trying to make would violate the required relation 'CategoriaToEtiqueta' between the `Etiqueta` and `Categoria` models.
+2025-11-27 00:23:57.357 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:240:62
+
+  237 const ReglasExistentes = c.reglas?.filter((e: any) => e.id !== 0) ?? [];
+  238 const ReglasNuevas = c.reglas?.filter((e: any) => e.id === 0) ?? [];
+  239 
+→ 240 const newCategoria = await this.prisma.categoria.update(
+The change you are trying to make would violate the required relation 'CategoriaToEtiqueta' between the `Etiqueta` and `Categoria` models.
+2025-11-27 00:26:34.079 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.categoria.update()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\categoriaController.controller.ts:252:62
+
+  249 const EspecialidadesOld = categoriaOld?.especialidades.map((es: any) => ({ id: es.id })) ?? [];
+  250 const EtiquetasOld = categoriaOld?.etiquetas.map((es: any) => ({ id: es.id })) ?? [];
+  251 
+→ 252 const newCategoria = await this.prisma.categoria.update(
+The change you are trying to make would violate the required relation 'CategoriaToEtiqueta' between the `Etiqueta` and `Categoria` models.

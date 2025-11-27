@@ -2272,7 +2272,9 @@ export namespace Prisma {
 
   export type UsuarioMinAggregateOutputType = {
     id: number | null
+    nombre_completo: string | null
     nombre: string | null
+    apellidos: string | null
     imagen: string | null
     correo: string | null
     contrasenna: string | null
@@ -2284,7 +2286,9 @@ export namespace Prisma {
 
   export type UsuarioMaxAggregateOutputType = {
     id: number | null
+    nombre_completo: string | null
     nombre: string | null
+    apellidos: string | null
     imagen: string | null
     correo: string | null
     contrasenna: string | null
@@ -2296,7 +2300,9 @@ export namespace Prisma {
 
   export type UsuarioCountAggregateOutputType = {
     id: number
+    nombre_completo: number
     nombre: number
+    apellidos: number
     imagen: number
     correo: number
     contrasenna: number
@@ -2318,7 +2324,9 @@ export namespace Prisma {
 
   export type UsuarioMinAggregateInputType = {
     id?: true
+    nombre_completo?: true
     nombre?: true
+    apellidos?: true
     imagen?: true
     correo?: true
     contrasenna?: true
@@ -2330,7 +2338,9 @@ export namespace Prisma {
 
   export type UsuarioMaxAggregateInputType = {
     id?: true
+    nombre_completo?: true
     nombre?: true
+    apellidos?: true
     imagen?: true
     correo?: true
     contrasenna?: true
@@ -2342,7 +2352,9 @@ export namespace Prisma {
 
   export type UsuarioCountAggregateInputType = {
     id?: true
+    nombre_completo?: true
     nombre?: true
+    apellidos?: true
     imagen?: true
     correo?: true
     contrasenna?: true
@@ -2441,7 +2453,9 @@ export namespace Prisma {
 
   export type UsuarioGroupByOutputType = {
     id: number
+    nombre_completo: string | null
     nombre: string | null
+    apellidos: string | null
     imagen: string | null
     correo: string
     contrasenna: string
@@ -2472,7 +2486,9 @@ export namespace Prisma {
 
   export type UsuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    nombre_completo?: boolean
     nombre?: boolean
+    apellidos?: boolean
     imagen?: boolean
     correo?: boolean
     contrasenna?: boolean
@@ -2493,7 +2509,9 @@ export namespace Prisma {
 
   export type UsuarioSelectScalar = {
     id?: boolean
+    nombre_completo?: boolean
     nombre?: boolean
+    apellidos?: boolean
     imagen?: boolean
     correo?: boolean
     contrasenna?: boolean
@@ -2503,7 +2521,7 @@ export namespace Prisma {
     idioma?: boolean
   }
 
-  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "imagen" | "correo" | "contrasenna" | "role" | "ultimaSesion" | "estado" | "idioma", ExtArgs["result"]["usuario"]>
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre_completo" | "nombre" | "apellidos" | "imagen" | "correo" | "contrasenna" | "role" | "ultimaSesion" | "estado" | "idioma", ExtArgs["result"]["usuario"]>
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tecnico?: boolean | Usuario$tecnicoArgs<ExtArgs>
     ticket?: boolean | Usuario$ticketArgs<ExtArgs>
@@ -2526,7 +2544,9 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      nombre_completo: string | null
       nombre: string | null
+      apellidos: string | null
       imagen: string | null
       correo: string
       contrasenna: string
@@ -2910,7 +2930,9 @@ export namespace Prisma {
    */
   interface UsuarioFieldRefs {
     readonly id: FieldRef<"Usuario", 'Int'>
+    readonly nombre_completo: FieldRef<"Usuario", 'String'>
     readonly nombre: FieldRef<"Usuario", 'String'>
+    readonly apellidos: FieldRef<"Usuario", 'String'>
     readonly imagen: FieldRef<"Usuario", 'String'>
     readonly correo: FieldRef<"Usuario", 'String'>
     readonly contrasenna: FieldRef<"Usuario", 'String'>
@@ -7575,20 +7597,20 @@ export namespace Prisma {
 
   export type EtiquetaMinAggregateOutputType = {
     id: number | null
-    idCategoria: number | null
     nombre: string | null
+    idCategoria: number | null
   }
 
   export type EtiquetaMaxAggregateOutputType = {
     id: number | null
-    idCategoria: number | null
     nombre: string | null
+    idCategoria: number | null
   }
 
   export type EtiquetaCountAggregateOutputType = {
     id: number
-    idCategoria: number
     nombre: number
+    idCategoria: number
     _all: number
   }
 
@@ -7605,20 +7627,20 @@ export namespace Prisma {
 
   export type EtiquetaMinAggregateInputType = {
     id?: true
-    idCategoria?: true
     nombre?: true
+    idCategoria?: true
   }
 
   export type EtiquetaMaxAggregateInputType = {
     id?: true
-    idCategoria?: true
     nombre?: true
+    idCategoria?: true
   }
 
   export type EtiquetaCountAggregateInputType = {
     id?: true
-    idCategoria?: true
     nombre?: true
+    idCategoria?: true
     _all?: true
   }
 
@@ -7710,8 +7732,8 @@ export namespace Prisma {
 
   export type EtiquetaGroupByOutputType = {
     id: number
-    idCategoria: number
     nombre: string
+    idCategoria: number
     _count: EtiquetaCountAggregateOutputType | null
     _avg: EtiquetaAvgAggregateOutputType | null
     _sum: EtiquetaSumAggregateOutputType | null
@@ -7735,8 +7757,8 @@ export namespace Prisma {
 
   export type EtiquetaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    idCategoria?: boolean
     nombre?: boolean
+    idCategoria?: boolean
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     Ticket?: boolean | Etiqueta$TicketArgs<ExtArgs>
     regla?: boolean | Etiqueta$reglaArgs<ExtArgs>
@@ -7747,11 +7769,11 @@ export namespace Prisma {
 
   export type EtiquetaSelectScalar = {
     id?: boolean
-    idCategoria?: boolean
     nombre?: boolean
+    idCategoria?: boolean
   }
 
-  export type EtiquetaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "idCategoria" | "nombre", ExtArgs["result"]["etiqueta"]>
+  export type EtiquetaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "idCategoria", ExtArgs["result"]["etiqueta"]>
   export type EtiquetaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     categoria?: boolean | CategoriaDefaultArgs<ExtArgs>
     Ticket?: boolean | Etiqueta$TicketArgs<ExtArgs>
@@ -7768,8 +7790,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      idCategoria: number
       nombre: string
+      idCategoria: number
     }, ExtArgs["result"]["etiqueta"]>
     composites: {}
   }
@@ -8143,8 +8165,8 @@ export namespace Prisma {
    */
   interface EtiquetaFieldRefs {
     readonly id: FieldRef<"Etiqueta", 'Int'>
-    readonly idCategoria: FieldRef<"Etiqueta", 'Int'>
     readonly nombre: FieldRef<"Etiqueta", 'String'>
+    readonly idCategoria: FieldRef<"Etiqueta", 'Int'>
   }
     
 
@@ -14800,7 +14822,9 @@ export namespace Prisma {
 
   export const UsuarioScalarFieldEnum: {
     id: 'id',
+    nombre_completo: 'nombre_completo',
     nombre: 'nombre',
+    apellidos: 'apellidos',
     imagen: 'imagen',
     correo: 'correo',
     contrasenna: 'contrasenna',
@@ -14860,8 +14884,8 @@ export namespace Prisma {
 
   export const EtiquetaScalarFieldEnum: {
     id: 'id',
-    idCategoria: 'idCategoria',
-    nombre: 'nombre'
+    nombre: 'nombre',
+    idCategoria: 'idCategoria'
   };
 
   export type EtiquetaScalarFieldEnum = (typeof EtiquetaScalarFieldEnum)[keyof typeof EtiquetaScalarFieldEnum]
@@ -14962,7 +14986,9 @@ export namespace Prisma {
 
 
   export const UsuarioOrderByRelevanceFieldEnum: {
+    nombre_completo: 'nombre_completo',
     nombre: 'nombre',
+    apellidos: 'apellidos',
     imagen: 'imagen',
     correo: 'correo',
     contrasenna: 'contrasenna'
@@ -15148,7 +15174,9 @@ export namespace Prisma {
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
     id?: IntFilter<"Usuario"> | number
+    nombre_completo?: StringNullableFilter<"Usuario"> | string | null
     nombre?: StringNullableFilter<"Usuario"> | string | null
+    apellidos?: StringNullableFilter<"Usuario"> | string | null
     imagen?: StringNullableFilter<"Usuario"> | string | null
     correo?: StringFilter<"Usuario"> | string
     contrasenna?: StringFilter<"Usuario"> | string
@@ -15166,7 +15194,9 @@ export namespace Prisma {
 
   export type UsuarioOrderByWithRelationInput = {
     id?: SortOrder
+    nombre_completo?: SortOrderInput | SortOrder
     nombre?: SortOrderInput | SortOrder
+    apellidos?: SortOrderInput | SortOrder
     imagen?: SortOrderInput | SortOrder
     correo?: SortOrder
     contrasenna?: SortOrder
@@ -15189,7 +15219,9 @@ export namespace Prisma {
     AND?: UsuarioWhereInput | UsuarioWhereInput[]
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    nombre_completo?: StringNullableFilter<"Usuario"> | string | null
     nombre?: StringNullableFilter<"Usuario"> | string | null
+    apellidos?: StringNullableFilter<"Usuario"> | string | null
     imagen?: StringNullableFilter<"Usuario"> | string | null
     contrasenna?: StringFilter<"Usuario"> | string
     role?: EnumRoleFilter<"Usuario"> | $Enums.Role
@@ -15206,7 +15238,9 @@ export namespace Prisma {
 
   export type UsuarioOrderByWithAggregationInput = {
     id?: SortOrder
+    nombre_completo?: SortOrderInput | SortOrder
     nombre?: SortOrderInput | SortOrder
+    apellidos?: SortOrderInput | SortOrder
     imagen?: SortOrderInput | SortOrder
     correo?: SortOrder
     contrasenna?: SortOrder
@@ -15226,7 +15260,9 @@ export namespace Prisma {
     OR?: UsuarioScalarWhereWithAggregatesInput[]
     NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Usuario"> | number
+    nombre_completo?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     nombre?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
+    apellidos?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     imagen?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     correo?: StringWithAggregatesFilter<"Usuario"> | string
     contrasenna?: StringWithAggregatesFilter<"Usuario"> | string
@@ -15498,8 +15534,8 @@ export namespace Prisma {
     OR?: EtiquetaWhereInput[]
     NOT?: EtiquetaWhereInput | EtiquetaWhereInput[]
     id?: IntFilter<"Etiqueta"> | number
-    idCategoria?: IntFilter<"Etiqueta"> | number
     nombre?: StringFilter<"Etiqueta"> | string
+    idCategoria?: IntFilter<"Etiqueta"> | number
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
     Ticket?: TicketListRelationFilter
     regla?: Regla_AutotriageListRelationFilter
@@ -15507,8 +15543,8 @@ export namespace Prisma {
 
   export type EtiquetaOrderByWithRelationInput = {
     id?: SortOrder
-    idCategoria?: SortOrder
     nombre?: SortOrder
+    idCategoria?: SortOrder
     categoria?: CategoriaOrderByWithRelationInput
     Ticket?: TicketOrderByRelationAggregateInput
     regla?: Regla_AutotriageOrderByRelationAggregateInput
@@ -15520,8 +15556,8 @@ export namespace Prisma {
     AND?: EtiquetaWhereInput | EtiquetaWhereInput[]
     OR?: EtiquetaWhereInput[]
     NOT?: EtiquetaWhereInput | EtiquetaWhereInput[]
-    idCategoria?: IntFilter<"Etiqueta"> | number
     nombre?: StringFilter<"Etiqueta"> | string
+    idCategoria?: IntFilter<"Etiqueta"> | number
     categoria?: XOR<CategoriaScalarRelationFilter, CategoriaWhereInput>
     Ticket?: TicketListRelationFilter
     regla?: Regla_AutotriageListRelationFilter
@@ -15529,8 +15565,8 @@ export namespace Prisma {
 
   export type EtiquetaOrderByWithAggregationInput = {
     id?: SortOrder
-    idCategoria?: SortOrder
     nombre?: SortOrder
+    idCategoria?: SortOrder
     _count?: EtiquetaCountOrderByAggregateInput
     _avg?: EtiquetaAvgOrderByAggregateInput
     _max?: EtiquetaMaxOrderByAggregateInput
@@ -15543,8 +15579,8 @@ export namespace Prisma {
     OR?: EtiquetaScalarWhereWithAggregatesInput[]
     NOT?: EtiquetaScalarWhereWithAggregatesInput | EtiquetaScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Etiqueta"> | number
-    idCategoria?: IntWithAggregatesFilter<"Etiqueta"> | number
     nombre?: StringWithAggregatesFilter<"Etiqueta"> | string
+    idCategoria?: IntWithAggregatesFilter<"Etiqueta"> | number
   }
 
   export type TicketWhereInput = {
@@ -15992,7 +16028,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -16010,7 +16048,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -16027,7 +16067,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -16045,7 +16087,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -16063,7 +16107,9 @@ export namespace Prisma {
 
   export type UsuarioCreateManyInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -16074,7 +16120,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateManyMutationInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -16086,7 +16134,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -16356,8 +16406,8 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedCreateInput = {
     id?: number
-    idCategoria: number
     nombre: string
+    idCategoria: number
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
     regla?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
@@ -16371,16 +16421,16 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
     regla?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
   export type EtiquetaCreateManyInput = {
     id?: number
-    idCategoria: number
     nombre: string
+    idCategoria: number
   }
 
   export type EtiquetaUpdateManyMutationInput = {
@@ -16389,8 +16439,8 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
   }
 
   export type TicketCreateInput = {
@@ -16946,7 +16996,9 @@ export namespace Prisma {
 
   export type UsuarioCountOrderByAggregateInput = {
     id?: SortOrder
+    nombre_completo?: SortOrder
     nombre?: SortOrder
+    apellidos?: SortOrder
     imagen?: SortOrder
     correo?: SortOrder
     contrasenna?: SortOrder
@@ -16962,7 +17014,9 @@ export namespace Prisma {
 
   export type UsuarioMaxOrderByAggregateInput = {
     id?: SortOrder
+    nombre_completo?: SortOrder
     nombre?: SortOrder
+    apellidos?: SortOrder
     imagen?: SortOrder
     correo?: SortOrder
     contrasenna?: SortOrder
@@ -16974,7 +17028,9 @@ export namespace Prisma {
 
   export type UsuarioMinOrderByAggregateInput = {
     id?: SortOrder
+    nombre_completo?: SortOrder
     nombre?: SortOrder
+    apellidos?: SortOrder
     imagen?: SortOrder
     correo?: SortOrder
     contrasenna?: SortOrder
@@ -17444,8 +17500,8 @@ export namespace Prisma {
 
   export type EtiquetaCountOrderByAggregateInput = {
     id?: SortOrder
-    idCategoria?: SortOrder
     nombre?: SortOrder
+    idCategoria?: SortOrder
   }
 
   export type EtiquetaAvgOrderByAggregateInput = {
@@ -17455,14 +17511,14 @@ export namespace Prisma {
 
   export type EtiquetaMaxOrderByAggregateInput = {
     id?: SortOrder
-    idCategoria?: SortOrder
     nombre?: SortOrder
+    idCategoria?: SortOrder
   }
 
   export type EtiquetaMinOrderByAggregateInput = {
     id?: SortOrder
-    idCategoria?: SortOrder
     nombre?: SortOrder
+    idCategoria?: SortOrder
   }
 
   export type EtiquetaSumOrderByAggregateInput = {
@@ -19770,7 +19826,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutNotificacionesRemitenteInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -19787,7 +19845,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateWithoutNotificacionesRemitenteInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -19808,7 +19868,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutNotificacionesInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -19825,7 +19887,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateWithoutNotificacionesInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -19857,7 +19921,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutNotificacionesRemitenteInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -19874,7 +19940,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateWithoutNotificacionesRemitenteInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -19901,7 +19969,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutNotificacionesInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -19918,7 +19988,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateWithoutNotificacionesInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -19934,7 +20006,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutTecnicoInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -19951,7 +20025,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateWithoutTecnicoInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -20034,7 +20110,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutTecnicoInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -20051,7 +20129,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateWithoutTecnicoInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -20380,8 +20460,8 @@ export namespace Prisma {
     OR?: EtiquetaScalarWhereInput[]
     NOT?: EtiquetaScalarWhereInput | EtiquetaScalarWhereInput[]
     id?: IntFilter<"Etiqueta"> | number
-    idCategoria?: IntFilter<"Etiqueta"> | number
     nombre?: StringFilter<"Etiqueta"> | string
+    idCategoria?: IntFilter<"Etiqueta"> | number
   }
 
   export type Regla_AutotriageUpsertWithWhereUniqueWithoutCategoriaInput = {
@@ -20556,7 +20636,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutTicketInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -20573,7 +20655,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateWithoutTicketInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -20601,8 +20685,8 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedCreateWithoutTicketInput = {
     id?: number
-    idCategoria: number
     nombre: string
+    idCategoria: number
     regla?: Regla_AutotriageUncheckedCreateNestedManyWithoutEtiquetasInput
   }
 
@@ -20708,7 +20792,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutTicketInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -20725,7 +20811,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateWithoutTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -20759,8 +20847,8 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedUpdateWithoutTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
     regla?: Regla_AutotriageUncheckedUpdateManyWithoutEtiquetasNestedInput
   }
 
@@ -20847,7 +20935,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutHistorialTicketInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -20864,7 +20954,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateWithoutHistorialTicketInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -20957,7 +21049,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutHistorialTicketInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -20974,7 +21068,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateWithoutHistorialTicketInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -21288,7 +21384,9 @@ export namespace Prisma {
   }
 
   export type UsuarioCreateWithoutValoracionInput = {
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -21305,7 +21403,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedCreateWithoutValoracionInput = {
     id?: number
+    nombre_completo?: string | null
     nombre?: string | null
+    apellidos?: string | null
     imagen?: string | null
     correo: string
     contrasenna: string
@@ -21377,7 +21477,9 @@ export namespace Prisma {
   }
 
   export type UsuarioUpdateWithoutValoracionInput = {
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -21394,7 +21496,9 @@ export namespace Prisma {
 
   export type UsuarioUncheckedUpdateWithoutValoracionInput = {
     id?: IntFieldUpdateOperationsInput | number
+    nombre_completo?: NullableStringFieldUpdateOperationsInput | string | null
     nombre?: NullableStringFieldUpdateOperationsInput | string | null
+    apellidos?: NullableStringFieldUpdateOperationsInput | string | null
     imagen?: NullableStringFieldUpdateOperationsInput | string | null
     correo?: StringFieldUpdateOperationsInput | string
     contrasenna?: StringFieldUpdateOperationsInput | string
@@ -21443,8 +21547,8 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedCreateWithoutReglaInput = {
     id?: number
-    idCategoria: number
     nombre: string
+    idCategoria: number
     Ticket?: TicketUncheckedCreateNestedManyWithoutEtiquetaInput
   }
 
@@ -22274,15 +22378,15 @@ export namespace Prisma {
 
   export type EtiquetaUncheckedUpdateWithoutReglaInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
     Ticket?: TicketUncheckedUpdateManyWithoutEtiquetaNestedInput
   }
 
   export type EtiquetaUncheckedUpdateManyWithoutReglaInput = {
     id?: IntFieldUpdateOperationsInput | number
-    idCategoria?: IntFieldUpdateOperationsInput | number
     nombre?: StringFieldUpdateOperationsInput | string
+    idCategoria?: IntFieldUpdateOperationsInput | number
   }
 
   export type EspecialidadUpdateWithoutReglasInput = {

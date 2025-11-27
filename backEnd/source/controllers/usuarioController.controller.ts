@@ -34,7 +34,7 @@ export class UsuarioController {
                     id: usuario.id,
                     idioma: usuario.idioma,
                     correo: usuario.correo,
-                    nombre: usuario.nombre,
+                    nombre_completo: usuario.nombre_completo,
                     role: usuario.role,
                     imagen: usuario.imagen ? usuario.imagen : ''
                 },

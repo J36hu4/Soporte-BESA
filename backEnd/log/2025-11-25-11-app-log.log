@@ -1,0 +1,21 @@
+2025-11-25 11:55:43.767 error: 	Jeshu--Error interno del servidor Error interno del servidor
+2025-11-25 11:55:43.795 error: 	Jeshu--Error interno del servidor Error interno del servidor
+2025-11-25 11:56:46.340 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.count()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:124:36
+
+  121     }
+  122 }),
+  123 
+→ 124 this.prisma.ticket.count(
+The table `ticket` does not exist in the current database.
+2025-11-25 11:56:46.346 error: 	Jeshu--Se produjo un error interno del servidor 
+Invalid `this.prisma.ticket.count()` invocation in
+D:\Progra Sofware Libre\Soporte Tecnico Besa\backEnd\source\controllers\ticketController.controller.ts:124:36
+
+  121     }
+  122 }),
+  123 
+→ 124 this.prisma.ticket.count(
+The table `ticket` does not exist in the current database.
+2025-11-25 11:56:48.096 error: 	Jeshu--Error interno del servidor Error interno del servidor

@@ -12,7 +12,6 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "@prisma/client": "^6.17.1",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
@@ -35,10 +34,13 @@
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
-    "prisma": "^6.17.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2",
     "winston": "^3.17.0",
     "winston-daily-rotate-file": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.17.1",
+    "prisma": "^6.17.1"
   }
 }

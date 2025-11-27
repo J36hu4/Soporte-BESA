@@ -122,7 +122,9 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.UsuarioScalarFieldEnum = {
   id: 'id',
+  nombre_completo: 'nombre_completo',
   nombre: 'nombre',
+  apellidos: 'apellidos',
   imagen: 'imagen',
   correo: 'correo',
   contrasenna: 'contrasenna',
@@ -167,8 +169,8 @@ exports.Prisma.CategoriaScalarFieldEnum = {
 
 exports.Prisma.EtiquetaScalarFieldEnum = {
   id: 'id',
-  idCategoria: 'idCategoria',
-  nombre: 'nombre'
+  nombre: 'nombre',
+  idCategoria: 'idCategoria'
 };
 
 exports.Prisma.TicketScalarFieldEnum = {
@@ -242,7 +244,9 @@ exports.Prisma.NullsOrder = {
 };
 
 exports.Prisma.UsuarioOrderByRelevanceFieldEnum = {
+  nombre_completo: 'nombre_completo',
   nombre: 'nombre',
+  apellidos: 'apellidos',
   imagen: 'imagen',
   correo: 'correo',
   contrasenna: 'contrasenna'

@@ -2,14 +2,18 @@ import { Role, MotivoDisponible } from "../../generated/prisma";
 export const usuarios = [
   // Administradores
   {
-    nombre: "Jeshua Herrera Salas",
+    nombre_completo: "Jeshua Herrera Salas",
+    nombre: "Jeshua",
+    apellidos: "Herrera Salas",
     correo: "jeshua.herrera@admin.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.ADMIN,
     imagen: 'PassaportFt.png'
   },
   {
-    nombre: "admin",
+    nombre_completo: "Administrador General",
+    nombre: "Admin",
+    apellidos: "General",
     correo: "admin@admin.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.ADMIN,
@@ -18,19 +22,25 @@ export const usuarios = [
 
   // Usuarios
   {
-    nombre: "Sofía Jiménez",
+    nombre_completo: "Sofía Jiménez",
+    nombre: "Sofía",
+    apellidos: "Jiménez",
     correo: "sofia.jimenez@besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     imagen: 'sofia.png'
   },
   {
-    nombre: "Pedro Vargas",
+    nombre_completo: "Pedro Vargas",
+    nombre: "Pedro",
+    apellidos: "Vargas",
     correo: "pedro.vargas@besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     imagen: 'pedro.png'
   },
   {
-    nombre: "Laura Fernández",
+    nombre_completo: "Laura Fernández",
+    nombre: "Laura",
+    apellidos: "Fernández",
     correo: "laura.fernandez@besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     imagen: 'laura.png'
@@ -38,41 +48,52 @@ export const usuarios = [
 
   // Técnicos
   {
-    nombre: "Luis Vega",
+    nombre_completo: "Luis Vega",
+    nombre: "Luis",
+    apellidos: "Vega",
     correo: "luis.vega@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
     imagen: 'luis.png'
   },
   {
-    nombre: "María Solano",
+    nombre_completo: "María Solano",
+    nombre: "María",
+    apellidos: "Solano",
     correo: "maria.solano@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
     imagen: 'maria.png'
   },
   {
-    nombre: "Jorge Castillo",
+    nombre_completo: "Jorge Castillo",
+    nombre: "Jorge",
+    apellidos: "Castillo",
     correo: "jorge.castillo@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
     imagen: 'notImage.png'
   },
   {
-    nombre: "Andrea Mora",
+    nombre_completo: "Andrea Mora",
+    nombre: "Andrea",
+    apellidos: "Mora",
     correo: "andrea.mora@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
     imagen: 'andrea.png'
   },
   {
-    nombre: "David Rojas",
+    nombre_completo: "David Rojas",
+    nombre: "David",
+    apellidos: "Rojas",
     correo: "david.rojas@tec.besa.com",
     contrasenna: "$2b$10$1BaQqXuZYNLDAC42PY5fN.ufSOKjApmjkaZrQUYf7ms71PaS1mASO",
     role: Role.TEC,
     imagen: 'david.png'
   },
 ];
+
 
 
 
